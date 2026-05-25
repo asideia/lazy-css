@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     // 1. Busca o arquivo JSON de dados
-    const response = await fetch("./assets/components.json");
+    const response = await fetch("./assets/data/components.json");
     const categorias = await response.json();
 
     // 2. Loop pelas categorias de componentes
