@@ -9,6 +9,9 @@ on:
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # Permite criar a Release e anexar o vibe.min.css
+      packages: write   # Caso decida usar o GitHub Packages no futuro
     steps:
       
       # 1. Faz o checkout do código do seu repositório na máquina virtual
