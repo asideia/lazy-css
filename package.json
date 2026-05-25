@@ -1,0 +1,31 @@
+{
+  "name": "@sua-empresa/vibe-css",
+  "version": "1.0.0",
+  "description": "A predictable, semantic, and LLM-friendly CSS library built for backend developers.",
+  "main": "dist/vibe.min.css",
+  "style": "dist/vibe.min.css",
+  "scripts": {
+    "build": "postcss src/vibe.css -o dist/vibe.min.css",
+    "watch": "postcss src/vibe.css -o dist/vibe.min.css --watch"
+  },
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "keywords": [
+    "css",
+    "framework",
+    "vibe",
+    "vibe-coding",
+    "llm-friendly",
+    "backend"
+  ],
+  "author": "Sua Empresa",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "cssnano": "^7.0.6",
+    "postcss-cli": "^11.0.0",
+    "postcss-import": "^16.1.0"
+  }
+}

@@ -1,0 +1,34 @@
+# ==========================================================================
+# 1. DEPENDÊNCIAS DO NODE (O maior gerador de lixo eletrônico do ecossistema)
+# ==========================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-store/
+
+# ==========================================================================
+# 2. ARQUIVOS TEMPORÁRIOS E LOGS DO SISTEMA OPERACIONAL
+# ==========================================================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================================================================
+# 3. CONFIGURAÇÕES DA IDE / EDITOR DE CÓDIGO
+# ==========================================================================
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# ==========================================================================
+# 4. CONFIGURAÇÕES DE CI/CD E ARQUIVOS LOCAIS SENSÍVEIS (SE HOUVER)
+# ==========================================================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

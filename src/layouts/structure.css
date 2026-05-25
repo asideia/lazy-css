@@ -1,0 +1,23 @@
+/* Centralização Absoluta na Tela (Ex: Telas de Login) */
+.vibe-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+/* Empilhamento Vertical Inteligente (Foco absoluto em formulários e listagens) */
+.vibe-stack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(1.25rem * var(--vibe-spacing-factor));
+}
+
+/* Alinhamento Horizontal (Foco em grupos de botões, badges ou cards em linha) */
+.vibe-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: calc(1rem * var(--vibe-spacing-factor));
+}

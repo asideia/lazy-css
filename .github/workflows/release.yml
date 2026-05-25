@@ -1,0 +1,47 @@
+name: 🚀 Vibe CSS - Distribuição & CI/CD
+
+# O pipeline roda automaticamente sempre que você criar uma nova Tag de versão (ex: v1.0.4)
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      
+      # 1. Faz o checkout do código do seu repositório na máquina virtual
+      - name: 📂 Checkout do código
+        uses: actions/checkout@v4
+
+      # 2. Configura o ambiente Node.js na máquina virtual
+      - name: 🟢 Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          # Configura o escopo para publicação no NPM/GitHub Packages
+          registry-url: 'https://registry.npmjs.org' 
+
+      # 3. Instala as dependências (PostCSS, Autoprefixer, CSSNano)
+      - name: 📦 Instalar dependências
+        run: npm ci
+
+      # 4. Executa o pipeline do PostCSS para gerar o dist/vibe.min.css oficial
+      - name: ⚡ Compilar Vibe CSS (Produção)
+        run: npm run build
+
+      # 5. Cria uma Release oficial no GitHub e anexa o arquivo .css puro para download
+      - name: 🏆 Criar GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/vibe.min.css
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 6. Publica o pacote no registro de pacotes (NPM) para suportar "npm install"
+      - name: 🚀 Publicar no NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
