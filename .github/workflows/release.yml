@@ -1,4 +1,4 @@
-name: 🚀 Vibe CSS - Distribuição & CI/CD
+name: 🚀 lazy CSS - Distribuição & CI/CD
 
 # O pipeline roda automaticamente sempre que você criar uma nova Tag de versão (ex: v1.0.4)
 on:
@@ -10,7 +10,7 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # Permite criar a Release e anexar o vibe.min.css
+      contents: write   # Permite criar a Release e anexar o lazy.min.css
       packages: write   # Caso decida usar o GitHub Packages no futuro
     steps:
       
@@ -30,15 +30,15 @@ jobs:
       - name: 📦 Instalar dependências
         run: npm ci
 
-      # 4. Executa o pipeline do PostCSS para gerar o dist/vibe.min.css oficial
-      - name: ⚡ Compilar Vibe CSS (Produção)
+      # 4. Executa o pipeline do PostCSS para gerar o dist/lazy.min.css oficial
+      - name: ⚡ Compilar lazy CSS (Produção)
         run: npm run build
 
       # 5. Cria uma Release oficial no GitHub e anexa o arquivo .css puro para download
       - name: 🏆 Criar GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/vibe.min.css
+          files: dist/lazy.min.css
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

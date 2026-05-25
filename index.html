@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌊 Vibe CSS — Playground Dinâmico</title>
+  <title>🌊 lazy CSS — Playground Dinâmico</title>
   
-  <link rel="stylesheet" href="./dist/vibe.min.css">
+  <link rel="stylesheet" href="./dist/lazy.min.css">
 
   <style>
     /* Estilos de apoio exclusivos do Playground */
@@ -66,7 +66,7 @@
     }
 
     /* Estilização do Botão de Copiar */
-    .vibe-copy-btn {
+    .lazy-copy-btn {
       position: absolute;
       top: 0.75rem;
       right: 0.75rem;
@@ -82,45 +82,45 @@
       user-select: none;
     }
 
-    .vibe-copy-btn:hover {
+    .lazy-copy-btn:hover {
       background: var(--color-primary);
       color: #ffffff;
       border-color: var(--color-primary);
     }
 
     /* Estado quando o código for copiado com sucesso */
-    .vibe-copy-btn.copied {
-      background: hsl(var(--vibe-success-raw) / 0.2);
+    .lazy-copy-btn.copied {
+      background: hsl(var(--lazy-success-raw) / 0.2);
       color: #00ff66;
-      border-color: hsl(var(--vibe-success-raw) / 0.4);
+      border-color: hsl(var(--lazy-success-raw) / 0.4);
     }
   </style>
 </head>
 <body>
 
-  <header class="vibe-row" style="background: var(--bg-surface); padding: 1.5rem; border-bottom: 1px solid var(--border-color); justify-content: space-between;">
-    <h1 class="vibe-text-main" style="font-size: 1.8rem; margin: 0;">🌊 Vibe CSS <span style="font-size: 1rem; color: var(--color-primary);">Playground Dinâmico</span></h1>
-    <span id="vibe-status-badge" style="font-weight: 600; color: #666; transition: color 0.3s ease;">Verificando Vibe...</span>
+  <header class="lazy-row" style="background: var(--bg-surface); padding: 1.5rem; border-bottom: 1px solid var(--border-color); justify-content: space-between;">
+    <h1 class="lazy-text-main" style="font-size: 1.8rem; margin: 0;">🌊 lazy CSS <span style="font-size: 1rem; color: var(--color-primary);">Playground Dinâmico</span></h1>
+    <span id="lazy-status-badge" style="font-weight: 600; color: #666; transition: color 0.3s ease;">Verificando lazy...</span>
   </header>
 
-  <main id="vibe-dynamic-content" class="vibe-container" style="padding: 2rem 1.5rem;">
+  <main id="lazy-dynamic-content" class="lazy-container" style="padding: 2rem 1.5rem;">
     </main>
 
-  <footer class="vibe-text-muted" style="text-align: center; padding: 3rem 0; font-size: 0.85rem; border-top: 1px solid var(--border-color);">
-    Vibe CSS &copy; 2026 — Desenvolvido em fluxo dinâmico de engenharia.
+  <footer class="lazy-text-muted" style="text-align: center; padding: 3rem 0; font-size: 0.85rem; border-top: 1px solid var(--border-color);">
+    lazy CSS &copy; 2026 — Desenvolvido em fluxo dinâmico de engenharia.
   </footer>
 
   <script src="./assets/playground.js"></script>
   <script>
     // Validador de status do CSS compilado
     document.addEventListener("DOMContentLoaded", () => {
-      const badge = document.getElementById("vibe-status-badge");
-      const isVibeActive = getComputedStyle(document.documentElement).getPropertyValue('--vibe-primary-raw').trim() !== "";
-      if (isVibeActive) {
-        badge.innerHTML = "Modo: 🛠️ Vibe Coding Ativo";
+      const badge = document.getElementById("lazy-status-badge");
+      const islazyActive = getComputedStyle(document.documentElement).getPropertyValue('--lazy-primary-raw').trim() !== "";
+      if (islazyActive) {
+        badge.innerHTML = "Modo: 🛠️ lazy Coding Ativo";
         badge.style.color = "var(--color-primary)";
       } else {
-        badge.innerHTML = "Modo: ⚠️ Vibe Coding Inativo (CSS offline)";
+        badge.innerHTML = "Modo: ⚠️ lazy Coding Inativo (CSS offline)";
         badge.style.color = "var(--color-danger)";
       }
     });

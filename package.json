@@ -1,12 +1,12 @@
 {
-  "name": "@sua-empresa/vibe-css",
+  "name": "@asideia/lazy-css",
   "version": "1.0.0",
   "description": "A predictable, semantic, and LLM-friendly CSS library built for backend developers.",
-  "main": "dist/vibe.min.css",
-  "style": "dist/vibe.min.css",
+  "main": "dist/lazy.min.css",
+  "style": "dist/lazy.min.css",
   "scripts": {
-    "build": "postcss src/vibe.css -o dist/vibe.min.css",
-    "watch": "postcss src/vibe.css -o dist/vibe.min.css --watch"
+    "build": "postcss src/lazy.css -o dist/lazy.min.css",
+    "watch": "postcss src/lazy.css -o dist/lazy.min.css --watch"
   },
   "files": [
     "dist/",
@@ -15,8 +15,8 @@
   "keywords": [
     "css",
     "framework",
-    "vibe",
-    "vibe-coding",
+    "lazy",
+    "lazy-css",
     "llm-friendly",
     "backend"
   ],

@@ -1,15 +1,15 @@
 /* --- CARD BASE --- */
-.vibe-card {
+.lazy-card {
   background-color: var(--bg-surface);
   border-radius: var(--radius-lg);
-  padding: calc(1.5rem * var(--vibe-spacing-factor));
-  box-shadow: var(--shadow-vibe);
+  padding: calc(1.5rem * var(--lazy-spacing-factor));
+  box-shadow: var(--shadow-lazy);
   border: 1px solid var(--border-color);
   width: 100%;
 }
 
 /* --- INPUTS E FORMULÁRIOS --- */
-.vibe-field {
+.lazy-field {
   width: 100%;
   padding: 0.75rem 1rem;
   border: 1px solid var(--border-color);
@@ -19,19 +19,19 @@
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.vibe-field:focus {
+.lazy-field:focus {
   outline: none;
   border-color: var(--color-primary);
   box-shadow: 0 0 0 3px var(--color-primary-dim);
 }
 
-.vibe-field::placeholder {
+.lazy-field::placeholder {
   color: var(--text-muted);
   opacity: 0.7;
 }
 
 /* --- BOTÕES COM FEEDBACK TÁTIL --- */
-.vibe-btn {
+.lazy-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -46,20 +46,20 @@
   user-select: none;
 }
 
-.vibe-btn-primary {
+.lazy-btn-primary {
   background-color: var(--color-primary);
   color: #ffffff;
 }
 
-.vibe-btn-primary:hover {
+.lazy-btn-primary:hover {
   background-color: var(--color-primary-hover);
 }
 
-.vibe-btn:active {
+.lazy-btn:active {
   transform: scale(0.97); /* Micro-interação ao clicar */
 }
 
-.vibe-btn:disabled {
+.lazy-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;

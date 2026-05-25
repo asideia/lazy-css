@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  const containerPrincipal = document.getElementById("vibe-dynamic-content");
+  const containerPrincipal = document.getElementById("lazy-dynamic-content");
   if (!containerPrincipal) return;
 
   try {
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       section.appendChild(title);
 
       const previewBox = document.createElement("div");
-      previewBox.className = "preview-box vibe-row";
+      previewBox.className = "preview-box lazy-row";
       previewBox.style.flexWrap = "wrap";
 
       let codigoAcumulado = "";
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       // Botão de Copiar Automatizado
       const copyBtn = document.createElement("button");
-      copyBtn.className = "vibe-copy-btn";
+      copyBtn.className = "lazy-copy-btn";
       copyBtn.textContent = "Copiar";
 
       // Evento de clique para copiar usando a API nativa do navegador

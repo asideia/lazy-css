@@ -1,5 +1,5 @@
 /* Centralização Absoluta na Tela (Ex: Telas de Login) */
-.vibe-center {
+.lazy-center {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,16 +8,16 @@
 }
 
 /* Empilhamento Vertical Inteligente (Foco absoluto em formulários e listagens) */
-.vibe-stack {
+.lazy-stack {
   display: flex;
   flex-direction: column;
-  gap: calc(1.25rem * var(--vibe-spacing-factor));
+  gap: calc(1.25rem * var(--lazy-spacing-factor));
 }
 
 /* Alinhamento Horizontal (Foco em grupos de botões, badges ou cards em linha) */
-.vibe-row {
+.lazy-row {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: calc(1rem * var(--vibe-spacing-factor));
+  gap: calc(1rem * var(--lazy-spacing-factor));
 }

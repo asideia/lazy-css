@@ -2,39 +2,39 @@
   /* ==========================================================================
      1. PRIMITIVAS DE MARCA (Altere aqui para mudar o design do sistema inteiro)
      ========================================================================== */
-  --vibe-hue: 220;           /* 0 a 360: Ângulo na roda de cores (220 = Azul) */
-  --vibe-radius-factor: 1;   /* Multiplicador de bordas: 0 = quadrado, 2 = ultra arredondado */
-  --vibe-spacing-factor: 1;  /* Multiplicador de espaçamento global */
+  --lazy-hue: 220;           /* 0 a 360: Ângulo na roda de cores (220 = Azul) */
+  --lazy-radius-factor: 1;   /* Multiplicador de bordas: 0 = quadrado, 2 = ultra arredondado */
+  --lazy-spacing-factor: 1;  /* Multiplicador de espaçamento global */
 
   /* ==========================================================================
      2. DESIGN TOKENS CRUS (Canais de cores HSL isolados para opacidade dinâmica)
      ========================================================================== */
-  --vibe-primary-raw: var(--vibe-hue) 85% 55%;
-  --vibe-success-raw: 142 70% 45%;
-  --vibe-warning-raw: 38 92% 50%;
-  --vibe-danger-raw:  0 84% 60%;
+  --lazy-primary-raw: var(--lazy-hue) 85% 55%;
+  --lazy-success-raw: 142 70% 45%;
+  --lazy-warning-raw: 38 92% 50%;
+  --lazy-danger-raw:  0 84% 60%;
 
   /* ==========================================================================
      3. ABSTRAÇÕES SEMÂNTICAS (O que as classes consomem por padrão)
      ========================================================================== */
   /* Cores Principais e Variações de Estado */
-  --color-primary:       hsl(var(--vibe-primary-raw) / 1);
-  --color-primary-hover: hsl(var(--vibe-hue) 85% 45%);
-  --color-primary-dim:   hsl(var(--vibe-primary-raw) / 0.15); /* Transparência nativa */
+  --color-primary:       hsl(var(--lazy-primary-raw) / 1);
+  --color-primary-hover: hsl(var(--lazy-hue) 85% 45%);
+  --color-primary-dim:   hsl(var(--lazy-primary-raw) / 0.15); /* Transparência nativa */
 
-  --color-success:       hsl(var(--vibe-success-raw) / 1);
-  --color-warning:       hsl(var(--vibe-warning-raw) / 1);
-  --color-danger:        hsl(var(--vibe-danger-raw) / 1);
+  --color-success:       hsl(var(--lazy-success-raw) / 1);
+  --color-warning:       hsl(var(--lazy-warning-raw) / 1);
+  --color-danger:        hsl(var(--lazy-danger-raw) / 1);
 
   /* Elementos de Interface Superfície (Light Mode Padrão) */
-  --bg-app:             hsl(var(--vibe-hue) 15% 97%);
+  --bg-app:             hsl(var(--lazy-hue) 15% 97%);
   --bg-surface:         #ffffff;
-  --text-main:          hsl(var(--vibe-hue) 20% 15%);
-  --text-muted:         hsl(var(--vibe-hue) 10% 45%);
-  --border-color:       hsl(var(--vibe-hue) 10% 90%);
+  --text-main:          hsl(var(--lazy-hue) 20% 15%);
+  --text-muted:         hsl(var(--lazy-hue) 10% 45%);
+  --border-color:       hsl(var(--lazy-hue) 10% 90%);
 
   /* Estrutura Proporcional Física */
-  --radius-md: calc(8px * var(--vibe-radius-factor));
-  --radius-lg: calc(14px * var(--vibe-radius-factor));
-  --shadow-vibe: 0 4px 12px -2px rgba(var(--vibe-hue), 20%, 30%, 0.08);
+  --radius-md: calc(8px * var(--lazy-radius-factor));
+  --radius-lg: calc(14px * var(--lazy-radius-factor));
+  --shadow-lazy: 0 4px 12px -2px rgba(var(--lazy-hue), 20%, 30%, 0.08);
 }

@@ -1,5 +1,5 @@
 /* 1. LAYOUT DASHBOARD SISTEMA (Sidebar fixa + Topbar + Área de Conteúdo) */
-.vibe-layout-dashboard {
+.lazy-layout-dashboard {
   display: grid;
   grid-template-columns: 260px 1fr;
   grid-template-rows: 65px 1fr;
@@ -9,40 +9,40 @@
   min-height: 100vh;
 }
 
-.vibe-area-sidebar { 
+.lazy-area-sidebar { 
   grid-area: sidebar; 
   background-color: var(--bg-surface); 
   border-right: 1px solid var(--border-color); 
 }
 
-.vibe-area-topbar  { 
+.lazy-area-topbar  { 
   grid-area: topbar;  
   background-color: var(--bg-surface); 
   border-bottom: 1px solid var(--border-color); 
 }
 
-.vibe-area-main    { 
+.lazy-area-main    { 
   grid-area: main;    
-  padding: calc(2rem * var(--vibe-spacing-factor)); 
+  padding: calc(2rem * var(--lazy-spacing-factor)); 
   overflow-y: auto; 
 }
 
 /* 2. ESTRUTURA PARA SITES/LANDING PAGES (Seções contidas ao centro) */
-.vibe-section {
-  padding: calc(4rem * var(--vibe-spacing-factor)) 1.5rem;
+.lazy-section {
+  padding: calc(4rem * var(--lazy-spacing-factor)) 1.5rem;
   display: flex;
   justify-content: center;
 }
 
-.vibe-container {
+.lazy-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 /* 3. GRID RESPONSIVO AUTOMÁTICO (Quebra linhas sozinho baseado no espaço físico) */
-.vibe-grid-auto {
+.lazy-grid-auto {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: calc(1.5rem * var(--vibe-spacing-factor));
+  gap: calc(1.5rem * var(--lazy-spacing-factor));
 }

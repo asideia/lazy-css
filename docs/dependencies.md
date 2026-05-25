@@ -1,21 +1,21 @@
 # 📦 Documento de Engenharia: Pipeline de Build e Dependências
 
-Este documento detalha o papel, a justificativa e o funcionamento das ferramentas de automação que compõem o ecossistema de desenvolvimento do **Vibe CSS**.
+Este documento detalha o papel, a justificativa e o funcionamento das ferramentas de automação que compõem o ecossistema de desenvolvimento do **lazy CSS**.
 
 ## 1. Por que usamos `devDependencies`?
 
 No arquivo `package.json`, as dependências estão listadas sob a chave `"devDependencies"`. Isso significa que essas ferramentas são utilizadas **apenas no ambiente de desenvolvimento** (na máquina do desenvolvedor ou nos servidores de CI/CD do GitHub) para compilar o código.
 
-Quando o **Vibe CSS** é instalado em um projeto final (como uma aplicação React ou um sistema em Java/PHP), o projeto consome apenas o arquivo compilado puro (`dist/vibe.min.css`). O ecossistema do Node **não** baixa as ferramentas de build para o projeto final, garantindo leveza absoluta.
+Quando o **lazy CSS** é instalado em um projeto final (como uma aplicação React ou um sistema em Java/PHP), o projeto consome apenas o arquivo compilado puro (`dist/lazy.min.css`). O ecossistema do Node **não** baixa as ferramentas de build para o projeto final, garantindo leveza absoluta.
 
 ---
 
 ## 2. Anatomia do Pipeline de Compilação
 
-O **Vibe CSS** utiliza o **PostCSS** como motor central. Ele funciona como uma linha de montagem industrial onde cada plugin executa uma transformação específica no código-fonte até gerar o artefato minificado de produção.
+O **lazy CSS** utiliza o **PostCSS** como motor central. Ele funciona como uma linha de montagem industrial onde cada plugin executa uma transformação específica no código-fonte até gerar o artefato minificado de produção.
 
 ```text
-       [ src/vibe.css ]  <- Código modular, limpo e legível para humanos
+       [ src/lazy.css ]  <- Código modular, limpo e legível para humanos
               │
               ▼
    ┌──────────────────────┐
@@ -33,7 +33,7 @@ O **Vibe CSS** utiliza o **PostCSS** como motor central. Ele funciona como uma l
    └──────────────────────┘
               │
               ▼
-       [ dist/vibe.min.css ] <- Arquivo final ultra-otimizado para produção
+       [ dist/lazy.min.css ] <- Arquivo final ultra-otimizado para produção
 
 ```
 
@@ -50,7 +50,7 @@ O **Vibe CSS** utiliza o **PostCSS** como motor central. Ele funciona como uma l
 ### 3.2. `postcss-import` (v16.1.0)
 
 * **O que é:** Plugin de resolução de escopo e unificação de arquivos.
-* **Função no Projeto:** Resolve as diretivas `@import` nativas do CSS em tempo de compilação. Ele busca os arquivos em `src/tokens/`, `src/base/`, etc., e injeta o conteúdo deles diretamente dentro do arquivo mestre `src/vibe.css`.
+* **Função no Projeto:** Resolve as diretivas `@import` nativas do CSS em tempo de compilação. Ele busca os arquivos em `src/tokens/`, `src/base/`, etc., e injeta o conteúdo deles diretamente dentro do arquivo mestre `src/lazy.css`.
 * **Por que é necessário:** Para garantir a **alta manutenabilidade**, o código precisa ser modular (separado por arquivos). Porém, navegadores web sofrem perda de performance se precisarem baixar múltiplos arquivos CSS pequenos via rede. O `postcss-import` nos permite programar de forma modular e entregar um arquivo único para o navegador.
 
 ### 3.3. `autoprefixer` (v10.4.20)
