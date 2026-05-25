@@ -1,4 +1,7 @@
-# 🦥 LazyCSS
+<div align="center">
+  <h1>Lazy CSS</h1>
+  <img src="https://raw.githubusercontent.com/asideia/lazy-css/main/assets/images/logo-without-background.png" alt="logo" width="20%">
+</div>
 
 ### *O framework de UI para desenvolvedores Backend que sofrem de alergia severa a CSS e preferem terceirizar a culpa do frontend para uma LLM.*
 
