@@ -1,156 +1,141 @@
-# 🌊 Vibe CSS
+# 🦥 LazyCSS
 
-> A predictable, semantic, and LLM-friendly CSS library built for backend developers who want to create delightful user interfaces during their vibe coding sessions.
+### *O framework de UI para desenvolvedores Backend que sofrem de alergia severa a CSS e preferem terceirizar a culpa do frontend para uma LLM.*
 
----
+**LazyCSS** é um micro-framework estrutural e intencionalmente rígido, projetado sob medida para engenheiros de software, DBAs e escavadores de dados que consideram `padding` um mistério da humanidade. Em vez de forçar você a decorar 450 classes utilitárias para centralizar um único botão ou passar horas brigando com o `flex-direction`, o LazyCSS fornece blocos de concreto macro-estruturais (`.lazy-stack`, `.lazy-grid-auto`, `.lazy-layout-dashboard`) **100% otimizados para a inteligência artificial (LLMs)** ler e entender sem reclamar.
 
-## 🧠 O Conceito
-
-O **Vibe CSS** aposta na **previsibilidade semântica**. Sua arquitetura utiliza variáveis HSL dinâmicas e desconectadas para que a customização seja matemática e direta. A nomenclatura das classes segue um padrão tão lógico (`vibe-[bloco]-[modificador]`) que as IAs (*LLMs*) conseguem deduzir e aplicar as estilizações perfeitamente a partir de estruturas brutas.
+Com o LazyCSS, você não encosta no CSS. Você apenas esfrega o nosso blueprint na cara do ChatGPT, Claude ou Gemini, programa sua lógica de negócio linda no backend e deixa a IA se virar para entregar um HTML que não quebra se o usuário respirar perto da tela.
 
 ---
 
-## 🚀 Guia de Utilização (Como usar no seu projeto)
+## 🎯 A Filosofia (Ou nossas desculpas oficiais)
 
-Você pode consumir o Vibe CSS de três maneiras diferentes, dependendo da arquitetura do seu projeto.
-
-### 1. Via Gerenciador de Pacotes (Node.js / Vite / React / Vue / Svelte)
-
-Se o seu projeto utiliza o ecossistema do Node, instale a biblioteca rodando:
-
-```bash
-npm install @sua-empresa/vibe-css
-# ou via yarn
-yarn add @sua-empresa/vibe-css
-
-```
-
-No arquivo de entrada principal do seu projeto (geralmente `main.js`, `index.js` ou `App.jsx`), importe o CSS minificado da biblioteca:
-
-```javascript
-// Importa o motor visual completo do Vibe CSS
-import '@sua-empresa/vibe-css/dist/vibe.min.css';
-
-```
+1. **Backend-First (e único):** Sem microgerenciamento de bordas, sombras ou tons pastéis. Os componentes padrão vêm com uma cara decente e corporativa de fábrica. Se o cliente quiser degradê piscante, ele que contrate um designer.
+2. **Arquitetura LLM-Optimal:** Nomes previsíveis e sem pegadinhas. Uma IA consegue deduzir a estrutura inteira do seu sistema sem sofrer alucinações e sem inventar classes que não existem.
+3. **Macro sobre Micro:** Focamos em tabelas densas cheias de dados, relatórios, formulários que não estouram o container e layouts de dashboard prontos. Animações fluidas de 60fps que se danem.
+4. **Engenharia Dinâmica de Cores:** Usamos tokens HSL puros (`--lazy-primary-raw`). Você muda a cor do sistema inteiro trocando um único número matemático. Se você odeia a paleta de cores atual, basta alterar o algorítmo.
 
 ---
 
-### 2. Via Link Direto (HTML Puro / Laravel Blade / Spring Boot Thymeleaf / PHP)
-
-Para projetos tradicionais ou monolíticos que não usam empacotadores de JavaScript, você pode referenciar o arquivo CSS diretamente na tag `<head>` do seu HTML.
-
-Se você estiver hospedando o arquivo no seu servidor de assets, a estrutura fica assim:
-
-```html
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minha Aplicação</title>
-  
-  <link rel="stylesheet" href="/path-to-assets/vibe.min.css">
-</head>
-<body>
-  </body>
-</html>
-
-```
-
----
-
-## 🎨 Customizando a Vibe do seu Projeto
-
-A maior vantagem do Vibe CSS é a facilidade de alterar o design e a marca da sua aplicação sem precisar mexer em arquivos internos ou reprocessar a lib.
-
-No arquivo CSS global do seu projeto de destino, basta sobrescrever os **Design Tokens** originais dentro do escopo `:root`:
-
-```css
-/* No arquivo style.css do SEU projeto */
-:root {
-  /* Altera a cor primária de toda a biblioteca para Roxo (Matiz 270) */
-  --vibe-hue: 270; 
-  
-  /* Deixa os cantos dos botões e cards 50% mais retos */
-  --vibe-radius-factor: 0.5; 
-}
-
-```
-
----
-
-## ⚡ Exemplo Prático de Uso (Copie e Cole)
-
-Aqui está um exemplo estrutural de uma tela de login ou card de métrica utilizando as classes semânticas da biblioteca. Note como as classes descrevem exatamente o comportamento do layout:
-
-```html
-<div class="vibe-center">
-  <div class="vibe-card vibe-stack">
-    
-    <div>
-      <h2 class="vibe-text-main">Acesso ao Sistema</h2>
-      <p class="vibe-text-muted">Insira suas credenciais abaixo.</p>
-    </div>
-
-    <form class="vibe-stack" style="--vibe-spacing: 1rem;">
-      <div>
-        <input type="email" class="vibe-field" placeholder="E-mail">
-      </div>
-      <div>
-        <input type="password" class="vibe-field" placeholder="Senha">
-      </div>
-      
-      <div class="vibe-row" style="justify-content: space-between;">
-        <button type="submit" class="vibe-btn vibe-btn-primary">Entrar</button>
-        <a href="#" class="vibe-text-muted" style="font-size: 0.9rem;">Esqueceu a senha?</a>
-      </div>
-    </form>
-
-  </div>
-</div>
-
-```
-
----
-
-## 🤖 Prompt de Contexto para Vibe Coding (Uso com IA)
-
-O Vibe CSS foi feito para você programar usando prompts. Quando pedir para uma IA gerar ou refatorar componentes no seu projeto, copie e cole o comando abaixo no chat da LLM:
-
-> "Estou desenvolvendo uma interface utilizando a biblioteca **Vibe CSS**. Ela utiliza uma convenção de nomenclatura semântica estrita baseada no prefixo `vibe-`.
-> Por favor, utilize as seguintes estruturas de classe para montar a minha tela:
-> * `.vibe-center` para centralizar blocos na viewport.
-> * `.vibe-layout-dashboard` para grids macro com barra lateral.
-> * `.vibe-grid-auto` para grids de cards responsivos automáticos.
-> * `.vibe-stack` para agrupar elementos com espaçamento vertical coerente.
-> * `.vibe-row` para alinhamento horizontal flexível.
-> * `.vibe-card`, `.vibe-field`, e `.vibe-btn` / `.vibe-btn-primary` para os elementos visuais."
-> 
-> 
-
----
-
-## 📂 Estrutura Interna do Repositório (Para Contribuidores)
-
-Se você clonou este repositório para estender a biblioteca ou criar novos componentes:
+## 📂 Arquitetura do Projeto
 
 ```text
-vibe-css/
-├── dist/                  # Artefato de produção final (vibe.min.css)
-├── src/                   # Código-fonte modular (Módulos separados por escopo)
-├── index.html             # Playground local para testes visuais em tempo real
-├── postcss.config.js      # Pipeline de build (Autoprefixer, CSSNano, Import)
-└── package.json           # Scripts de automação (build e watch)
+lazy-css/
+├── .github/workflows/
+│   └── release.yml        # A esteira de CI/CD que faz o trabalho duro por você
+├── .vscode/               # Preferências salvas para seu VS Code não estragar a indentação
+├── assets/
+│   ├── components.json    # A Fonte Única da Verdade (Onde você adiciona coisas sem programar)
+│   └── playground.js      # O motor JS que impede a documentação de ficar desatualizada
+├── dist/                  # Onde mora o CSS cuspido e compactado pelo compilador
+│   └── lazy.min.css       # O único arquivo que realmente importa pro seu HTML bruto
+├── docs/                  # Manuais para humanos (ou IAs muito avançadas)
+│   └── release-guide.md   # Como gerar uma nova versão sem quebrar a esteira de CI/CD
+├── src/                   # Onde o CSS modular finge que é uma linguagem de gente grande
+│   ├── tokens/
+│   │   └── variables.css  # Variáveis mágicas e matemática pura de espaçamento
+│   ├── base/
+│   │   └── reset.css      # Onde a gente tenta convencer os navegadores a cooperarem
+│   ├── layouts/
+│   │   ├── structure.css  # Alinhamentos em linha e em pilha (Flexbox de sobrevivência)
+│   │   └── page-grid.css  # Telas de dashboard inteiras que não quebram por nada
+│   ├── components/
+│   │   └── components.css # Botões, inputs e tabelas (O básico para o sistema funcionar)
+│   └── lazy.css           # O arquivo mestre que junta a bagunça toda via PostCSS
+├── index.html             # O Playground Interativo (Para você testar se ficou bonito)
+├── package.json           # Onde ficam guardados os scripts que você sempre esquece o comando
+└── postcss.config.js      # A receita de bolo que faz o PostCSS minificar tudo
 
 ```
 
-### Comandos de Desenvolvimento:
+---
 
-* `npm run watch`: Ativa o modo de escuta. Qualquer alteração nos arquivos da pasta `src/` atualiza a pasta `dist/` e o `index.html` instantaneamente.
-* `npm run build`: Compila, insere prefixos globais de compatibilidade e minifica o CSS para produção.
+## ⚙️ Começo Rápido (Para quem tem pressa)
+
+### 1. Instalar as tralhas
+
+Clone o repositório e baixe o ecossistema do Node que vai inflar sua pasta local:
+
+```bash
+npm install
+
+```
+
+### 2. Deixar o robô trabalhando (Watch Mode)
+
+Inicie o monitoramento. Sempre que você alterar um arquivo CSS na pasta `src/`, o script compila tudo em background em menos tempo do que leva para seu café esfriar:
+
+```bash
+npm run watch
+
+```
+
+### 3. Abrir o Playground
+
+Abra o arquivo `index.html` usando um servidor local (como a extensão **Live Server** do VS Code) para que o navegador não bloqueie o JavaScript com erros de CORS. Fique de olho no badge no topo da página:
+
+* `Modo: 🛠️ AI-Prompting Ativo`: Tudo certo! O CSS carregou e você está pronto para programar.
+* `Modo: ⚠️ AI-Prompting Offline`: O CSS sumiu, quebrou ou você esqueceu de rodar o comando do Passo 2. Volte duas casas.
 
 ---
 
-## 📄 Licença
+## 🤖 O Blueprint para IA (Copia, cola e reza)
 
-Este projeto está sob a licença **MIT**.
+Quando for pedir para uma inteligência artificial desenhar uma tela para você, não tente explicar o design. **Copie o bloco abaixo, cole no início do prompt e assista ao milagre:**
+
+```text
+[CONTEXTO DE INFRAESTRUTURA: LazyCSS UI Framework]
+Estou utilizando o LazyCSS, um framework feito para quem odeia estilização manual. Monte o HTML/JSX usando ESTRITAMENTE estas classes semânticas:
+- Layout de Tela Cheia: `.lazy-layout-dashboard` (Divisão travada para sistemas com barras fixas)
+- Menu de Navegação Lateral: `.lazy-area-sidebar` (Fica travado na esquerda)
+- Topbar do Sistema: `.lazy-area-topbar` (Fica travada no topo)
+- Área de Dados/Visualização: `.lazy-area-main` (Onde o conteúdo/tabelas devem ser renderizados)
+- Alinhadores de Layout:
+  - `.lazy-stack` (Flexbox vertical. Empilha inputs e cards adicionando espaçamento automático)
+  - `.lazy-row` (Flexbox horizontal. Coloca botões e campos lado a lado alinhados)
+- Grelha Inteligente: `.lazy-grid-auto` (CSS Grid mágico que se ajusta sozinho sem que eu precise configurar media-queries)
+- Átomos Visuais: `.lazy-card`, `.lazy-btn`, `.lazy-btn-primary`, `.lazy-field` (inputs)
+
+REGRA CRÍTICA DE SOBREVIVÊNCIA: Não invente estilos inline (style="...") nem tente criar CSS customizado. Monte a interface combinando apenas as classes listadas.
+
+```
+
+---
+
+## 🚀 Pipeline de CI/CD (Deploy sem passar nervoso)
+
+O projeto conta com um sistema de automação no **GitHub Actions** (`.github/workflows/release.yml`) para que você não precise gerar arquivos de produção na sua máquina como se estivesse em 2005.
+
+### Como lançar uma nova versão sem estragar o dia de ninguém:
+
+1. Vá no `package.json` e mude o número da versão (ex: de `1.0.3` para `1.0.4`).
+2. Dê o commit padrão nas suas alterações de código.
+3. Crie uma tag Git que obrigatoriamente comece com a letra `v`:
+```bash
+git tag -a v1.0.4 -m "Release v1.0.4 - Ajustando o gap do lazy-stack para caber mais inputs"
+
+```
+
+
+4. Empurre a tag para o GitHub:
+```bash
+git push origin v1.0.4
+
+```
+
+
+
+A partir daí, os servidores do GitHub acordam, geram o `lazy.min.css` otimizado, criam uma **GitHub Release** com o arquivo pronto para download e jogam o pacote direto no **NPM Registry** para você poder dar `npm install` no seu próximo projeto. Você só precisa olhar o painel ficar verde.
+
+---
+
+## 🤝 Governança e Contribuição
+
+* Se envolve alinhamento de página ou macro-grid, coloque em `src/layouts/`.
+* Se for um componente isolado (botão, input, tag), coloque em `src/components/` e use sempre o prefixo `.lazy-*`.
+* Se criou um componente novo legal, adicione o objeto estruturado dele dentro de `assets/components.json` para que o playground se atualize sozinho. Não nos faça ter que abrir o HTML para mexer em documentação estática.
+* Manuais sérios e sem piadas devem ser mantidos na pasta `docs/`.
+
+---
+
+LazyCSS © 2026 — Desenvolvido por e para desenvolvedores que preferem passar 4 horas otimizando uma query SQL complexa a gastar 5 minutos centralizando uma imagem na tela.
