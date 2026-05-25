@@ -83,20 +83,17 @@ Abra o arquivo `index.html` usando um servidor local (como a extensão **Live Se
 
 Quando for pedir para uma inteligência artificial desenhar uma tela para você, não tente explicar o design. **Copie o bloco abaixo, cole no início do prompt e assista ao milagre:**
 
-```text
-[CONTEXTO DE INFRAESTRUTURA: LazyCSS UI Framework]
-Estou utilizando o LazyCSS, um framework feito para quem odeia estilização manual. Monte o HTML/JSX usando ESTRITAMENTE estas classes semânticas:
-- Layout de Tela Cheia: `.lazy-layout-dashboard` (Divisão travada para sistemas com barras fixas)
-- Menu de Navegação Lateral: `.lazy-area-sidebar` (Fica travado na esquerda)
-- Topbar do Sistema: `.lazy-area-topbar` (Fica travada no topo)
-- Área de Dados/Visualização: `.lazy-area-main` (Onde o conteúdo/tabelas devem ser renderizados)
-- Alinhadores de Layout:
-  - `.lazy-stack` (Flexbox vertical. Empilha inputs e cards adicionando espaçamento automático)
-  - `.lazy-row` (Flexbox horizontal. Coloca botões e campos lado a lado alinhados)
-- Grelha Inteligente: `.lazy-grid-auto` (CSS Grid mágico que se ajusta sozinho sem que eu precise configurar media-queries)
-- Átomos Visuais: `.lazy-card`, `.lazy-btn`, `.lazy-btn-primary`, `.lazy-field` (inputs)
+```markdown
+[CONTEXTO: UI Framework LazyCSS]
+Utilize as especificações técnicas de classes e responsividade contidas no arquivo/link 'lazycss-blueprint.md' anexado para realizar a tarefa abaixo.
 
-REGRA CRÍTICA DE SOBREVIVÊNCIA: Não invente estilos inline (style="...") nem tente criar CSS customizado. Monte a interface combinando apenas as classes listadas.
+TAREFA:
+Preciso que você gere o HTML/JSX para uma tela de [EXEMPLO: Listagem de Clientes com Filtros e uma Tabela Corporativa].
+
+REGRAS DE EXECUÇÃO:
+1. Siga estritamente as Cláusulas Críticas do blueprint anexado (Sem estilos inline, sem CSS customizado).
+2. Garanta o comportamento responsivo combinando as classes estruturais de linha (.lazy-row) e grelha (.lazy-grid-auto).
+3. Responda APENAS com o bloco de código limpo, sem introduções ou explicações textuais sobre o design.
 
 ```
 
