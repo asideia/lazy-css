@@ -99,7 +99,7 @@
 <body>
 
   <header class="lazy-row" style="background: var(--bg-surface); padding: 1.5rem; border-bottom: 1px solid var(--border-color); justify-content: space-between;">
-    <h1 class="lazy-text-main" style="font-size: 1.8rem; margin: 0;">🦥 lazy CSS <span style="font-size: 1rem; color: var(--color-primary);">Playground Dinâmico</span></h1>
+    <h1 class="lazy-text-main" style="font-size: 1.8rem; margin: 0;">🦥 Lazy CSS <span style="font-size: 1rem; color: var(--color-primary);">Playground Dinâmico</span></h1>
     <span id="lazy-status-badge" style="font-weight: 600; color: #666; transition: color 0.3s ease;">Verificando lazy...</span>
   </header>
 
@@ -117,10 +117,10 @@
       const badge = document.getElementById("lazy-status-badge");
       const islazyActive = getComputedStyle(document.documentElement).getPropertyValue('--lazy-primary-raw').trim() !== "";
       if (islazyActive) {
-        badge.innerHTML = "Modo: 🛠️ lazy Coding Ativo";
+        badge.innerHTML = "Modo: 🛠️ Lazy Coding Ativo";
         badge.style.color = "var(--color-primary)";
       } else {
-        badge.innerHTML = "Modo: ⚠️ lazy Coding Inativo (CSS offline)";
+        badge.innerHTML = "Modo: ⚠️ Lazy Coding Inativo (CSS offline)";
         badge.style.color = "var(--color-danger)";
       }
     });
