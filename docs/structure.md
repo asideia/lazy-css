@@ -1,91 +1,121 @@
-# 📂 Documento de Arquitetura: Estrutura do Projeto
+# 📂 Documento de Arquitetura: Estrutura do Projeto (Architecture & Project Structure)
 
-Este documento serve para mapear a anatomia do repositório do **lazy CSS**, detalhando a governança de arquivos, a separação de responsabilidades e o fluxo de compilação dos módulos visuais.
+Este documento mapeia a anatomia do repositório do **Lazy CSS**, detalhando a governança de arquivos, a separação estrita de responsabilidades, as convenções de idioma e o fluxo de compilação dos módulos visuais.
 
-## 1. Visão Geral da Árvore de Diretórios
+---
 
-O projeto adota uma abordagem monolítica modularizada. O código de desenvolvimento é fragmentado para garantir manutenibilidade, enquanto o ambiente de distribuição entrega um arquivo unificado de alta performance.
+## 1. Visão Geral da Árvore de Diretórios (Directory Tree)
+
+O projeto adota uma abordagem modular de desenvolvimento com distribuição monolítica de alta performance. O código-fonte é altamente fragmentado em arquivos específicos para garantir manutenibilidade técnica, enquanto o pipeline de compilação unifica e otimiza o ecossistema em um único artefato pronto para produção.
 
 ```text
 lazy-css/
-├── dist/                  # Artefatos Compilados (Produção)
-│   └── lazy.min.css       # Folha de estilo única, minificada e com prefixos globais
-├── src/                   # Código-Fonte Modular (Desenvolvimento)
+├── .github/workflows/
+│   └── release.yml          # CI/CD pipeline for automated builds and deployment
+├── .vscode/                 # Stored preferences to enforce code style formatting
+├── assets/                  # Ecosystem support resources and intelligence
+│   ├── data/
+│   │   └── lazycss.spec.json # The Single Source of Truth (AI Contract & Showcase data)
+│   ├── images/
+│   │   └── logo.png         # Brand identity and graphic assets
+│   └── scripts/
+│       └── playground.js    # Native JS engines (dynamic rendering, MD blueprint generator)
+├── dist/                    # Compiled and minified production-ready CSS distribution
+│   ├── lazycss.css          # Development style builds
+│   └── lazycss.min.css      # Production style builds (The only file your HTML needs)
+├── docs/                    # Internal governance and pipeline manuals
+│   ├── release-guide.md     # Guidelines on pushing releases without breaking CI/CD
+│   └── structure.md         # This architecture and file-system governance file
+├── src/                     # Core CSS modular codebase
 │   ├── tokens/
-│   │   └── variables.css  # Camada de Dados (Design Tokens baseados em HSL raw)
+│   │   └── variables.css    # Design tokens and fluid mathematical spacing formulas
 │   ├── base/
-│   │   └── reset.css      # Camada de Normalização (Reset e suavização cross-browser)
+│   │   └── reset.css        # Semantic browser reset rules for cross-platform harmony
 │   ├── layouts/
-│   │   ├── structure.css  # Camada de Microlayouts (Alinhamento atômico Flexbox)
-│   │   └── page-grid.css  # Camada de Macroestruturas (Grids de páginas e seções)
+│   │   ├── structure.css    # Row and Stack layout adjusters (Survival flexbox)
+│   │   └── page-grid.css    # Full screen layout viewports with isolated scrolling
 │   ├── components/
-│   │   └── components.css # Camada de Elementos (Componentes visuais puros)
-│   └── lazy.css           # Arquivo Mestre Indexador (Orquestrador do PostCSS)
-├── postcss.config.js      # Pipeline de Build (Configuração de Plugins)
-├── package.json           # Manifesto do Projeto (Metadados e Scripts de Automação)
-└── index.html             # Playground Local (Ambiente de Testes e Sandbox)
+│   │   └── components.css   # Clean administrative UI atoms (buttons, fields, cards, tables)
+│   └── lazy.css             # Root master file unifying the codebase via PostCSS
+├── index.html               # Main project presentation and Landing Page
+├── quickstart.html          # Official step-by-step setup guide and LLM prompting manuals
+├── showcase.html            # Living component docs (Parses lazycss.spec.json & outputs the AI .md)
+├── playground.html          # Interactive Sandbox (Real-time token and layout lab)
+├── package.json             # Build scripts, version tags, and package definitions
+└── postcss.config.js        # Compilation pipeline recipe for code optimization
 
 ```
 
 ---
 
-## 2. O Fluxo de Dados e Compilação
+## 2. O Fluxo de Dados e Compilação (Build & Data Flow)
 
-Para entender como a estrutura se comporta, é essencial compreender o ciclo de vida do código. O desenvolvedor (ou a IA) altera exclusivamente os arquivos contidos dentro do diretório `src/`. O navegador que roda o `index.html` (Playground) lê apenas o resultado gerado dentro da pasta `dist/`.
+Para manter o ecossistema sustentável, o desenvolvedor (ou a IA) altera exclusivamente os arquivos modulares contidos dentro do diretório `src/`. O navegador e as páginas de teste consomem exclusivamente o resultado gerado dentro do diretório de distribuição `dist/`.
 
-O arquivo central `src/lazy.css` atua como o funil do projeto, utilizando diretivas `@import` para estruturar a ordem de precedência correta do CSS:
+O arquivo central `src/lazy.css` atua como o funil de orquestração do projeto, utilizando as diretivas `@import` para determinar a ordem física de precedência do CSS:
 
 ```css
 /* src/lazy.css */
-@import "./tokens/variables.css";  /* 1. Carrega as variáveis (Escopo Global) */
-@import "./base/reset.css";       /* 2. Aplica o reset (Sobrescreve os browsers) */
-@import "./layouts/structure.css"; /* 3. Injeta utilitários de alinhamento */
-@import "./layouts/page-grid.css";  /* 4. Injeta estruturas de páginas */
-@import "./components/components.css"; /* 5. Carrega a estilização dos elementos */
+@import "./tokens/variables.css";     /* 1. Carrega as variáveis (Escopo Global) */
+@import "./base/reset.css";            /* 2. Aplica o reset (Sobrescreve os navegadores) */
+@import "./layouts/structure.css";    /* 3. Injeta utilitários de alinhamento atômico */
+@import "./layouts/page-grid.css";     /* 4. Injeta macroestruturas de páginas */
+@import "./components/components.css";    /* 5. Carrega a estilização dos elementos atômicos */
 
 ```
 
 ---
 
-## 3. Detalhamento das Pastas e Responsabilidades
+## 3. Diretamento de Pastas e Responsabilidades
 
 ### 3.1. Diretório `/dist` (Distribution)
 
-Contém o produto final pronto para consumo.
+Contém os produtos finais compilados, prefixados contra incompatibilidades de navegadores antigos e prontos para produção.
 
-* **`lazy.min.css`:** É um arquivo gerado de forma 100% automatizada. Ele não deve ser editado manualmente sob nenhuma hipótese. Qualquer alteração feita diretamente nele será sobrescrevida no próximo build.
+* **`lazycss.min.css`:** Arquivo gerado de forma 100% automatizada através do PostCSS. Ele **nunca** deve ser editado manualmente sob nenhuma hipótese. Qualquer alteração direta nele será apagada no próximo ciclo de build.
 
-### 3.2. Diretório `/src/tokens`
+### 3.2. Diretório `/assets` (Ecosystem Intelligence)
 
-Camada declarativa de dados brutos.
+Armazena os motores lógicos que transformam o Lazy CSS em um framework nativo para Inteligência Artificial.
 
-* **Responsabilidade:** Armazenar os limites matemáticos e visuais da biblioteca (paleta de cores, escala de espaçamento, fatores de borda e intensidades de sombra).
-* **Regra Arquitetural:** Não deve conter classes CSS (seletores com ponto `.`), apenas propriedades customizadas (`:root`). As cores devem ser declaradas em formato HSL fragmentado (sem o invólucro da função `hsl()`) para permitir modificações dinâmicas de opacidade nos componentes.
+* **`/data/lazycss.spec.json`:** A **Única Fonte de Verdade** do projeto. Estruturado em inglês (`en-US`), separa metadados puramente técnicos para treinamento de LLMs (`blueprint_specs`) de exemplos brutos para visualização humana (`sandbox_elements`).
+* **`/scripts/playground.js`:** Motor JavaScript nativo que lê o arquivo `.spec.json`, renderiza dinamicamente a interface do laboratório e converte o JSON em formato Markdown sob demanda.
 
-### 3.3. Diretório `/src/base`
+### 3.3. Diretório `/src/tokens`
 
-Camada de consistência física.
+Camada declarativa de dados de design brutos.
 
-* **Responsabilidade:** Zerar comportamentos bizarros herdados de navegadores antigos e padronizar o comportamento de box-model (`box-sizing: border-box`) e tipografia.
-* **Regra Arquitetural:** Alvos exclusivos em tags HTML puras (como `body`, `html`, `img`, `input`). Nenhuma classe customizada deve ser criada aqui.
+* **Responsabilidade:** Armazenar os limites matemáticos da biblioteca (paleta de cores, escala de espaçamento fluido, curvas de borda).
+* **Regra Arquitetural:** É proibido conter classes CSS (seletores com ponto `.`), aceitando apenas propriedades customizadas `:root`. As cores devem ser declaradas em formato HSL fragmentado (ex: `--lazy-primary-raw: 210 100% 50%;`) para permitir modificações dinâmicas de opacidade em tempo de execução pelos componentes.
 
-### 3.4. Diretório `/src/layouts`
+### 3.4. Diretório `/src/base`
 
-Camada de posicionamento e responsividade espacial. É dividida em duas frentes de engenharia:
+Camada de consistência estrutural.
 
-* **`structure.css` (Microlayouts):** Focado no comportamento interno de pequenos blocos (empilhar inputs verticalmente, alinhar botões horizontalmente). Baseado estritamente em Flexbox.
-* **`page-grid.css` (Macroestruturas):** Focado no esqueleto da página inteira (divisão de menus laterais, grids de relatórios auto-responsivos). Baseado estritamente em CSS Grid.
+* **Responsabilidade:** Neutralizar comportamentos imprevisíveis herdados dos navegadores e unificar o comportamento de box-model (`box-sizing: border-box`).
+* **Regra Arquitetural:** Alvos exclusivos em tags HTML puras. Nenhuma classe customizada deve ser injetada nesta camada.
 
-### 3.5. Diretório `/src/components`
+### 3.5. Diretório `/src/layouts`
+
+Camada de posicionamento e responsividade nativa espacial. Dividida em duas frentes com regras matemáticas rígidas para evitar a necessidade de media-queries nos prompts das LLMs:
+
+* **`structure.css` (Microlayouts):** Focado no comportamento de fluxo interno de pequenos blocos (empilhar elementos via `.lazy-stack` ou alinhar lateralmente com quebra dinâmica mobile via `.lazy-row`). Baseado estritamente em Flexbox.
+* **`page-grid.css` (Macroestruturas):** Focado no esqueleto de viewport fixa para sistemas corporativos (`.lazy-layout-dashboard`) e grades inteligentes autogerenciáveis (`.lazy-grid-auto`). Baseado estritamente em CSS Grid.
+
+### 3.6. Diretório `/src/components`
 
 Camada de elementos de interface interativos.
 
 * **Responsabilidade:** Isolar a semântica visual de componentes atômicos reutilizáveis.
-* **Regra Arquitetural:** Seguir a risca a convenção de nomenclatura da biblioteca (`.lazy-card`, `.lazy-field`, `.lazy-btn`). Todos os componentes devem ser agnósticos de layout (não devem possuir margens externas fixas ou larguras estáticas forçadas), delegando o espaçamento para as classes da pasta `/layouts`.
+* **Regra Arquitetural:** Seguir rigidamente o prefixo `.lazy-*`. Todos os componentes devem ser **agnósticos de layout** (não devem possuir margens externas fixas ou larguras estáticas forçadas), delegando o espaçamento e o posicionamento inteiramente para as classes contidas em `/layouts`.
 
 ---
 
-## 4. O Playground Integrado (`/index.html`)
+## 4. O Ecossistema Desacoplado de Páginas (Multi-Page Architecture)
 
-O arquivo `index.html` reside na raiz do projeto por motivos estratégicos de desenvolvimento ágil (*lazy coding*).
-Ao manter o playground no mesmo nível do manifesto `package.json`, o desenvolvedor consegue subir um servidor local instantâneo que consome o artefato em desenvolvimento (`dist/lazy.min.css`). Isso elimina a necessidade de criar pacotes fictícios (*npm link*) ou repositórios espelhos apenas para testar se uma nova classe de botão ou input foi estilizada corretamente.
+Em vez de centralizar toda a documentação em um arquivo monolítico, o Lazy CSS divide as responsabilidades de uso em quatro arquivos HTML na raiz:
+
+1. **`index.html` (Landing Page):** A vitrine comercial do framework. Apresenta o manifesto, a filosofia do projeto e as chamadas para ação.
+2. **`quickstart.html` (Guide):** Manual linear focado na velocidade do desenvolvedor backend. Explica a importação do CDN e ensina a orquestrar LLMs utilizando o prompt de guarnição estático e disponibiliza o download imediato do arquivo `lazycss-blueprint.md` gerado em tempo de execução para alimentar as IAs.
+3. **`showcase.html` (Documentation):** Consome dinamicamente o arquivo `/assets/data/lazycss.spec.json` via JavaScript nativo para exibir os componentes.
+4. **`playground.html` (Sandbox):** Laboratório tátil em tempo real para simular layouts interativos, responsividade mobile e alteração de propriedades e tokens.
