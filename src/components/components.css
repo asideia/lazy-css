@@ -1,66 +1,127 @@
-/* --- CARD BASE --- */
-.lazy-card {
-  background-color: var(--bg-surface);
-  border-radius: var(--radius-lg);
-  padding: calc(1.5rem * var(--lazy-spacing-factor));
-  box-shadow: var(--shadow-lazy);
-  border: 1px solid var(--border-color);
-  width: 100%;
-}
+/* ==========================================================================
+   ⚡ LAZY CSS - INTERACTIVE COMPONENTS (src/components/components.css)
+   ========================================================================== */
 
-/* --- INPUTS E FORMULÁRIOS --- */
-.lazy-field {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  background-color: var(--bg-surface);
-  color: var(--text-main);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
+/* ------------------------------------------------------------------------
+   1. BOTÕES & GATILHOS (Buttons)
+   ------------------------------------------------------------------------ */
 
-.lazy-field:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-primary-dim);
-}
-
-.lazy-field::placeholder {
-  color: var(--text-muted);
-  opacity: 0.7;
-}
-
-/* --- BOTÕES COM FEEDBACK TÁTIL --- */
+/* Botão Base/Neutro */
 .lazy-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  border-radius: var(--radius-md);
+  font-weight: var(--lazy-weight-medium);
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  border-radius: var(--lazy-radius-md);
+  background-color: hsl(var(--lazy-border-raw));
+  color: hsl(var(--lazy-text-main-raw));
   border: 1px solid transparent;
-  background-color: var(--border-color);
-  color: var(--text-main);
-  cursor: pointer;
-  transition: all 0.15s ease;
+  transition: filter 0.2s ease, box-shadow 0.2s ease;
   user-select: none;
+  white-space: nowrap;
 }
 
+/* Variante Principal (Primary Action) */
 .lazy-btn-primary {
-  background-color: var(--color-primary);
-  color: #ffffff;
+  background-color: hsl(var(--lazy-primary-raw));
+  color: hsl(var(--lazy-card-raw));
+  box-shadow: 0 2px 4px hsl(var(--lazy-primary-raw) / 0.15);
 }
 
-.lazy-btn-primary:hover {
-  background-color: var(--color-primary-hover);
+/* Modificação de Estados (Hover/Active) via Filtros Nativos */
+.lazy-btn:hover {
+  filter: brightness(0.92);
 }
 
 .lazy-btn:active {
-  transform: scale(0.97); /* Micro-interação ao clicar */
+  filter: brightness(0.85);
 }
 
+/* Estado Desabilitado */
 .lazy-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  transform: none;
+  filter: none;
+}
+
+/* ------------------------------------------------------------------------
+   2. CAPTURA DE DADOS & FORMULÁRIOS (Inputs & Fields)
+   ------------------------------------------------------------------------ */
+
+/* Campo de Entrada Padrão */
+.lazy-field {
+  width: 100%;
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  background-color: hsl(var(--lazy-card-raw));
+  color: hsl(var(--lazy-text-main-raw));
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-md);
+  box-shadow: var(--lazy-shadow-flat);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Placeholder discreto */
+.lazy-field::placeholder {
+  color: hsl(var(--lazy-text-muted-raw));
+  opacity: 0.7;
+}
+
+/* Estado de Foco (Focus) Seguro e Elegante */
+.lazy-field:focus {
+  border-color: hsl(var(--lazy-primary-raw));
+  box-shadow: 0 0 0 3px hsl(var(--lazy-primary-raw) / 0.15);
+}
+
+/* ------------------------------------------------------------------------
+   3. BLOCOS DE ELEVAÇÃO (Cards)
+   ------------------------------------------------------------------------ */
+.lazy-card {
+  background-color: hsl(var(--lazy-card-raw));
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-lg);
+  padding: var(--lazy-space-md);
+  box-shadow: var(--lazy-shadow-raised);
+}
+
+/* ------------------------------------------------------------------------
+   4. TABELAS DE DADOS ADMINISTRATIVAS (Data Tables)
+   ------------------------------------------------------------------------ */
+.lazy-table {
+  width: 100%;
+  text-align: left;
+  background-color: hsl(var(--lazy-card-raw));
+  border-radius: var(--lazy-radius-lg);
+  overflow: hidden;
+}
+
+/* Cabeçalho da Tabela */
+.lazy-table th {
+  background-color: hsl(var(--lazy-bg-raw));
+  color: hsl(var(--lazy-text-muted-raw));
+  font-weight: var(--lazy-weight-bold);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  border-bottom: 1px solid hsl(var(--lazy-border-raw));
+}
+
+/* Células de Dados */
+.lazy-table td {
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  border-bottom: 1px solid hsl(var(--lazy-border-raw));
+  color: hsl(var(--lazy-text-main-raw));
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+/* Efeito de linhas alternadas (Zebra Stripe) para alta densidade */
+.lazy-table tbody tr:nth-child(even) {
+  background-color: hsl(var(--lazy-bg-raw) / 0.4);
+}
+
+/* Efeito de destaque ao passar o mouse na linha */
+.lazy-table tbody tr:hover {
+  background-color: hsl(var(--lazy-bg-raw) / 0.8);
 }
