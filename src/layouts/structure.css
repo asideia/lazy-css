@@ -1,23 +1,70 @@
-/* Centralização Absoluta na Tela (Ex: Telas de Login) */
-.lazy-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 1.5rem;
-}
+/* ==========================================================================
+   ⚡ LAZY CSS - MICROLAYOUTS & ATOMIC FLOWS (src/layouts/structure.css)
+   ========================================================================== */
 
-/* Empilhamento Vertical Inteligente (Foco absoluto em formulários e listagens) */
+/* ------------------------------------------------------------------------
+   1. EMPILHADOR VERTICAL (Stack Layout)
+   Alinha todos os elementos filhos em uma única coluna. Ideal para organizar
+   blocos lógicos, seções e empilhar elementos de formulários.
+   ------------------------------------------------------------------------ */
 .lazy-stack {
   display: flex;
   flex-direction: column;
-  gap: calc(1.25rem * var(--lazy-spacing-factor));
+  justify-content: flex-start;
+  /* Aplica o espaçamento fluido padrão (md) de forma intrínseca */
+  gap: var(--lazy-space-md);
 }
 
-/* Alinhamento Horizontal (Foco em grupos de botões, badges ou cards em linha) */
+/* ------------------------------------------------------------------------
+   2. ALINHADOR HORIZONTAL (Row Layout)
+   Posiciona os elementos lado a lado. Possui quebra automática ativa (wrap)
+   que força o empilhamento em telas pequenas de forma natural.
+   ------------------------------------------------------------------------ */
 .lazy-row {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  gap: calc(1rem * var(--lazy-spacing-factor));
+  justify-content: flex-start;
+  /* Espaçamento fluido médio para eixos X e Y */
+  gap: var(--lazy-space-md);
+}
+
+/* ------------------------------------------------------------------------
+   3. VARIAÇÕES DE ALINHAMENTO HORIZONTAL (Justify Content Modifiers)
+   ------------------------------------------------------------------------ */
+
+/* Distribui os elementos uniformemente, empurrando o último para a extremidade */
+.lazy-row-between {
+  justify-content: space-between;
+}
+
+/* Centraliza os elementos no eixo horizontal */
+.lazy-row-center {
+  justify-content: center;
+}
+
+/* Alinha os elementos ao final do eixo horizontal (direita) */
+.lazy-row-end {
+  justify-content: flex-end;
+}
+
+/* ------------------------------------------------------------------------
+   4. MODIFICADORES DE ESPAÇAMENTO INTERNO (Gap Overrides)
+   Permitem que a IA altere a densidade do fluxo de acordo com a necessidade.
+   ------------------------------------------------------------------------ */
+.lazy-gap-xs { gap: var(--lazy-space-xs); }
+.lazy-gap-sm { gap: var(--lazy-space-sm); }
+.lazy-gap-md { gap: var(--lazy-space-md); }
+.lazy-gap-lg { gap: var(--lazy-space-lg); }
+.lazy-gap-xl { gap: var(--lazy-space-xl); }
+
+/* ------------------------------------------------------------------------
+   5. UTILITÁRIOS DE EXPANSÃO (Flex Grow)
+   Força um elemento a ocupar todo o espaço disponível no layout pai.
+   ------------------------------------------------------------------------ */
+.lazy-fill {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
 }
