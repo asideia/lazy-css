@@ -1,69 +1,76 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lazy CSS - Playground Sandbox</title>
     <link rel="stylesheet" href="dist/lazycss.min.css">
     <style>
-        /* Estilos estruturais do painel do Playground */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0f172a;
-            color: #f1f5f9;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
             height: 100vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
+
         header {
-            background-color: #1e293b;
-            border-bottom: 1px solid #334155;
-            padding: 0.75rem 2rem;
+            background-color: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-shrink: 0;
         }
+
         nav a {
-            color: #94a3b8;
+            color: #475569;
             text-decoration: none;
             margin-left: 1.5rem;
             font-weight: 500;
             transition: color 0.2s;
         }
+
         nav a:hover {
-            color: #38bdf8;
+            color: #2563eb;
         }
+
         .sandbox-layout {
             display: flex;
             flex-grow: 1;
             overflow: hidden;
         }
+
         .editor-pane {
             width: 40%;
-            background-color: #1e293b;
-            border-right: 1px solid #334155;
+            background-color: #ffffff;
+            border-right: 1px solid #e2e8f0;
             display: flex;
             flex-direction: column;
-            padding: 1rem;
+            padding: 1.5rem;
             box-sizing: border-box;
         }
+
         .editor-pane h3 {
-            margin: 0 0 0.5rem 0;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #94a3b8;
+            margin: 0 0 0.75rem 0;
+            font-size: 1rem;
+            color: #0f172a;
+            font-weight: 600;
         }
+
         textarea {
             width: 100%;
             flex-grow: 1;
             background-color: #0f172a;
             color: #38bdf8;
-            border: 1px solid #475569;
+            border: 1px solid #334155;
             border-radius: 6px;
             padding: 1rem;
             font-family: 'Courier New', Courier, monospace;
@@ -71,27 +78,55 @@
             resize: none;
             outline: none;
             box-sizing: border-box;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         textarea:focus {
-            border-color: #38bdf8;
+            border-color: #2563eb;
         }
+
         .preview-pane {
             width: 60%;
-            background-color: #f8fafc;
             display: flex;
             flex-direction: column;
+            background-color: #f8fafc;
         }
+
         .preview-toolbar {
-            background-color: #e2e8f0;
-            padding: 0.5rem 1rem;
+            background-color: #f1f5f9;
+            padding: 0.75rem 1.5rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            justify-content: space-between;
             color: #475569;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 500;
-            border-bottom: 1px solid #cbd5e1;
+            border-bottom: 1px solid #e2e8f0;
         }
+
+        /* Banner de Status do CSS */
+        .css-status-badge {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status-loading {
+            background: #e2e8f0;
+            color: #475569;
+        }
+
+        .status-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
         iframe {
             width: 100%;
             flex-grow: 1;
@@ -100,73 +135,151 @@
         }
     </style>
 </head>
+
 <body>
 
     <header>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #fff;">🦥 Lazy<span style="color: #38bdf8;">CSS</span></span>
+            <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #0f172a;">🦥 Lazy<span
+                    style="color: #2563eb;">CSS</span></span>
         </div>
         <nav>
             <a href="index.html">Home</a>
             <a href="quickstart.html">Quickstart & IA</a>
             <a href="showcase.html">Componentes</a>
-            <a href="playground.html" style="color: #38bdf8;">Playground</a>
+            <a href="playground.html" style="color: #2563eb;">Playground</a>
         </nav>
     </header>
 
     <div class="sandbox-layout">
-        
+
         <section class="editor-pane">
-            <h3>✒️ Cole o código da IA aqui</h3>
-            <textarea id="lazy-code-input" placeholder="&#10;<div class='lazy-stack'>&#10;  <button class='lazy-btn lazy-btn-primary'>Botão de Teste</button>&#10;</div>"></textarea>
+            <h3>✒️ Seu código aqui</h3>
+            <textarea id="lazy-code-input" placeholder="Digite ou cole seu HTML estrutural aqui..."></textarea>
         </section>
 
         <section class="preview-pane">
             <div class="preview-toolbar">
                 <span>🖥️ Real-time Preview (Isolated Environment)</span>
+                <span id="css-status" class="css-status-badge status-loading">🔍 Verificando
+                    dist/lazycss.min.css...</span>
             </div>
-            <iframe id="lazy-preview-frame"></iframe>
+            <iframe id="lazy-preview-frame" srcdoc="
+                <!DOCTYPE html>
+                <html>
+                    <head>
+                    <meta charset='UTF-8'>
+                    <link rel='stylesheet' href='./dist/lazycss.min.css'>
+                    <style>
+                        body { 
+                        padding: 2rem; 
+                        margin: 0; 
+                        background-color: #f8fafc;
+                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                        }
+                    </style>
+                    </head>
+                    <body id='preview-root'>
+                    </body>
+                </html>
+            "></iframe>
         </section>
-
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const textarea = document.getElementById('lazy-code-input');
             const iframe = document.getElementById('lazy-preview-frame');
+            const statusBadge = document.getElementById('css-status');
 
-            function updatePreview() {
-                const userHtml = textarea.value;
-                
-                // Injeta dinamicamente o CSS de produção dentro do iframe para garantir a estilização
-                const iframeContent = `
-                    <!DOCTYPE html>
-                    <html lang="pt-BR">
-                    <head>
-                        <meta charset="UTF-8">
-                        <link rel="stylesheet" href="dist/lazycss.min.css">
-                        <style>
-                            body { padding: 2rem; margin: 0; background: #f8fafc; }
-                        </style>
-                    </head>
-                    <body>
-                        ${userHtml}
-                    </body>
-                    </html>
-                `;
+            // Template padrão injetado via JS para evitar quebras de parser do navegador
+            const defaultTemplate = `<div class="lazy-stack">
+                                        <div class="lazy-row lazy-row-between">
+                                            <div class="lazy-stack lazy-gap-xs">
+                                            <h3 style="margin:0; font-size: 1.4rem; font-weight: 600;">Controle de Usuários</h3>
+                                            <p style="margin:0; color:#64748b; font-size: 0.95rem;">Gerenciamento de credenciais do backoffice.</p>
+                                            </div>
+                                            <button class="lazy-btn lazy-btn-primary">⚡ Novo Registro</button>
+                                        </div>
 
-                const doc = iframe.contentDocument || iframe.contentWindow.document;
-                doc.open();
-                doc.write(iframeContent);
-                doc.close();
+                                        <div class="lazy-card">
+                                            <table class="lazy-table">
+                                            <thead>
+                                                <tr>
+                                                <th>Operador</th>
+                                                <th>Escopo</th>
+                                                <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                <td>Admin</td>
+                                                <td>Administrator</td>
+                                                <td><span style="color: #166534; font-weight: bold;">Ativo</span></td>
+                                                </tr>
+                                                <tr>
+                                                <td>Patricia</td>
+                                                <td>Content Manager</td>
+                                                <td><span style="color: #166534; font-weight: bold;">Ativo</span></td>
+                                                </tr>
+                                            </tbody>
+                                            </table>
+                                        </div>
+                                    </div>`;
+
+            // Define o valor padrão no editor
+            if (textarea) {
+                textarea.value = defaultTemplate;
             }
 
-            // Escuta as alterações de digitação e colagem
+            // Função que renderiza o conteúdo no Iframe
+            function updatePreview() {
+                if (!textarea || !iframe) return;
+
+                const userHtml = textarea.value; // Pode ser apenas: <button class="lazy-btn">Clique</button>
+
+                try {
+                    const doc = iframe.contentDocument || iframe.contentWindow.document;
+                    const root = doc.getElementById('preview-root');
+
+                    if (root) {
+                        // Injeta diretamente o elemento puro sem quebrar o <head> ou o CSS do iframe
+                        root.innerHTML = userHtml;
+                    } else {
+                        // Fallback caso o iframe ainda não tenha terminado de carregar o srcdoc inicial
+                        doc.open();
+                        doc.write(userHtml);
+                        doc.close();
+                    }
+                } catch (err) {
+                    console.error("Erro na atualização do preview:", err);
+                }
+            }
+
+            // Checa de forma assíncrona se o arquivo de estilo compilado realmente existe
+            function checkCssAvailability() {
+                fetch('./dist/lazycss.min.css', { method: 'HEAD' })
+                    .then(response => {
+                        if (response.ok) {
+                            statusBadge.innerText = "✓ lazycss.min.css pronto";
+                            statusBadge.className = "css-status-badge status-success";
+                        } else {
+                            throw new Error();
+                        }
+                    })
+                    .catch(() => {
+                        statusBadge.innerText = "⚠️ Alerta: dist/lazycss.min.css não encontrado. Rode 'npm run build'";
+                        statusBadge.className = "css-status-badge status-error";
+                    });
+            }
+
+            // Inicializadores
             textarea.addEventListener('input', updatePreview);
-            
-            // Executa a primeira renderização com o placeholder inicial
+            checkCssAvailability();
             updatePreview();
         });
     </script>
+
 </body>
+
 </html>
