@@ -140,8 +140,7 @@
 
     <header>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #0f172a;">🦥 Lazy<span
-                    style="color: #2563eb;">CSS</span></span>
+            <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #0f172a;">🦥 Lazy<span style="color: #2563eb;">CSS</span></span>
         </div>
         <nav>
             <a href="index.html">Home</a>
@@ -161,26 +160,24 @@
         <section class="preview-pane">
             <div class="preview-toolbar">
                 <span>🖥️ Real-time Preview (Isolated Environment)</span>
-                <span id="css-status" class="css-status-badge status-loading">🔍 Verificando
-                    dist/lazycss.min.css...</span>
+                <span id="css-status" class="css-status-badge status-loading">🔍 Verificando dist/lazycss.min.css...</span>
             </div>
             <iframe id="lazy-preview-frame" srcdoc="
                 <!DOCTYPE html>
                 <html>
                     <head>
-                    <meta charset='UTF-8'>
-                    <link rel='stylesheet' href='./dist/lazycss.min.css'>
-                    <style>
-                        body { 
-                        padding: 2rem; 
-                        margin: 0; 
-                        background-color: #f8fafc;
-                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                        }
-                    </style>
+                        <meta charset='UTF-8'>
+                        <link rel='stylesheet' href='./dist/lazycss.min.css'>
+                        <style>
+                            body { 
+                                padding: 2rem; 
+                                margin: 0; 
+                                background-color: #f8fafc;
+                                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                            }
+                        </style>
                     </head>
-                    <body id='preview-root'>
-                    </body>
+                    <body id='preview-root'></body>
                 </html>
             "></iframe>
         </section>
@@ -192,71 +189,65 @@
             const iframe = document.getElementById('lazy-preview-frame');
             const statusBadge = document.getElementById('css-status');
 
-            // Template padrão injetado via JS para evitar quebras de parser do navegador
+            // Template padrão limpo (apenas elementos sem estrutura de página)
             const defaultTemplate = `<div class="lazy-stack">
-                                        <div class="lazy-row lazy-row-between">
-                                            <div class="lazy-stack lazy-gap-xs">
-                                            <h3 style="margin:0; font-size: 1.4rem; font-weight: 600;">Controle de Usuários</h3>
-                                            <p style="margin:0; color:#64748b; font-size: 0.95rem;">Gerenciamento de credenciais do backoffice.</p>
-                                            </div>
-                                            <button class="lazy-btn lazy-btn-primary">⚡ Novo Registro</button>
-                                        </div>
+  <div class="lazy-row lazy-row-between">
+    <div class="lazy-stack lazy-gap-xs">
+      <h3 style="margin:0; font-size: 1.4rem; font-weight: 600;">Controle de Usuários</h3>
+      <p style="margin:0; color:#64748b; font-size: 0.95rem;">Gerenciamento de credenciais do backoffice.</p>
+    </div>
+    <button class="lazy-btn lazy-btn-primary">⚡ Novo Registro</button>
+  </div>
 
-                                        <div class="lazy-card">
-                                            <table class="lazy-table">
-                                            <thead>
-                                                <tr>
-                                                <th>Operador</th>
-                                                <th>Escopo</th>
-                                                <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                <td>Admin</td>
-                                                <td>Administrator</td>
-                                                <td><span style="color: #166534; font-weight: bold;">Ativo</span></td>
-                                                </tr>
-                                                <tr>
-                                                <td>Patricia</td>
-                                                <td>Content Manager</td>
-                                                <td><span style="color: #166534; font-weight: bold;">Ativo</span></td>
-                                                </tr>
-                                            </tbody>
-                                            </table>
-                                        </div>
-                                    </div>`;
+  <div class="lazy-card">
+    <table class="lazy-table">
+      <thead>
+        <tr>
+          <th>Operador</th>
+          <th>Escopo</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Muller Dev</td>
+          <td>Administrator</td>
+          <td><span style="color: #166534; font-weight: bold;">Ativo</span></td>
+        </tr>
+        <tr>
+          <td>Thais Stellet</td>
+          <td>Content Manager</td>
+          <td><span style="color: #166534; font-weight: bold;">Ativo</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>`;
 
-            // Define o valor padrão no editor
+            // Define o valor inicial no editor
             if (textarea) {
                 textarea.value = defaultTemplate;
             }
 
-            // Função que renderiza o conteúdo no Iframe
+            // Função focada em injetar apenas os elementos internos
             function updatePreview() {
                 if (!textarea || !iframe) return;
 
-                const userHtml = textarea.value; // Pode ser apenas: <button class="lazy-btn">Clique</button>
+                const userHtml = textarea.value;
 
                 try {
                     const doc = iframe.contentDocument || iframe.contentWindow.document;
                     const root = doc.getElementById('preview-root');
 
                     if (root) {
-                        // Injeta diretamente o elemento puro sem quebrar o <head> ou o CSS do iframe
                         root.innerHTML = userHtml;
-                    } else {
-                        // Fallback caso o iframe ainda não tenha terminado de carregar o srcdoc inicial
-                        doc.open();
-                        doc.write(userHtml);
-                        doc.close();
                     }
                 } catch (err) {
                     console.error("Erro na atualização do preview:", err);
                 }
             }
 
-            // Checa de forma assíncrona se o arquivo de estilo compilado realmente existe
+            // Checa se o arquivo CSS compilado existe localmente
             function checkCssAvailability() {
                 fetch('./dist/lazycss.min.css', { method: 'HEAD' })
                     .then(response => {
@@ -273,13 +264,20 @@
                     });
             }
 
-            // Inicializadores
+            // EVENTOS DE SINCRONIA:
+            // 1. Atualiza o preview em tempo real conforme digita
             textarea.addEventListener('input', updatePreview);
+            
+            // 2. Aguarda o iframe terminar de montar o esqueleto do srcdoc antes do primeiro render
+            iframe.addEventListener('load', updatePreview);
+
+            // Inicializadores de rotina
             checkCssAvailability();
+            
+            // Caso o iframe já tenha carregado antes do JS bater aqui, força um gatilho manual
             updatePreview();
         });
     </script>
-
 </body>
 
 </html>
