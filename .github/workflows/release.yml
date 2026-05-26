@@ -1,50 +1,41 @@
-name: 🚀 lazy CSS - Distribuição & CI/CD
+name: 🚀 Lazy CSS - Production Build & Release
 
-# O pipeline roda automaticamente sempre que você criar uma nova Tag de versão (ex: v1.0.4)
+# Trigger the workflow automatically when a version tag (e.g., v1.0.4) is pushed
 on:
   push:
     tags:
       - 'v*'
 
 jobs:
-  build-and-publish:
+  build-and-release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # Permite criar a Release e anexar o lazy.min.css
-      packages: write   # Caso decida usar o GitHub Packages no futuro
+      contents: write   # Required to create GitHub Releases and upload assets
+    
     steps:
-      
-      # 1. Faz o checkout do código do seu repositório na máquina virtual
-      - name: 📂 Checkout do código
+      # 1. Checkout the repository code into the runner
+      - name: 📂 Checkout codebase
         uses: actions/checkout@v4
 
-      # 2. Configura o ambiente Node.js na máquina virtual
-      - name: 🟢 Configurar Node.js
+      # 2. Setup the Node.js runtime environment
+      - name: 🟢 Setup Node.js env
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          # Configura o escopo para publicação no NPM/GitHub Packages
-          registry-url: 'https://registry.npmjs.org' 
 
-      # 3. Instala as dependências (PostCSS, Autoprefixer, CSSNano)
-      - name: 📦 Instalar dependências
+      # 3. Install development dependencies using clean install (npm ci)
+      - name: 📦 Install ecosystem dependencies
         run: npm ci
 
-      # 4. Executa o pipeline do PostCSS para gerar o dist/lazy.min.css oficial
-      - name: ⚡ Compilar lazy CSS (Produção)
+      # 4. Compile the core CSS modules into production distribution artifacts
+      - name: ⚡ Compile Lazy CSS artifacts
         run: npm run build
 
-      # 5. Cria uma Release oficial no GitHub e anexa o arquivo .css puro para download
-      - name: 🏆 Criar GitHub Release
+      # 5. Create an automated GitHub Release and attach the production asset
+      - name: 🏆 Generate automated GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/lazy.min.css
+          files: dist/lazycss.min.css
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # 6. Publica o pacote no registro de pacotes (NPM) para suportar "npm install"
-      - name: 🚀 Publicar no NPM
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
