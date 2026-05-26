@@ -1,129 +1,162 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🦥 lazy CSS — Playground Dinâmico</title>
-  
-  <link rel="stylesheet" href="./dist/lazy.min.css">
-
-  <style>
-    /* Estilos de apoio exclusivos do Playground */
-    .play-section {
-      margin-bottom: 3.5rem;
-      padding-bottom: 2.5rem;
-      border-bottom: 2px dashed var(--border-color);
-    }
-    .play-title {
-      font-size: 1.25rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .preview-box {
-      padding: 1.5rem;
-      background-color: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      margin-bottom: 1rem;
-    }
-    .code-inspector {
-      background: #1e1e2e;
-      color: #cdd6f4;
-      border-radius: var(--radius-md);
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-    }
-    .code-inspector summary {
-      cursor: pointer;
-      font-weight: 600;
-      color: var(--color-primary);
-      user-select: none;
-      padding: 0.5rem 0;
-    }
-    .code-inspector pre {
-      margin-top: 1rem;
-      padding: 1rem;
-      background: #11111b;
-      border-radius: var(--radius-md);
-      overflow-x: auto;
-      font-family: 'Courier New', Courier, monospace;
-    }
-    /* Posicionamento do wrapper de código */
-    .code-wrapper {
-      position: relative;
-      margin-top: 1rem;
-    }
-    
-    .code-inspector pre {
-      margin-top: 0; /* Resetado pois o wrapper agora segura o espaçamento */
-      padding: 1.25rem;
-      background: #11111b;
-      border-radius: var(--radius-md);
-      overflow-x: auto;
-      font-family: 'Courier New', Courier, monospace;
-    }
-
-    /* Estilização do Botão de Copiar */
-    .lazy-copy-btn {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      background: rgba(255, 255, 255, 0.1);
-      color: #cdd6f4;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 0.35rem 0.75rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      border-radius: calc(var(--radius-md) * 0.75);
-      cursor: pointer;
-      transition: all 0.2s ease;
-      user-select: none;
-    }
-
-    .lazy-copy-btn:hover {
-      background: var(--color-primary);
-      color: #ffffff;
-      border-color: var(--color-primary);
-    }
-
-    /* Estado quando o código for copiado com sucesso */
-    .lazy-copy-btn.copied {
-      background: hsl(var(--lazy-success-raw) / 0.2);
-      color: #00ff66;
-      border-color: hsl(var(--lazy-success-raw) / 0.4);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy CSS - AI-Native Structural Framework</title>
+    <link rel="stylesheet" href="dist/lazycss.min.css">
+    <style>
+        /* Estilos temporários de apoio para a Landing Page enquanto a pasta src/ está vazia */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: #475569;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #2563eb;
+        }
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: #475569;
+            max-width: 800px;
+            margin: 0 auto 2.5rem auto;
+        }
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background-color: #2563eb;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+        .btn-secondary {
+            background-color: #fff;
+            color: #334155;
+            border: 1px solid #cbd5e1;
+        }
+        .btn-secondary:hover {
+            background-color: #f1f5f9;
+        }
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+        .card h3 {
+            font-size: 1.25rem;
+            color: #0f172a;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+        .card p {
+            color: #64748b;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 5rem;
+            background: #fff;
+        }
+    </style>
 </head>
 <body>
 
-  <header class="lazy-row" style="background: var(--bg-surface); padding: 1.5rem; border-bottom: 1px solid var(--border-color); justify-content: space-between;">
-    <h1 class="lazy-text-main" style="font-size: 1.8rem; margin: 0;">🦥 Lazy CSS <span style="font-size: 1rem; color: var(--color-primary);">Playground Dinâmico</span></h1>
-    <span id="lazy-status-badge" style="font-weight: 600; color: #666; transition: color 0.3s ease;">Verificando lazy...</span>
-  </header>
+    <header>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #0f172a;">⚡ Lazy<span style="color: #2563eb;">CSS</span></span>
+        </div>
+        <nav>
+            <a href="index.html" style="color: #2563eb;">Home</a>
+            <a href="quickstart.html">Quickstart & IA</a>
+            <a href="showcase.html">Componentes</a>
+            <a href="playground.html">Playground</a>
+        </nav>
+    </header>
 
-  <main id="lazy-dynamic-content" class="lazy-container" style="padding: 2rem 1.5rem;">
+    main class="hero">
+        <h1>O Framework CSS Nativo para IA<br><span style="color: #2563eb;">Feito para Desenvolvedores Backend</span></h1>
+        <p>Esqueça a necessidade de microgerenciar centenas de classes utilitárias ou quebrar layouts no mobile. Entregue o blueprint do Lazy CSS para o Claude, ChatGPT ou Gemini e deixe a IA gerar interfaces administrativas indestrutíveis por você.</p>
+        <div class="cta-group">
+            <a href="quickstart.html" class="btn btn-primary">Alimente sua IA (Get Blueprint)</a>
+            <a href="showcase.html" class="btn btn-secondary">Ver Vitrine de Componentes</a>
+        </div>
     </main>
 
-  <footer class="lazy-text-muted" style="text-align: center; padding: 3rem 0; font-size: 0.85rem; border-top: 1px solid var(--border-color);">
-    lazy CSS &copy; 2026 — Desenvolvido em fluxo dinâmico de engenharia.
-  </footer>
+    <section class="features">
+        <div class="card">
+            <h3>🤖 AI-Native Contract</h3>
+            <p>Um modelo de dados otimizado e compacto em Markdown feito especificamente para ser injetado no prompt das LLMs, garantindo que a IA gere código sem inventar classes.</p>
+        </div>
+        <div class="card">
+            <h3>📐 Responsividade Intrínseca</h3>
+            <p>Construído sobre layouts fluidos matemáticos usando regras estritas de CSS Grid e Flexbox. O layout se adapta sozinho sem a necessidade de media-queries manuais.</p>
+        </div>
+        <div class="card">
+            <h3>💼 Foco Administrativo</h3>
+            <p>Direcionado cirurgicamente para as necessidades reais de softwares corporativos e backoffice: formulários limpos, tabelas de dados resilientes e painéis divididos.</p>
+        </div>
+    </section>
 
-  <script src="./assets//scripts/playground.js"></script>
-  <script>
-    // Validador de status do CSS compilado
-    document.addEventListener("DOMContentLoaded", () => {
-      const badge = document.getElementById("lazy-status-badge");
-      const islazyActive = getComputedStyle(document.documentElement).getPropertyValue('--lazy-primary-raw').trim() !== "";
-      if (islazyActive) {
-        badge.innerHTML = "Modo: 🛠️ Lazy Coding Ativo";
-        badge.style.color = "var(--color-primary)";
-      } else {
-        badge.innerHTML = "Modo: ⚠️ Lazy Coding Inativo (CSS offline)";
-        badge.style.color = "var(--color-danger)";
-      }
-    });
-  </script>
+    <footer>
+        <p>&copy; 2026 Lazy CSS Framework. Distribuído sob a licença MIT. Projetado para engenharia ágil.</p>
+    </footer>
+
 </body>
 </html>
