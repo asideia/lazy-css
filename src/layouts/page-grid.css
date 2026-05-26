@@ -1,48 +1,77 @@
-/* 1. LAYOUT DASHBOARD SISTEMA (Sidebar fixa + Topbar + Área de Conteúdo) */
+/* ==========================================================================
+   ⚡ LAZY CSS - MACRO PAGE STRUCTURES & GRIDS (src/layouts/page-grid.css)
+   ========================================================================== */
+
+/* ------------------------------------------------------------------------
+   1. VIEWPORT CORPORATIVA FIXA (Dashboard Layout)
+   Cria um layout de tela cheia (100vh) ideal para painéis administrativos.
+   Divide a tela em uma barra lateral de navegação (sidebar) e uma área
+   de conteúdo principal que controla sua própria rolagem.
+   ------------------------------------------------------------------------ */
 .lazy-layout-dashboard {
   display: grid;
-  grid-template-columns: 260px 1fr;
-  grid-template-rows: 65px 1fr;
-  grid-template-areas: 
-    "sidebar topbar"
-    "sidebar main";
-  min-height: 100vh;
+  grid-template-columns: 260px 1fr; /* Sidebar fixa com 260px e conteúdo flexível */
+  grid-template-rows: 100vh;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-color: hsl(var(--lazy-bg-raw));
 }
 
-.lazy-area-sidebar { 
-  grid-area: sidebar; 
-  background-color: var(--bg-surface); 
-  border-right: 1px solid var(--border-color); 
+/* Comportamento responsivo intrínseco para telas móveis */
+@media (max-width: 768px) {
+  .lazy-layout-dashboard {
+    grid-template-columns: 1fr; /* No mobile, a barra lateral colapsa ou empilha */
+    grid-template-rows: auto 1fr;
+    height: auto;
+    overflow: auto;
+  }
 }
 
-.lazy-area-topbar  { 
-  grid-area: topbar;  
-  background-color: var(--bg-surface); 
-  border-bottom: 1px solid var(--border-color); 
-}
+/* ------------------------------------------------------------------------
+   2. ELEMENTOS DO DASHBOARD
+   ------------------------------------------------------------------------ */
 
-.lazy-area-main    { 
-  grid-area: main;    
-  padding: calc(2rem * var(--lazy-spacing-factor)); 
-  overflow-y: auto; 
-}
-
-/* 2. ESTRUTURA PARA SITES/LANDING PAGES (Seções contidas ao centro) */
-.lazy-section {
-  padding: calc(4rem * var(--lazy-spacing-factor)) 1.5rem;
+/* Barra lateral fixa para menus e identidade do software */
+.lazy-dashboard-sidebar {
+  background-color: hsl(var(--lazy-card-raw));
+  border-right: 1px solid hsl(var(--lazy-border-raw));
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
 }
 
+/* Painel de conteúdo com rolagem isolada (evita o scroll na página inteira) */
+.lazy-dashboard-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--lazy-space-lg); /* Padding fluido que se adapta ao tamanho da tela */
+}
+
+/* ------------------------------------------------------------------------
+   3. GRID DE CARD DE MÉTRICAS (Data Grid)
+   Distribui cartões de informação ou formulários em colunas que se auto-ajustam.
+   Se os cards não couberem com o tamanho mínimo de 280px, eles quebram de linha sozinhos.
+   ------------------------------------------------------------------------ */
+.lazy-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--lazy-space-md);
+  width: 100%;
+}
+
+/* ------------------------------------------------------------------------
+   4. CONTAINER DE CONTEÚDO CENTRALIZADO (Páginas Estáticas/Simples)
+   Limita a largura máxima para leitura confortável em monitores muito grandes.
+   ------------------------------------------------------------------------ */
 .lazy-container {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* 3. GRID RESPONSIVO AUTOMÁTICO (Quebra linhas sozinho baseado no espaço físico) */
-.lazy-grid-auto {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: calc(1.5rem * var(--lazy-spacing-factor));
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--lazy-space-md);
+  padding-right: var(--lazy-space-md);
 }
