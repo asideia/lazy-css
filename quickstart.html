@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy CSS - Quickstart & Contexto de IA</title>
+    <link rel="stylesheet" href="dist/lazycss.min.css">
+    <style>
+        /* Estilos temporários de apoio para o Quickstart enquanto a pasta src/ está vazia */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #fff;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: #475569;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #2563eb;
+        }
+        main {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #0f172a;
+            margin-bottom: 1rem;
+            letter-spacing: -0.025em;
+        }
+        p {
+            color: #475569;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .blueprint-box {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01);
+            margin-bottom: 3rem;
+        }
+        .btn-download {
+            display: inline-block;
+            background-color: #2563eb;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
+        }
+        .btn-download:hover {
+            background-color: #1d4ed8;
+        }
+        .btn-download:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .steps {
+            background: #f1f5f9;
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+        }
+        .steps ol {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: #334155;
+        }
+        .steps li {
+            margin-bottom: 0.75rem;
+        }
+        .steps code {
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #0f172a;
+        }
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 6rem;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #0f172a;">⚡ Lazy<span style="color: #2563eb;">CSS</span></span>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="quickstart.html" style="color: #2563eb;">Quickstart & IA</a>
+            <a href="showcase.html">Componentes</a>
+            <a href="playground.html">Playground</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Alimente sua Inteligência Artificial</h1>
+        <p>O Lazy CSS não exige que você decore classes utilitárias. O segredo é baixar o nosso manifesto de especificação técnica compilado e injetá-lo diretamente no prompt do seu modelo de linguagem (Claude, ChatGPT ou Gemini) antes de pedir para ele codificar suas telas.</p>
+
+        <div class="blueprint-box">
+            <h3 style="margin-top: 0; font-size: 1.3rem; color: #0f172a; margin-bottom: 0.5rem;">Compilador de Blueprint Nativo</h3>
+            <p style="font-size: 0.95rem; color: #64748b; margin-bottom: 1.5rem;">Gera o arquivo Markdown unificado combinando as regras de engenharia e os exemplos reais contidos no manifesto do sistema.</p>
+            
+            <button id="lazy-download-blueprint-btn" class="btn-download">🤖 Baixar Contexto para IA (.md)</button>
+        </div>
+
+        <h2>Como Utilizar no Fluxo de Trabalho (Workflow)</h2>
+        <div class="steps">
+            <ol>
+                <li>Clique no botão acima para baixar o arquivo <code>lazycss-blueprint.md</code>.</li>
+                <li>Inicie uma nova conversa limpa com a sua LLM de preferência.</li>
+                <li>Anexe ou copie o conteúdo do arquivo baixado no primeiro prompt e envie.</li>
+                <li>Após a IA confirmar que aprendeu as especificações, faça o seu pedido técnico de tela corporativa (Ex: <em>"Crie um formulário de cadastro de usuários administrativos usando o Lazy CSS"</em>).</li>
+            </ol>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Lazy CSS Framework. Distribuído sob a licença MIT.</p>
+    </footer>
+
+    <script src="assets/scripts/buildLazyCSSBlueprint.js"></script>
+</body>
+</html>
