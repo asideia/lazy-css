@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy CSS - Playground Sandbox</title>
+    <link rel="stylesheet" href="dist/lazycss.min.css">
+    <style>
+        /* Estilos estruturais do painel do Playground */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0f172a;
+            color: #f1f5f9;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        header {
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: #38bdf8;
+        }
+        .sandbox-layout {
+            display: flex;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+        .editor-pane {
+            width: 40%;
+            background-color: #1e293b;
+            border-right: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        .editor-pane h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+        }
+        textarea {
+            width: 100%;
+            flex-grow: 1;
+            background-color: #0f172a;
+            color: #38bdf8;
+            border: 1px solid #475569;
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.95rem;
+            resize: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+        textarea:focus {
+            border-color: #38bdf8;
+        }
+        .preview-pane {
+            width: 60%;
+            background-color: #f8fafc;
+            display: flex;
+            flex-direction: column;
+        }
+        .preview-toolbar {
+            background-color: #e2e8f0;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #475569;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-bottom: 1px solid #cbd5e1;
+        }
+        iframe {
+            width: 100%;
+            flex-grow: 1;
+            border: none;
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #fff;">⚡ Lazy<span style="color: #38bdf8;">CSS</span></span>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="quickstart.html">Quickstart & IA</a>
+            <a href="showcase.html">Componentes</a>
+            <a href="playground.html" style="color: #38bdf8;">Playground</a>
+        </nav>
+    </header>
+
+    <div class="sandbox-layout">
+        
+        <section class="editor-pane">
+            <h3>✒️ Cole o código da IA aqui</h3>
+            <textarea id="lazy-code-input" placeholder="&#10;<div class='lazy-stack'>&#10;  <button class='lazy-btn lazy-btn-primary'>Botão de Teste</button>&#10;</div>"></textarea>
+        </section>
+
+        <section class="preview-pane">
+            <div class="preview-toolbar">
+                <span>🖥️ Real-time Preview (Isolated Environment)</span>
+            </div>
+            <iframe id="lazy-preview-frame"></iframe>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textarea = document.getElementById('lazy-code-input');
+            const iframe = document.getElementById('lazy-preview-frame');
+
+            function updatePreview() {
+                const userHtml = textarea.value;
+                
+                // Injeta dinamicamente o CSS de produção dentro do iframe para garantir a estilização
+                const iframeContent = `
+                    <!DOCTYPE html>
+                    <html lang="pt-BR">
+                    <head>
+                        <meta charset="UTF-8">
+                        <link rel="stylesheet" href="dist/lazycss.min.css">
+                        <style>
+                            body { padding: 2rem; margin: 0; background: #f8fafc; }
+                        </style>
+                    </head>
+                    <body>
+                        ${userHtml}
+                    </body>
+                    </html>
+                `;
+
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                doc.open();
+                doc.write(iframeContent);
+                doc.close();
+            }
+
+            // Escuta as alterações de digitação e colagem
+            textarea.addEventListener('input', updatePreview);
+            
+            // Executa a primeira renderização com o placeholder inicial
+            updatePreview();
+        });
+    </script>
+</body>
+</html>
