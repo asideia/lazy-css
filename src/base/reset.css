@@ -1,23 +1,89 @@
-*, *::before, *::after {
+/* ==========================================================================
+   ⚡ LAZY CSS - BASE RESET & NORMALIZATION (src/base/reset.css)
+   ========================================================================== */
+
+/* Força o cálculo de tamanho de caixa previsível em todo o ecossistema */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Configura a raiz do documento com rolagem suave e comportamento limpo */
+html {
+  -webkit-text-size-adjust: 100%; /* Evita modificações automáticas de tamanho de fonte no iOS */
+  -moz-tab-size: 4;
+  tab-size: 4;
+  scroll-behavior: smooth;
+}
+
+/* Normaliza o corpo da página aplicando os tokens corporativos padrão */
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-app);
-  color: var(--text-main);
+  font-family: var(--lazy-font-sans);
+  font-size: 1rem;
+  font-weight: var(--lazy-weight-normal);
   line-height: 1.5;
+  background-color: hsl(var(--lazy-bg-raw));
+  color: hsl(var(--lazy-text-main-raw));
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-img, picture, video, canvas, svg {
-  display: block;
-  max-width: 100%;
+/* Remove estilos padrão de listas em contêineres semânticos */
+ul,
+ol {
+  list-style: none;
 }
 
-input, button, textarea, select {
-  font: inherit;
+/* Garante que imagens e elementos de mídia se comportem de forma responsiva */
+img,
+svg,
+video,
+canvas,
+audio,
+iframe {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Herança consistente para elementos de entrada de dados (Inputs) */
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+/* Define o cursor interativo para elementos clicáveis por padrão */
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/* Desativa o redimensionamento descontrolado que quebra layouts em áreas de texto */
+textarea {
+  resize: vertical;
+}
+
+/* Remove decorações padrão de links e aplica transição suave */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Garante isolamento de tabelas administrativas para evitar vazamento de células */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
 }
