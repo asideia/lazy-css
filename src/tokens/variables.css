@@ -1,40 +1,70 @@
+/* ==========================================================================
+   ⚡ LAZY CSS - DESIGN TOKENS (src/tokens/variables.css)
+   ========================================================================== */
+
 :root {
-  /* ==========================================================================
-     1. PRIMITIVAS DE MARCA (Altere aqui para mudar o design do sistema inteiro)
-     ========================================================================== */
-  --lazy-hue: 220;           /* 0 a 360: Ângulo na roda de cores (220 = Azul) */
-  --lazy-radius-factor: 1;   /* Multiplicador de bordas: 0 = quadrado, 2 = ultra arredondado */
-  --lazy-spacing-factor: 1;  /* Multiplicador de espaçamento global */
+  /* ------------------------------------------------------------------------
+     1. CORES FUNDAMENTAIS (Raw HSL)
+     Definidas em números puros (H S L) para permitir manipulação dinâmica
+     de opacidade/alpha via hsl(var(--token-raw) / alpha) nos componentes.
+     ------------------------------------------------------------------------ */
+  
+  /* Cores de Identidade (Brand Identity) */
+  --lazy-primary-raw:   220 85% 57%;  /* Azul Corporativo / Ações Principais */
+  --lazy-success-raw:   142 70% 35%;  /* Verde Administrativo / Sucesso / Concluído */
+  --lazy-danger-raw:    350 80% 55%;  /* Vermelho Alerta / Erros / Destrutivo */
+  
+  /* Cores de Superfície e Fundo (Surfaces & Backgrounds) */
+  --lazy-bg-raw:        210 20% 98%;  /* Fundo da Viewport Geral (Cinza Ultra-Claro) */
+  --lazy-card-raw:      0 0% 100%;    /* Fundo de Blocos Elevados / Tabelas / Cards (Branco) */
+  
+  /* Cores de Contraste e Texto (Typography & Borders) */
+  --lazy-text-main-raw: 215 25% 15%;  /* Texto Principal (Grafite Escuro de Alta Legibilidade) */
+  --lazy-text-muted-raw:215 15% 50%;  /* Texto Secundário / Descrições / Subtítulos */
+  --lazy-border-raw:    214 30% 92%;  /* Linhas de Divisão / Bordas de Elementos */
 
-  /* ==========================================================================
-     2. DESIGN TOKENS CRUS (Canais de cores HSL isolados para opacidade dinâmica)
-     ========================================================================== */
-  --lazy-primary-raw: var(--lazy-hue) 85% 55%;
-  --lazy-success-raw: 142 70% 45%;
-  --lazy-warning-raw: 38 92% 50%;
-  --lazy-danger-raw:  0 84% 60%;
+  /* ------------------------------------------------------------------------
+     2. ESCALA DE ESPAÇAMENTO FLUIDO (Fluid Space Scale)
+     Calculada via clamp() para fazer a transição linear perfeita baseada
+     na largura do Viewport.
+     Ponto de Partida (Mínimo): 375px (Mobile) -> Ponto de Chegada (Máximo): 1440px (Desktop)
+     ------------------------------------------------------------------------ */
+  
+  /* --lazy-space-xs: De 4px para 8px */
+  --lazy-space-xs: clamp(0.25rem, 0.16rem + 0.38vw, 0.5rem);
+  
+  /* --lazy-space-sm: De 8px para 12px */
+  --lazy-space-sm: clamp(0.5rem, 0.41rem + 0.38vw, 0.75rem);
+  
+  /* --lazy-space-md: De 16px para 24px */
+  --lazy-space-md: clamp(1rem, 0.81rem + 0.75vw, 1.5rem);
+  
+  /* --lazy-space-lg: De 24px para 40px */
+  --lazy-space-lg: clamp(1.5rem, 1.11rem + 1.5vw, 2.5rem);
+  
+  /* --lazy-space-xl: De 32px para 64px */
+  --lazy-space-xl: clamp(2rem, 1.44rem + 2.5vw, 4rem);
 
-  /* ==========================================================================
-     3. ABSTRAÇÕES SEMÂNTICAS (O que as classes consomem por padrão)
-     ========================================================================== */
-  /* Cores Principais e Variações de Estado */
-  --color-primary:       hsl(var(--lazy-primary-raw) / 1);
-  --color-primary-hover: hsl(var(--lazy-hue) 85% 45%);
-  --color-primary-dim:   hsl(var(--lazy-primary-raw) / 0.15); /* Transparência nativa */
+  /* ------------------------------------------------------------------------
+     3. TIPOGRAFIA ADMINISTRATIVA
+     Focada em performance e sobriedade, consumindo as fontes do sistema.
+     ------------------------------------------------------------------------ */
+  --lazy-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Pesos de Fonte */
+  --lazy-weight-normal: 400;
+  --lazy-weight-medium: 500;
+  --lazy-weight-bold:   700;
 
-  --color-success:       hsl(var(--lazy-success-raw) / 1);
-  --color-warning:       hsl(var(--lazy-warning-raw) / 1);
-  --color-danger:        hsl(var(--lazy-danger-raw) / 1);
-
-  /* Elementos de Interface Superfície (Light Mode Padrão) */
-  --bg-app:             hsl(var(--lazy-hue) 15% 97%);
-  --bg-surface:         #ffffff;
-  --text-main:          hsl(var(--lazy-hue) 20% 15%);
-  --text-muted:         hsl(var(--lazy-hue) 10% 45%);
-  --border-color:       hsl(var(--lazy-hue) 10% 90%);
-
-  /* Estrutura Proporcional Física */
-  --radius-md: calc(8px * var(--lazy-radius-factor));
-  --radius-lg: calc(14px * var(--lazy-radius-factor));
-  --shadow-lazy: 0 4px 12px -2px rgba(var(--lazy-hue), 20%, 30%, 0.08);
+  /* ------------------------------------------------------------------------
+     4. ARREDONDAMENTOS E ELEVAÇÃO (Borders & Shadows)
+     Padrões estritos para interfaces de gerenciamento limpas.
+     ------------------------------------------------------------------------ */
+  --lazy-radius-sm: 4px;   /* Pequenos componentes: Checkboxes, badges, tags */
+  --lazy-radius-md: 6px;   /* Elementos de ação: Inputs, botões padrão */
+  --lazy-radius-lg: 8px;   /* Grandes contêineres: Cards, tabelas, modais, sidebars */
+  
+  /* Sombras Sutis (Evitam poluição visual em dashboards densos) */
+  --lazy-shadow-flat:   0 1px 3px hsl(var(--lazy-text-main-raw) / 0.05);
+  --lazy-shadow-raised: 0 4px 6px -1px hsl(var(--lazy-text-main-raw) / 0.05), 0 2px 4px -1px hsl(var(--lazy-text-main-raw) / 0.03);
 }
