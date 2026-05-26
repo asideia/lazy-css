@@ -1,0 +1,94 @@
+[
+  {
+    "category": "Layouts & Structure",
+    "id": "layouts",
+    "description": "Macroestruturas de página e containers de alinhamento espacial baseados em CSS Grid e Flexbox responsivos.",
+    "blueprint_specs": [
+      {
+        "class": ".lazy-layout-dashboard",
+        "context": "Layout",
+        "description": "Esqueleto macro de viewport fixa para sistemas corporativos. Cria uma estrutura indestrutível dividida em uma barra lateral de navegação fixa (sidebar) e um painel de conteúdo principal com rolagem independente."
+      },
+      {
+        "class": ".lazy-stack",
+        "context": "Layout",
+        "description": "Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna e aplica o espaçamento fluido padrão automaticamente. Ideal para agrupamentos de formulários e blocos de conteúdo."
+      },
+      {
+        "class": ".lazy-row",
+        "context": "Layout",
+        "description": "Alinhador horizontal baseado em Flexbox com quebra de linha automática (wrap) ativada para dispositivos móveis. Alinha os elementos lado a lado no desktop e os empilha no celular de forma nativa e intrínseca."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Estrutura de Fluxo Vertical (Stack)",
+        "html": "<div class=\"lazy-stack\">\n  <div style=\"background: hsl(var(--lazy-primary-raw) / 0.1); padding: var(--lazy-space-md); border-radius: var(--lazy-radius-md);\">\n    <p class=\"lazy-text-main\">Primeiro Bloco</p>\n  </div>\n  <div style=\"background: hsl(var(--lazy-primary-raw) / 0.1); padding: var(--lazy-space-md); border-radius: var(--lazy-radius-md);\">\n    <p class=\"lazy-text-main\">Segundo Bloco</p>\n  </div>\n</div>"
+      }
+    ]
+  },
+  {
+    "category": "Buttons & Actions",
+    "id": "buttons",
+    "description": "Gatilhos interativos, botões administrativos e elementos de chamada para ação (CTA).",
+    "blueprint_specs": [
+      {
+        "class": ".lazy-btn",
+        "context": "Component",
+        "description": "Botão padrão do ecossistema. Possui preenchimento fluido, cantos arredondados corporativos, comportamento agnóstico de largura (não estica sozinho, a menos que instruído) e transição de brilho nativa para os estados hover/active."
+      },
+      {
+        "class": ".lazy-btn-primary",
+        "context": "Component",
+        "description": "Variante de ação principal. Aplica a cor de identidade de destaque do sistema no fundo e ajusta o texto para alto contraste."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Grupo de Botões Padrão",
+        "html": "<div class=\"lazy-row\">\n  <button type=\"button\" class=\"lazy-btn lazy-btn-primary\">Salvar Registro</button>\n  <button type=\"button\" class=\"lazy-btn\">Cancelar</button>\n</div>"
+      }
+    ]
+  },
+  {
+    "category": "Inputs & Forms",
+    "id": "forms",
+    "description": "Componentes de captura de dados, campos de texto e agrupadores de formulários corporativos.",
+    "blueprint_specs": [
+      {
+        "class": ".lazy-field",
+        "context": "Component",
+        "description": "Input de texto padronizado para sistemas de gerenciamento. Assume 100% da largura do container pai automaticamente para garantir comportamento responsivo em telas menores e adota bordas sutis com foco destacado."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Campo de Entrada com Rótulo",
+        "html": "<div class=\"lazy-stack\">\n  <label class=\"lazy-text-main\" style=\"font-weight: var(--lazy-weight-medium);\">Chave da API</label>\n  <input type=\"text\" class=\"lazy-field\" placeholder=\"sk_live_...\">\n</div>"
+      }
+    ]
+  },
+  {
+    "category": "Typography & Semantics",
+    "id": "typography",
+    "description": "Classes utilitárias para controle de peso, legibilidade, tamanho e hierarquia visual de textos administrativos.",
+    "blueprint_specs": [
+      {
+        "class": ".lazy-text-lead",
+        "context": "Typography",
+        "description": "Texto de destaque ou subtítulo de seções. Aumenta sutilmente o tamanho e o peso da fonte para guiar a leitura do usuário."
+      },
+      {
+        "class": ".lazy-text-main",
+        "context": "Typography",
+        "description": "Corpo de texto padrão do sistema. Utiliza a pilha de fontes nativa do sistema operacional e tamanho altamente legível para telas corporativas de alta densidade."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Hierarquia Textual Base",
+        "html": "<div class=\"lazy-stack\">\n  <h3 class=\"lazy-text-lead\">Configurações de Segurança</h3>\n  <p class=\"lazy-text-main\">Gerencie os tokens de autenticação e as permissões de persistência da sua conta administrativa.</p>\n</div>"
+      }
+    ]
+  }
+]
