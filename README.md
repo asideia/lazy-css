@@ -1,140 +1,115 @@
 <div align="center">
-  <img src="https://github.com/asideia/lazy-css/blob/main/assets/images/logo-with-name-and-slogan.png" alt="logo" width="40%">
+  <img src="https://github.com/asideia/lazy-css/blob/main/assets/images/logo-with-name-and-slogan.png" alt="Lazy CSS Logo" width="40%">
 </div>
 
-### *O framework de UI para desenvolvedores Backend que sofrem de alergia severa a CSS e preferem terceirizar a culpa do frontend para uma LLM.*
+### *O framework de UI para desenvolvedores Backend que sofrem de prevenção severa a CSS e preferem terceirizar 100% da responsabilidade do frontend para uma LLM.*
 
-**LazyCSS** é um micro-framework estrutural e intencionalmente rígido, projetado sob medida para engenheiros de software, DBAs e escavadores de dados que consideram `padding` um mistério da humanidade. Em vez de forçar você a decorar 450 classes utilitárias para centralizar um único botão ou passar horas brigando com o `flex-direction`, o LazyCSS fornece blocos de concreto macro-estruturais (`.lazy-stack`, `.lazy-grid-auto`, `.lazy-layout-dashboard`) **100% otimizados para a inteligência artificial (LLMs)** ler e entender sem reclamar.
+**Lazy CSS** é um framework estrutural, intencionalmente rígido e agnóstico, projetado sob medida para qualquer pessoa que consideram alinhar elementos na tela um mistério da humanidade. Em vez de forçar você a decorar centenas de classes utilitárias ou passar horas brigando com media-queries no mobile, o Lazy CSS fornece blocos de concreto macro-estruturais (`.lazy-stack`, `.lazy-grid-auto`, `.lazy-layout-dashboard`) **nativamente otimizados para Inteligências Artificiais (LLMs)** lerem e computarem sem sofrer alucinações.
 
-Com o LazyCSS, você não encosta no CSS. Você apenas esfrega o nosso blueprint na cara do ChatGPT, Claude ou Gemini, programa sua lógica de negócio linda no backend e deixa a IA se virar para entregar um HTML que não quebra se o usuário respirar perto da tela.
+Com o Lazy CSS, o seu fluxo de trabalho muda radicalmente: a especificação viva do framework é injetada no contexto do Claude, ChatGPT ou Gemini junto com o seu HTML bruto do backend, e a IA entrega uma interface limpa, corporativa e com **responsividade nativa inegociável**.
 
 ---
 
 ## 🎯 A Filosofia (Ou nossas desculpas oficiais)
 
-1. **Backend-First (e único):** Sem microgerenciamento de bordas, sombras ou tons pastéis. Os componentes padrão vêm com uma cara decente e corporativa de fábrica. Se o cliente quiser degradê piscante, ele que contrate um designer.
-2. **Arquitetura LLM-Optimal:** Nomes previsíveis e sem pegadinhas. Uma IA consegue deduzir a estrutura inteira do seu sistema sem sofrer alucinações e sem inventar classes que não existem.
-3. **Macro sobre Micro:** Focamos em tabelas densas cheias de dados, relatórios, formulários que não estouram o container e layouts de dashboard prontos. Animações fluidas de 60fps que se danem.
-4. **Engenharia Dinâmica de Cores:** Usamos tokens HSL puros (`--lazy-primary-raw`). Você muda a cor do sistema inteiro trocando um único número matemático. Se você odeia a paleta de cores atual, basta alterar o algorítmo.
+1. **Backend-First por Natureza:** Sem microgerenciamento de sombras, paddings milimétricos ou tons pastéis. Os componentes vêm com uma estética sóbria e administrativa direto da caixa. Se o cliente quiser firulas visuais exageradas, ele que contrate um designer.
+2. **Arquitetura IA-Native (Context-Optimized):** Classes previsíveis com mapeamento funcional estrito. Separamos a especificação abstrata do exemplo visual dentro do nosso arquivo manifesto para economizar tokens e garantir atenção máxima da LLM no seu layout.
+3. **Responsividade Intrínseca e Inegociável:** É terminantemente proibido entupir o HTML com breakpoints declarativos (ex: `md:flex-row`). O Lazy CSS usa propriedades fluidas e matemática nativa (`clamp()`, CSS Grid com auto-fit) para garantir que a interface fique indestrutível tanto em uma tela de 375px (Mobile) quanto em 1920px (Desktop).
+4. **Engenharia Dinâmica de Cores:** Construído com tokens HSL puros (`--lazy-primary-raw`). Alterar a identidade visual do sistema inteiro é uma questão de mudar um único número matemático no algoritmo de cores.
 
 ---
 
-## 📂 Arquitetura do Projeto
+## 📂 Arquitetura do Projeto (Repository Structure)
+
+Todo o ecossistema de código, scripts internos, mapeamento de dados e seletores CSS utilizam estritamente o padrão de idioma inglês (`en-US`), mantendo a internacionalização e a alta performance de leitura das LLMs.
 
 ```text
 lazy-css/
 ├── .github/workflows/
-│   └── release.yml        # A esteira de CI/CD que faz o trabalho duro por você
-├── .vscode/               # Preferências salvas para seu VS Code não estragar a indentação
-├── assets/
-│   ├── components.json    # A Fonte Única da Verdade (Onde você adiciona coisas sem programar)
-│   └── playground.js      # O motor JS que impede a documentação de ficar desatualizada
-├── dist/                  # Onde mora o CSS cuspido e compactado pelo compilador
-│   └── lazy.min.css       # O único arquivo que realmente importa pro seu HTML bruto
-├── docs/                  # Manuais para humanos (ou IAs muito avançadas)
-│   └── release-guide.md   # Como gerar uma nova versão sem quebrar a esteira de CI/CD
-├── src/                   # Onde o CSS modular finge que é uma linguagem de gente grande
+│   └── release.yml          # CI/CD pipeline for automated builds and deployment
+├── .vscode/                 # Stored preferences to enforce code style formatting
+├── assets/                  # Ecosystem support resources and intelligence
+│   ├── data/
+│   │   └── lazycss.spec.json # The Single Source of Truth (AI Contract & Showcase data)
+│   ├── images/
+│   │   └── logo.png         # Brand identity and graphic assets
+│   └── scripts/
+│       └── playground.js    # Native JS engines (dynamic rendering, MD blueprint generator)
+├── dist/                    # Compiled and minified production-ready CSS distribution
+│   ├── lazycss.css          # Development style builds
+│   └── lazycss.min.css      # Production style builds (The only file your HTML needs)
+├── docs/                    # Internal governance and pipeline manuals
+│   └── release-guide.md     # Guidelines on pushing releases without breaking CI/CD
+├── src/                     # Core CSS modular codebase
 │   ├── tokens/
-│   │   └── variables.css  # Variáveis mágicas e matemática pura de espaçamento
+│   │   └── variables.css    # Design tokens and fluid mathematical spacing formulas
 │   ├── base/
-│   │   └── reset.css      # Onde a gente tenta convencer os navegadores a cooperarem
+│   │   └── reset.css        # Semantic browser reset rules for cross-platform harmony
 │   ├── layouts/
-│   │   ├── structure.css  # Alinhamentos em linha e em pilha (Flexbox de sobrevivência)
-│   │   └── page-grid.css  # Telas de dashboard inteiras que não quebram por nada
+│   │   ├── structure.css    # Row and Stack layout adjusters (Survival flexbox)
+│   │   └── page-grid.css    # Full screen layout viewports with isolated scrolling
 │   ├── components/
-│   │   └── components.css # Botões, inputs e tabelas (O básico para o sistema funcionar)
-│   └── lazy.css           # O arquivo mestre que junta a bagunça toda via PostCSS
-├── index.html             # O Playground Interativo (Para você testar se ficou bonito)
-├── package.json           # Onde ficam guardados os scripts que você sempre esquece o comando
-└── postcss.config.js      # A receita de bolo que faz o PostCSS minificar tudo
+│   │   └── components.css   # Clean administrative UI atoms (buttons, fields, cards, tables)
+│   └── lazy.css             # Root master file unifying the codebase via PostCSS
+├── index.html               # Main project presentation and Landing Page
+├── quickstart.html          # Official step-by-step setup guide and LLM prompting manuals
+├── showcase.html            # Living component docs (Parses lazycss.spec.json & outputs the AI .md)
+├── playground.html          # Interactive Sandbox (Real-time token and layout lab)
+├── package.json             # Build scripts, version tags, and package definitions
+└── postcss.config.js        # Compilation pipeline recipe for code optimization
 
 ```
 
 ---
 
-## ⚙️ Começo Rápido (Para quem tem pressa)
+## 🛠️ Desenvolvimento Local e Monitoramento
 
-### 1. Instalar as tralhas
+Se você deseja estender o framework, alterar o comportamento das macros ou modificar as fórmulas de tokens locais:
 
-Clone o repositório e baixe o ecossistema do Node que vai inflar sua pasta local:
+### 1. Instale as dependências de engenharia
 
 ```bash
 npm install
 
 ```
 
-### 2. Deixar o robô trabalhando (Watch Mode)
+### 2. Ative o modo de compilação contínua (Watch Mode)
 
-Inicie o monitoramento. Sempre que você alterar um arquivo CSS na pasta `src/`, o script compila tudo em background em menos tempo do que leva para seu café esfriar:
+O compilador monitorará a pasta `src/` e reconstruirá o arquivo final de distribuição em background em tempo real:
 
 ```bash
 npm run watch
 
 ```
 
-### 3. Abrir o Playground
-
-Abra o arquivo `index.html` usando um servidor local (como a extensão **Live Server** do VS Code) para que o navegador não bloqueie o JavaScript com erros de CORS. Fique de olho no badge no topo da página:
-
-* `Modo: 🛠️ AI-Prompting Ativo`: Tudo certo! O CSS carregou e você está pronto para programar.
-* `Modo: ⚠️ AI-Prompting Offline`: O CSS sumiu, quebrou ou você esqueceu de rodar o comando do Passo 2. Volte duas casas.
+> 📖 **Nota de Uso:** Para instruções completas de como importar a biblioteca via CDN, injetar o ecossistema de dados em modelos de linguagem comerciais e copiar os prompts estruturados de guarnição, consulte o arquivo local `quickstart.html`.
 
 ---
 
-## 🤖 O Blueprint para IA (Copia, cola e reza)
+## 🚀 Pipeline de CI/CD (Deploy Automatizado)
 
-Quando for pedir para uma inteligência artificial desenhar uma tela para você, não tente explicar o design. **Copie o bloco abaixo, cole no início do prompt e assista ao milagre:**
+O projeto conta com automação via **GitHub Actions** (`.github/workflows/release.yml`). Você não precisa gerar e compilar arquivos de produção localmente na sua máquina.
 
-```markdown
-[CONTEXTO: UI Framework LazyCSS]
-Utilize as especificações técnicas de classes e responsividade contidas no arquivo/link 'lazycss-blueprint.md' anexado para realizar a tarefa abaixo.
+1. Altere o número da versão no arquivo `package.json` (ex: de `1.0.3` para `1.0.4`).
+2. Realize o commit padrão das suas alterações de código.
+3. Crie e empurre uma tag Git começando obrigatoriamente com a letra `v`:
 
-TAREFA:
-Preciso que você gere o HTML/JSX para uma tela de [EXEMPLO: Listagem de Clientes com Filtros e uma Tabela Corporativa].
-
-REGRAS DE EXECUÇÃO:
-1. Siga estritamente as Cláusulas Críticas do blueprint anexado (Sem estilos inline, sem CSS customizado).
-2. Garanta o comportamento responsivo combinando as classes estruturais de linha (.lazy-row) e grelha (.lazy-grid-auto).
-3. Responda APENAS com o bloco de código limpo, sem introduções ou explicações textuais sobre o design.
-
-```
-
----
-
-## 🚀 Pipeline de CI/CD (Deploy sem passar nervoso)
-
-O projeto conta com um sistema de automação no **GitHub Actions** (`.github/workflows/release.yml`) para que você não precise gerar arquivos de produção na sua máquina como se estivesse em 2005.
-
-### Como lançar uma nova versão sem estragar o dia de ninguém:
-
-1. Vá no `package.json` e mude o número da versão (ex: de `1.0.3` para `1.0.4`).
-2. Dê o commit padrão nas suas alterações de código.
-3. Crie uma tag Git que obrigatoriamente comece com a letra `v`:
 ```bash
-git tag -a v1.0.4 -m "Release v1.0.4 - Ajustando o gap do lazy-stack para caber mais inputs"
-
-```
-
-
-4. Empurre a tag para o GitHub:
-```bash
+git tag -a v1.0.4 -m "Release v1.0.4 - Implementing robust responsive data tables"
 git push origin v1.0.4
 
 ```
 
-
-
-A partir daí, os servidores do GitHub acordam, geram o `lazy.min.css` otimizado, criam uma **GitHub Release** com o arquivo pronto para download e jogam o pacote direto no **NPM Registry** para você poder dar `npm install` no seu próximo projeto. Você só precisa olhar o painel ficar verde.
+Os servidores do GitHub vão interceptar a tag, rodar a esteira do PostCSS, processar e minificar o código, criar uma **GitHub Release** com os arquivos de produção anexados e publicar o pacote automaticamente no **NPM Registry**.
 
 ---
 
 ## 🤝 Governança e Contribuição
 
-* Se envolve alinhamento de página ou macro-grid, coloque em `src/layouts/`.
-* Se for um componente isolado (botão, input, tag), coloque em `src/components/` e use sempre o prefixo `.lazy-*`.
-* Se criou um componente novo legal, adicione o objeto estruturado dele dentro de `assets/components.json` para que o playground se atualize sozinho. Não nos faça ter que abrir o HTML para mexer em documentação estática.
-* Manuais sérios e sem piadas devem ser mantidos na pasta `docs/`.
+* **Macros e Layouts:** Regras de alinhamento global de telas, grids adaptáveis e viewports fixas devem morar em `src/layouts/`.
+* **Átomos Visuais:** Componentes isolados e independentes (botões, campos, badges) devem morar em `src/components/` e usar obrigatoriamente o prefixo `.lazy-*`.
+* **Evolução da Única Fonte de Verdade:** Adicionou ou alterou um seletor? É obrigatório atualizar o nó `blueprint_specs` e o nó `sandbox_elements` dentro de `assets/data/lazycss.spec.json`. O ecossistema de renderização do showcase e o gerador dinâmico de Markdown dependem exclusivamente desse arquivo.
 
 ---
 
-LazyCSS © 2026 — Desenvolvido por e para desenvolvedores que preferem passar 4 horas otimizando uma query SQL complexa a gastar 5 minutos centralizando uma imagem na tela.
+Lazy CSS © 2026 — Desenvolvido por e para engenheiros de software que preferem passar 4 horas otimizando uma query SQL complexa a gastar 5 minutos centralizando um elemento na tela.
