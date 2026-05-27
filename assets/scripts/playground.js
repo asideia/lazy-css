@@ -1,84 +1,93 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  const containerPrincipal = document.getElementById("lazy-dynamic-content");
-  if (!containerPrincipal) return;
+document.addEventListener('DOMContentLoaded', () => {
+    const textarea = document.getElementById('lazy-code-input');
+    const iframe = document.getElementById('lazy-preview-frame');
+    const statusBadge = document.getElementById('css-status');
 
-  try {
-    // 1. Busca o arquivo JSON de dados
-    const response = await fetch("./assets/data/components.json");
-    const categorias = await response.json();
+    // Template padrão limpo (apenas elementos sem estrutura de página)
+    const defaultTemplate = `<div class="lazy-stack">
+        <div class="lazy-row lazy-row-between">
+        <div class="lazy-stack lazy-gap-xs">
+            <h3 style="margin:0; font-size: 1.4rem; font-weight: 600;">Controle de Usuários</h3>
+            <p style="margin:0; color:#64748b; font-size: 0.95rem;">Gerenciamento de credenciais do backoffice.</p>
+        </div>
+        <button class="lazy-btn lazy-btn-primary">⚡ Novo Registro</button>
+        </div>
 
-    // 2. Loop pelas categorias de componentes
-    categorias.forEach(cat => {
-      const section = document.createElement("section");
-      section.className = "play-section";
+        <div class="lazy-card">
+        <table class="lazy-table">
+            <thead>
+            <tr>
+                <th>Operador</th>
+                <th>Escopo</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Admin</td>
+                <td>Administrator</td>
+                <td><span style="color: #166534; font-weight: bold;">Ativo</span></td>
+            </tr>
+            <tr>
+                <td>Maria</td>
+                <td>Content Manager</td>
+                <td><span style="color: #166534; font-weight: bold;">Ativo</span></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>`;
 
-      const title = document.createElement("h2");
-      title.className = "play-title";
-      title.textContent = cat.categoria;
-      section.appendChild(title);
+    // Define o valor inicial no editor
+    if (textarea) {
+        textarea.value = defaultTemplate;
+    }
 
-      const previewBox = document.createElement("div");
-      previewBox.className = "preview-box lazy-row";
-      previewBox.style.flexWrap = "wrap";
+    // Função focada em injetar apenas os elementos internos
+    function updatePreview() {
+        if (!textarea || !iframe) return;
 
-      let codigoAcumulado = "";
+        const userHtml = textarea.value;
 
-      // Loop pelos elementos internos da categoria
-      cat.elementos.forEach(el => {
-        previewBox.innerHTML += el.html;
-        codigoAcumulado += `\n${el.html}\n\n`;
-      });
+        try {
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+            const root = doc.getElementById('preview-root');
 
-      section.appendChild(previewBox);
+            if (root) {
+                root.innerHTML = userHtml;
+            }
+        } catch (err) {
+            console.error("Erro na atualização do preview:", err);
+        }
+    }
 
-      // 3. Cria o Inspetor de Código Dinâmico (Details/Summary)
-      const details = document.createElement("details");
-      details.className = "code-inspector";
-      
-      const summary = document.createElement("summary");
-      summary.textContent = "👁️ Mostrar Estrutura de Código (HTML Gerado)";
-      details.appendChild(summary);
+    // Checa se o arquivo CSS compilado existe localmente
+    function checkCssAvailability() {
+        fetch('./dist/lazycss.min.css', { method: 'HEAD' })
+            .then(response => {
+                if (response.ok) {
+                    statusBadge.innerText = "✓ lazycss.min.css pronto";
+                    statusBadge.className = "css-status-badge status-success";
+                } else {
+                    throw new Error();
+                }
+            })
+            .catch(() => {
+                statusBadge.innerText = "⚠️ Alerta: dist/lazycss.min.css não encontrado. Rode 'npm run build'";
+                statusBadge.className = "css-status-badge status-error";
+            });
+    }
 
-      // Container do Bloco de Código (para posicionar o botão de copiar)
-      const codeWrapper = document.createElement("div");
-      codeWrapper.className = "code-wrapper";
+    // EVENTOS DE SINCRONIA:
+    // 1. Atualiza o preview em tempo real conforme digita
+    textarea.addEventListener('input', updatePreview);
 
-      // Botão de Copiar Automatizado
-      const copyBtn = document.createElement("button");
-      copyBtn.className = "lazy-copy-btn";
-      copyBtn.textContent = "Copiar";
+    // 2. Aguarda o iframe terminar de montar o esqueleto do srcdoc antes do primeiro render
+    iframe.addEventListener('load', updatePreview);
 
-      // Evento de clique para copiar usando a API nativa do navegador
-      const textoParaCopiar = codigoAcumulado.trim();
-      copyBtn.addEventListener("click", () => {
-        navigator.clipboard.writeText(textoParaCopiar).then(() => {
-          copyBtn.textContent = "Copiado! ✓";
-          copyBtn.classList.add("copied");
-          
-          // Reseta o botão após 2 segundos
-          setTimeout(() => {
-            copyBtn.textContent = "Copiar";
-            copyBtn.classList.remove("copied");
-          }, 2000);
-        }).catch(err => {
-          console.error("Erro ao copiar código: ", err);
-        });
-      });
+    // Inicializadores de rotina
+    checkCssAvailability();
 
-      const pre = document.createElement("pre");
-      const code = document.createElement("code");
-      code.textContent = textoParaCopiar;
-      
-      pre.appendChild(code);
-      codeWrapper.appendChild(copyBtn); // Injeta o botão no wrapper
-      codeWrapper.appendChild(pre);     // Injeta o código no wrapper
-      details.appendChild(codeWrapper);
-      section.appendChild(details);
-
-      containerPrincipal.appendChild(section);
-    });
-
-  } catch (error) {
-    console.error("Erro ao carregar os componentes do playground:", error);
-  }
+    // Caso o iframe já tenha carregado antes do JS bater aqui, força um gatilho manual
+    updatePreview();
 });
