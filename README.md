@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/asideia/lazy-css/blob/main/assets/images/logo-with-name-and-slogan.png" alt="Lazy CSS Logo" width="40%">
+  <img src="https://github.com/asideia/lazy-css/blob/main/assets/images/logo-without-removebg.png" alt="Lazy CSS Logo" width="30%">
 </div>
 
 ### *O framework de UI para desenvolvedores Backend que sofrem de prevenção severa a CSS e preferem terceirizar 100% da responsabilidade do frontend para uma LLM.*
