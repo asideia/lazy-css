@@ -107,12 +107,17 @@ function renderShowcase(categories, targetContainer) {
                 const card = document.createElement('div');
                 card.style.cssText = 'border: 1px solid #e2e8f0; background: #fff; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);';
 
-                // Cabeçalho do Card com botão de copiar
+                // Cabeçalho do Card com botões de Ação (Copiar + Ver Código)
                 const cardHeader = document.createElement('div');
                 cardHeader.style.cssText = 'padding: 0.75rem 1rem; background: #f7fafc; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;';
                 cardHeader.innerHTML = `
                     <span style="font-weight: 500; font-size: 0.9rem; color: #4a5568;">${element.name}</span>
-                    <button class="lazy-copy-btn" style="padding: 4px 8px; font-size: 0.8rem; cursor: pointer; border: 1px solid #cbd5e0; background: #fff; border-radius: 4px; color: #4a5568; transition: all 0.2s;" data-html="${encodeURIComponent(element.html)}">📑 Copiar HTML</button>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="lazy-toggle-code-btn" style="padding: 4px 8px; font-size: 0.8rem; cursor: pointer; border: 1px solid #cbd5e0; background: #fff; border-radius: 4px; color: #4a5568; transition: all 0.2s;">
+                            &lt;/&gt; Ver Código
+                        </button>
+                        <button class="lazy-copy-btn" style="padding: 4px 8px; font-size: 0.8rem; cursor: pointer; border: 1px solid #cbd5e0; background: #fff; border-radius: 4px; color: #4a5568; transition: all 0.2s;" data-html="${encodeURIComponent(element.html)}">📑 Copiar</button>
+                    </div>
                 `;
 
                 // Preview em Tempo Real (Injeta o código gerado)
@@ -120,8 +125,40 @@ function renderShowcase(categories, targetContainer) {
                 previewArea.style.cssText = 'padding: 1.5rem; flex-grow: 1; background: var(--lazy-bg, #f8fafc);';
                 previewArea.innerHTML = element.html;
 
+                // Bloco de Código Oculto por Padrão (Estilo idêntico ao Playground)
+                const codeArea = document.createElement('div');
+                codeArea.style.cssText = 'display: none; border-top: 1px solid #e2e8f0;';
+                
+                const pre = document.createElement('pre');
+                pre.style.cssText = 'margin: 0; background: #0f172a; padding: 1rem; overflow-x: auto;';
+                
+                const code = document.createElement('code');
+                code.style.cssText = 'font-family: "Courier New", Courier, monospace; font-size: 0.85rem; color: #38bdf8; white-space: pre;';
+                
+                // Trata e escapa o HTML puro para exibição em formato de texto seguro
+                code.textContent = element.html.trim();
+                
+                pre.appendChild(code);
+                codeArea.appendChild(pre);
+
+                // Evento para expandir e recolher o código
+                const toggleBtn = cardHeader.querySelector('.lazy-toggle-code-btn');
+                toggleBtn.addEventListener('click', () => {
+                    const isHidden = codeArea.style.display === 'none';
+                    if (isHidden) {
+                        codeArea.style.display = 'block';
+                        toggleBtn.innerText = '▲ Ocultar';
+                        toggleBtn.style.background = '#edf2f7';
+                    } else {
+                        codeArea.style.display = 'none';
+                        toggleBtn.innerText = '</> Ver Código';
+                        toggleBtn.style.background = '#fff';
+                    }
+                });
+
                 card.appendChild(cardHeader);
                 card.appendChild(previewArea);
+                card.appendChild(codeArea); // Injeta o bloco expansível no card
                 grid.appendChild(card);
             });
 
