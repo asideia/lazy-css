@@ -2,11 +2,11 @@
   "name": "@asideia/lazy-css",
   "version": "1.0.0",
   "description": "A predictable, semantic, and LLM-friendly CSS library built for backend developers.",
-  "main": "dist/lazy.min.css",
-  "style": "dist/lazy.min.css",
+  "main": "dist/lazycss.min.css",
+  "style": "dist/lazycss.min.css",
   "scripts": {
-    "build": "postcss src/lazy.css -o dist/lazy.min.css",
-    "watch": "postcss src/lazy.css -o dist/lazy.min.css --watch"
+    "build": "postcss src/lazy.css -o dist/lazycss.min.css",
+    "watch": "postcss src/lazy.css -o dist/lazycss.min.css --watch"
   },
   "files": [
     "dist/",

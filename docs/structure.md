@@ -79,7 +79,9 @@ Contém os produtos finais compilados, prefixados contra incompatibilidades de n
 Armazena os motores lógicos que transformam o Lazy CSS em um framework nativo para Inteligência Artificial.
 
 * **`/data/lazycss.spec.json`:** A **Única Fonte de Verdade** do projeto. Estruturado em inglês (`en-US`), separa metadados puramente técnicos para treinamento de LLMs (`blueprint_specs`) de exemplos brutos para visualização humana (`sandbox_elements`).
-* **`/scripts/playground.js`:** Motor JavaScript nativo que lê o arquivo `.spec.json`, renderiza dinamicamente a interface do laboratório e converte o JSON em formato Markdown sob demanda.
+* **`/scripts/renderShowcaseElements.js`:** Motor JavaScript nativo que lê o arquivo `.spec.json` e renderiza dinamicamente a interface do laboratório.
+* **`/scripts/buildLazyCSSBlueprint.js`:** Motor JavaScript nativo que lê o arquivo `.spec.json` e converte o JSON em formato Markdown sob demanda.
+* **`/scripts/playground.js`:** Motor JavaScript nativo que lê o código no elemento com o id `lazy-code-input` e renderiza no elemento com o id `lazy-preview-frame`.
 
 ### 3.3. Diretório `/src/tokens`
 

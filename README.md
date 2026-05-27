@@ -26,37 +26,39 @@ Todo o ecossistema de código, scripts internos, mapeamento de dados e seletores
 ```text
 lazy-css/
 ├── .github/workflows/
-│   └── release.yml          # CI/CD pipeline for automated builds and deployment
-├── .vscode/                 # Stored preferences to enforce code style formatting
-├── assets/                  # Ecosystem support resources and intelligence
+│   └── release.yml                     # CI/CD pipeline for automated builds and deployment
+├── .vscode/                            # Stored preferences to enforce code style formatting
+├── assets/                             # Ecosystem support resources and intelligence
 │   ├── data/
-│   │   └── lazycss.spec.json # The Single Source of Truth (AI Contract & Showcase data)
+│   │   └── lazycss.spec.json           # The Single Source of Truth (AI Contract & Showcase data)
 │   ├── images/
-│   │   └── logo.png         # Brand identity and graphic assets
+│   │   └── logo.png                    # Brand identity and graphic assets
 │   └── scripts/
-│       └── playground.js    # Native JS engines (dynamic rendering, MD blueprint generator)
-├── dist/                    # Compiled and minified production-ready CSS distribution
-│   ├── lazycss.css          # Development style builds
-│   └── lazycss.min.css      # Production style builds (The only file your HTML needs)
-├── docs/                    # Internal governance and pipeline manuals
-│   └── release-guide.md     # Guidelines on pushing releases without breaking CI/CD
-├── src/                     # Core CSS modular codebase
+│       └── buildLazyCSSBlueprint.js    # Native JS engines (engine to create and export blueprint)
+│       └── playground.js               # Native JS engines (dynamic rendering in playground)
+│       └── renderShowcaseElements.js   # Native JS engines (dynamic rendering to showcase)
+├── dist/                               # Compiled and minified production-ready CSS distribution
+│   ├── lazycss.css                     # Development style builds
+│   └── lazycss.min.css                 # Production style builds (The only file your HTML needs)
+├── docs/                               # Internal governance and pipeline manuals
+│   └── release-guide.md                # Guidelines on pushing releases without breaking CI/CD
+├── src/                                # Core CSS modular codebase
 │   ├── tokens/
-│   │   └── variables.css    # Design tokens and fluid mathematical spacing formulas
+│   │   └── variables.css               # Design tokens and fluid mathematical spacing formulas
 │   ├── base/
-│   │   └── reset.css        # Semantic browser reset rules for cross-platform harmony
+│   │   └── reset.css                   # Semantic browser reset rules for cross-platform harmony
 │   ├── layouts/
-│   │   ├── structure.css    # Row and Stack layout adjusters (Survival flexbox)
-│   │   └── page-grid.css    # Full screen layout viewports with isolated scrolling
+│   │   ├── structure.css               # Row and Stack layout adjusters (Survival flexbox)
+│   │   └── page-grid.css               # Full screen layout viewports with isolated scrolling
 │   ├── components/
-│   │   └── components.css   # Clean administrative UI atoms (buttons, fields, cards, tables)
-│   └── lazy.css             # Root master file unifying the codebase via PostCSS
-├── index.html               # Main project presentation and Landing Page
-├── quickstart.html          # Official step-by-step setup guide and LLM prompting manuals
-├── showcase.html            # Living component docs (Parses lazycss.spec.json & outputs the AI .md)
-├── playground.html          # Interactive Sandbox (Real-time token and layout lab)
-├── package.json             # Build scripts, version tags, and package definitions
-└── postcss.config.js        # Compilation pipeline recipe for code optimization
+│   │   └── components.css              # Clean administrative UI atoms (buttons, fields, cards, tables)
+│   └── lazy.css                        # Root master file unifying the codebase via PostCSS
+├── index.html                          # Main project presentation and Landing Page
+├── quickstart.html                     # Official step-by-step setup guide and LLM prompting manuals
+├── showcase.html                       # Living component docs (Parses lazycss.spec.json & outputs the AI .md)
+├── playground.html                     # Interactive Sandbox (Real-time token and layout lab)
+├── package.json                        # Build scripts, version tags, and package definitions
+└── postcss.config.js                   # Compilation pipeline recipe for code optimization
 
 ```
 
