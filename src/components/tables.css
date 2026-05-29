@@ -1,0 +1,38 @@
+.lazy-table {
+  width: 100%;
+  text-align: left;
+  background-color: hsl(var(--lazy-card-raw));
+  border-radius: var(--lazy-radius-lg);
+  overflow: hidden;
+}
+
+/* Cabeçalho da Tabela */
+.lazy-table th {
+  background-color: hsl(var(--lazy-bg-raw));
+  color: hsl(var(--lazy-text-muted-raw));
+  font-weight: var(--lazy-weight-bold);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  border-bottom: 1px solid hsl(var(--lazy-border-raw));
+}
+
+/* Células de Dados */
+.lazy-table td {
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  border-bottom: 1px solid hsl(var(--lazy-border-raw));
+  color: hsl(var(--lazy-text-main-raw));
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+/* Efeito de linhas alternadas (Zebra Stripe) para alta densidade */
+.lazy-table tbody tr:nth-child(even) {
+  background-color: hsl(var(--lazy-bg-raw) / 0.4);
+}
+
+/* Efeito de destaque ao passar o mouse na linha */
+.lazy-table tbody tr:hover {
+  background-color: hsl(var(--lazy-bg-raw) / 0.8);
+}

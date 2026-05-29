@@ -1,0 +1,72 @@
+/* ==========================================================================
+   🧱 LAZY CSS - UTILIÁRIOS DE ESTADO E STATUS (src/components/status.css)
+   ========================================================================== */
+
+/**
+ * NOTA DE ARQUITETURA:
+ * Estas classes controlam exclusivamente o comportamento cromático dos estados,
+ * permitindo composição flexível (Lego-style) com outros componentes do framework.
+ * Elas não possuem padding, margens ou regras de display.
+ */
+
+/* ==========================================================================
+   🟢 1. STATUS: SUCESSO (Concluído / Ativo / Operacional)
+   ========================================================================== */
+.lazy-status-success {
+    background-color: hsl(var(--lazy-success-raw) / 0.08);
+    border: 1px solid hsl(var(--lazy-success-raw) / 0.15);
+    color: hsl(var(--lazy-success-raw) / 1);
+}
+
+/* Interação sutil caso o elemento seja um link ou botão clicável */
+a.lazy-status-success:hover,
+button.lazy-status-success:hover {
+    background-color: hsl(var(--lazy-success-raw) / 0.15);
+    border-color: hsl(var(--lazy-success-raw) / 0.25);
+}
+
+/* ==========================================================================
+   🟡 2. STATUS: ALERTA (Pendente / Processando / Atenção)
+   ========================================================================== */
+.lazy-status-warning {
+    background-color: hsl(var(--lazy-warning-raw) / 0.08);
+    border: 1px solid hsl(var(--lazy-warning-raw) / 0.2);
+    /* Um multiplicador sutil de luminosidade para garantir contraste em fundos claros */
+    color: hsl(var(--lazy-warning-raw) / 0.95); 
+}
+
+a.lazy-status-warning:hover,
+button.lazy-status-warning:hover {
+    background-color: hsl(var(--lazy-warning-raw) / 0.15);
+    border-color: hsl(var(--lazy-warning-raw) / 0.3);
+}
+
+/* ==========================================================================
+   🔴 3. STATUS: PERIGO (Erro / Falha / Crítico / Destrutivo)
+   ========================================================================== */
+.lazy-status-danger {
+    background-color: hsl(var(--lazy-danger-raw) / 0.08);
+    border: 1px solid hsl(var(--lazy-danger-raw) / 0.15);
+    color: hsl(var(--lazy-danger-raw) / 1);
+}
+
+a.lazy-status-danger:hover,
+button.lazy-status-danger:hover {
+    background-color: hsl(var(--lazy-danger-raw) / 0.15);
+    border-color: hsl(var(--lazy-danger-raw) / 0.25);
+}
+
+/* ==========================================================================
+   🔵 4. STATUS: INFORMATIVO (Notas / Links / Dicas / Logs)
+   ========================================================================== */
+.lazy-status-info {
+    background-color: hsl(var(--lazy-info-raw) / 0.08);
+    border: 1px solid hsl(var(--lazy-info-raw) / 0.15);
+    color: hsl(var(--lazy-info-raw) / 1);
+}
+
+a.lazy-status-info:hover,
+button.lazy-status-info:hover {
+    background-color: hsl(var(--lazy-info-raw) / 0.15);
+    border-color: hsl(var(--lazy-info-raw) / 0.25);
+}

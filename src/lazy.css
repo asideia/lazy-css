@@ -1,5 +1,16 @@
+/*tokens*/
 @import "./tokens/variables.css";
+
+/*base*/
 @import "./base/reset.css";
+
+/*layouts*/
 @import "./layouts/structure.css";
 @import "./layouts/page-grid.css";
-@import "./components/components.css";
+
+/*components*/
+@import "./components/status.css";
+@import "./components/tables.css";
+@import "./components/cards.css";
+@import "./components/forms.css";
+@import "./components/buttons.css";

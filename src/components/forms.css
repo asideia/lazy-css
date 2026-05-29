@@ -1,0 +1,23 @@
+/* Campo de Entrada Padrão */
+.lazy-field {
+  width: 100%;
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  background-color: hsl(var(--lazy-card-raw));
+  color: hsl(var(--lazy-text-main-raw));
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-md);
+  box-shadow: var(--lazy-shadow-flat);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Placeholder discreto */
+.lazy-field::placeholder {
+  color: hsl(var(--lazy-text-muted-raw));
+  opacity: 0.7;
+}
+
+/* Estado de Foco (Focus) Seguro e Elegante */
+.lazy-field:focus {
+  border-color: hsl(var(--lazy-primary-raw));
+  box-shadow: 0 0 0 3px hsl(var(--lazy-primary-raw) / 0.15);
+}

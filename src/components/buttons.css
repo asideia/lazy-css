@@ -1,0 +1,38 @@
+/* Botão Base/Neutro */
+.lazy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--lazy-weight-medium);
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  border-radius: var(--lazy-radius-md);
+  background-color: hsl(var(--lazy-border-raw));
+  color: hsl(var(--lazy-text-main-raw));
+  border: 1px solid transparent;
+  transition: filter 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Variante Principal (Primary Action) */
+.lazy-btn-primary {
+  background-color: hsl(var(--lazy-primary-raw));
+  color: hsl(var(--lazy-card-raw));
+  box-shadow: 0 2px 4px hsl(var(--lazy-primary-raw) / 0.15);
+}
+
+/* Modificação de Estados (Hover/Active) via Filtros Nativos */
+.lazy-btn:hover {
+  filter: brightness(0.92);
+}
+
+.lazy-btn:active {
+  filter: brightness(0.85);
+}
+
+/* Estado Desabilitado */
+.lazy-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: none;
+}

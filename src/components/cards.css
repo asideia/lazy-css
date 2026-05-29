@@ -1,0 +1,7 @@
+.lazy-card {
+  background-color: hsl(var(--lazy-card-raw));
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-lg);
+  padding: var(--lazy-space-md);
+  box-shadow: var(--lazy-shadow-raised);
+}
