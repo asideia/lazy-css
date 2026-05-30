@@ -11,8 +11,17 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  box-sizing: border-box;
   /* Aplica o espaçamento fluido padrão (md) de forma intrínseca */
   gap: var(--lazy-space-md);
+  /* Blindagem contra overflow em aninhamentos profundos */
+  min-width: 0;
+}
+
+/* Garante que o espaçamento seja controlado exclusivamente pelo gap do pai */
+.lazy-stack > * {
+  margin: 0;
+  box-sizing: border-box;
 }
 
 /* ------------------------------------------------------------------------
@@ -26,8 +35,18 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
+  box-sizing: border-box;
   /* Espaçamento fluido médio para eixos X e Y */
   gap: var(--lazy-space-md);
+  /* Impede que a linha estoure o contêiner pai */
+  min-width: 0;
+}
+
+/* Shielding: impede que filhos (como tabelas e cards) vazem o limite da row */
+.lazy-row > * {
+  margin: 0;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 /* ------------------------------------------------------------------------
