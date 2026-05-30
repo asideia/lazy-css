@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandbox - Teste de CDN do Lazy CSS</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/asideia/lazy-css@main/dist/lazycss.min.css">
+</head>
+<body style="background-color: var(--lazy-bg-raw); font-family: var(--lazy-font-sans); padding: var(--lazy-space-md);">
+
+    <main class="lazy-stack" style="max-width: 1200px; margin: 0 auto; gap: var(--lazy-space-lg);">
+        
+        <div class="lazy-row lazy-row-between">
+            <div>
+                <h1 style="color: var(--lazy-text-main-raw); margin: 0;">⚡ Lazy CSS CDN Sandbox</h1>
+                <p style="color: var(--lazy-text-muted-raw); margin: 0;">Testando renderização e carregamento assíncrono via jsDelivr</p>
+            </div>
+            <button class="lazy-btn lazy-btn-primary">Conexão Estável</button>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid var(--lazy-border-raw); margin: 0;">
+
+        <div class="lazy-row" style="gap: var(--lazy-space-md); flex-wrap: wrap;">
+            
+            <div class="lazy-card lazy-status-success" style="flex: 1; min-width: 250px; padding: var(--lazy-space-md); border-radius: var(--lazy-radius-lg);">
+                <h3 style="margin-top: 0;">Sucesso</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 0;">Classes de status e variáveis HSL processadas corretamente.</p>
+            </div>
+
+            <div class="lazy-card lazy-status-warning" style="flex: 1; min-width: 250px; padding: var(--lazy-space-md); border-radius: var(--lazy-radius-lg);">
+                <h3 style="margin-top: 0;">Pendente</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 0;">Alinhamento e cores fluidas testados via espelhamento do GitHub.</p>
+            </div>
+
+            <div class="lazy-card lazy-status-danger" style="flex: 1; min-width: 250px; padding: var(--lazy-space-md); border-radius: var(--lazy-radius-lg);">
+                <h3 style="margin-top: 0;">Erro Crítico</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 0;">Se você está vendo as cores corretas, a CDN está operacional.</p>
+            </div>
+
+        </div>
+
+        <div class="lazy-card" style="background-color: var(--lazy-card-raw); padding: var(--lazy-space-md); border-radius: var(--lazy-radius-lg); box-shadow: var(--lazy-shadow-flat);">
+            <h2 style="margin-top: 0; margin-bottom: var(--lazy-space-sm); color: var(--lazy-text-main-raw);">Tabela de Homologação</h2>
+            <table class="lazy-table" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="text-align: left; border-bottom: 2px solid var(--lazy-border-raw);">
+                        <th style="padding: var(--lazy-space-xs);">Ambiente</th>
+                        <th style="padding: var(--lazy-space-xs);">Provedor</th>
+                        <th style="padding: var(--lazy-space-xs);">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid var(--lazy-border-raw);">
+                        <td style="padding: var(--lazy-space-sm);">Produção Externa</td>
+                        <td style="padding: var(--lazy-space-sm);">cdn.jsdelivr.net</td>
+                        <td style="padding: var(--lazy-space-sm);"><span class="lazy-badge lazy-status-success" style="padding: 2px 8px; border-radius: var(--lazy-radius-sm); font-size: 0.8rem;">Online</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+</body>
+</html>
