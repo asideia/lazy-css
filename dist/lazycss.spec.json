@@ -159,18 +159,28 @@
   {
     "category": "components",
     "id": "tables",
-    "description": "Componentes de Tabelas Estruturadas do Lazy CSS.\nFornece estilização nativa, limpa e de alta densidade para listagem de dados,\nrelatórios e painéis gerenciais. Inclui suporte a cabeçalhos otimizados,\nalinhamento ergonômico, efeito zebra alternado e destaque visual de linha (hover).",
+    "description": "Componentes de Tabelas Estruturadas do Lazy CSS.\nFornece estilização nativa, limpa e de alta densidade para listagem de dados,\nrelatórios e painéis gerenciais. Inclui suporte a cabeçalhos otimizados,\nalinhamento ergonômico, efeito zebra alternado e destaque visual de linha (hover).\nTratado para suportar grandes massas de dados sem estouro horizontal.",
     "blueprint_specs": [
+      {
+        "signature": ".lazy-table-wrapper",
+        "context": "tables",
+        "description": "Wrapper de contenção mecânica. Obrigatoriamente envelopa a tag <table>.\nGarante o arredondamento perfeito do contêiner e isola o escopo de scroll\nhorizontal em viewports menores ou massas de dados extremas."
+      },
       {
         "signature": ".lazy-table",
         "context": "tables",
-        "description": "Componente de tabela principal. Ocupa toda a largura disponível, herda o fundo de cards e força o arredondamento padrão do sistema nas extremidades."
+        "description": "Componente de tabela principal. Ocupa toda a largura disponível e herda a tipografia."
+      },
+      {
+        "signature": ".lazy-text-break",
+        "context": "tables",
+        "description": "Utilitário de segurança para quebra inteligente de strings massivas (Hashes, Tokens, URLs).\nImpede que sequências longas de caracteres sem espaço forcem o esticamento da célula."
       }
     ],
     "sandbox_elements": [
       {
-        "name": "Tabela de Dados Administrativa Padrão",
-        "html": "<table class=\"lazy-table\">\n<thead>\n<tr>\n<th>ID</th>\n<th>Nome do Cliente</th>\n<th>Status</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>#1001</td>\n<td>Ana Silva</td>\n<td>Ativo</td>\n</tr>\n<tr>\n<td>#1002</td>\n<td>Carlos Souza</td>\n<td>Pendente</td>\n</tr>\n</tbody>\n</table>"
+        "name": "Tabela de Dados Administrativa Padrão (Alta Densidade)",
+        "html": "<div class=\"lazy-table-wrapper\">\n<table class=\"lazy-table\">\n<thead>\n<tr>\n<th>ID</th>\n<th>Nome do Cliente</th>\n<th>Hash de Verificação</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>#1001</td>\n<td>Ana Silva</td>\n<td><code class=\"lazy-text-break\">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>\n</tr>\n<tr>\n<td>#1002</td>\n<td>Carlos Souza</td>\n<td><code class=\"lazy-text-break\">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>\n</tr>\n</tbody>\n</table>\n</div>"
       }
     ]
   },

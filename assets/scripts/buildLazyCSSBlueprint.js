@@ -36,6 +36,7 @@ function buildMarkdownBlueprint() {
         md += `4. **Inline Status and Badges:** Whenever placing metadata tags, counters, or badges (e.g., "7 Falhas", "100% OK") next to a section title inside a card, you MUST wrap them together using a \`<div class="lazy-card-header">\` to guarantee perfect flexbox horizontal alignment. Never let them float or sit loosely.\n`;
         md += `5. **Form Layout TIGHT constraints:** Form actions (buttons) should be adjacent to their input rows. Wrap search filters and their buttons in structured layouts to avoid vertical height bloating.\n`;
         md += `6. **Strict Flow Boundaries (No Overlaps):** You are strictly forbidden from leaving inputs, buttons, or labels floating freely. All form elements and custom sections must maintain their standard block/flex document flow. Never use CSS properties that cause elements to break out of their parent container's physical height boundaries.\n`;
+        md += `7. **Data Table Isolation (No Horizontal Bleeding):** Whenever generating tabular reports or grid listings using \`.lazy-table\`, you MUST strictly encapsulate the \`<table>\` element inside a \`<div class="lazy-table-wrapper">\`. This isolates the horizontal overflow scroll scope. Furthermore, any long cryptographic hash, hex token, or long unspaced text inside table cells must be wrapped with the \`.lazy-text-break\` utility class to enforce safe character wrapping.\n`;
         
         md += `---\n\n`;
 

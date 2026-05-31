@@ -4,44 +4,61 @@
  * Fornece estilização nativa, limpa e de alta densidade para listagem de dados, 
  * relatórios e painéis gerenciais. Inclui suporte a cabeçalhos otimizados, 
  * alinhamento ergonômico, efeito zebra alternado e destaque visual de linha (hover).
+ * Tratado para suportar grandes massas de dados sem estouro horizontal.
  */
 
 /**
  * [SANDBOX_ELEMENT]
- * [SANDBOX_ELEMENT_NAME] Tabela de Dados Administrativa Padrão
+ * [SANDBOX_ELEMENT_NAME] Tabela de Dados Administrativa Padrão (Alta Densidade)
  * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-table-wrapper">
  * <table class="lazy-table">
  * <thead>
  * <tr>
  * <th>ID</th>
  * <th>Nome do Cliente</th>
- * <th>Status</th>
+ * <th>Hash de Verificação</th>
  * </tr>
  * </thead>
  * <tbody>
  * <tr>
  * <td>#1001</td>
  * <td>Ana Silva</td>
- * <td>Ativo</td>
+ * <td><code class="lazy-text-break">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>
  * </tr>
  * <tr>
  * <td>#1002</td>
  * <td>Carlos Souza</td>
- * <td>Pendente</td>
+ * <td><code class="lazy-text-break">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>
  * </tr>
  * </tbody>
  * </table>
+ * </div>
  */
 
 /**
- * Componente de tabela principal. Ocupa toda a largura disponível, herda o fundo de cards e força o arredondamento padrão do sistema nas extremidades.
+ * Wrapper de contenção mecânica. Obrigatoriamente envelopa a tag <table>.
+ * Garante o arredondamento perfeito do contêiner e isola o escopo de scroll
+ * horizontal em viewports menores ou massas de dados extremas.
+ */
+.lazy-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--lazy-space-md);
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-lg);
+  background-color: hsl(var(--lazy-card-raw));
+}
+
+/**
+ * Componente de tabela principal. Ocupa toda a largura disponível e herda a tipografia.
  */
 .lazy-table {
   width: 100%;
+  border-collapse: collapse;
   text-align: left;
-  background-color: hsl(var(--lazy-card-raw));
-  border-radius: var(--lazy-radius-lg);
-  overflow: hidden;
+  font-family: var(--lazy-font-sans);
 }
 
 /* Cabeçalho da Tabela - Estilização nativa interna aplicada via herança */
@@ -53,7 +70,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: var(--lazy-space-sm) var(--lazy-space-md);
-  border-bottom: 1px solid hsl(var(--lazy-border-raw));
+  border-bottom: 2px solid hsl(var(--lazy-border-raw));
 }
 
 /* Células de Dados - Alinhamento e espaçamento fluido para garantir legibilidade de registros */
@@ -63,14 +80,31 @@
   color: hsl(var(--lazy-text-main-raw));
   font-size: 0.95rem;
   vertical-align: middle;
+  line-height: 1.4;
 }
 
-/* Efeito de linhas alternadas (Zebra Stripe) para alta densidade de dados */
+/* Remove a borda dupla da última linha para casar simetricamente com o raio do wrapper pai */
+.lazy-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Efeito de linhas alternadas (Zebra Stripe) calibrado para contraste milimétrico */
 .lazy-table tbody tr:nth-child(even) {
-  background-color: hsl(var(--lazy-bg-raw) / 0.4);
+  background-color: hsl(var(--lazy-text-main-raw) / 0.03);
 }
 
 /* Efeito de destaque ao passar o mouse na linha (Row Hover Feedback) */
 .lazy-table tbody tr:hover {
-  background-color: hsl(var(--lazy-bg-raw) / 0.8);
+  background-color: hsl(var(--lazy-text-main-raw) / 0.06);
+}
+
+/**
+ * Utilitário de segurança para quebra inteligente de strings massivas (Hashes, Tokens, URLs).
+ * Impede que sequências longas de caracteres sem espaço forcem o esticamento da célula.
+ */
+.lazy-text-break {
+  word-break: break-all !important;
+  white-space: normal !important;
+  display: inline-block;
+  max-width: 100%;
 }

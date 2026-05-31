@@ -10,6 +10,7 @@
 4. **Inline Status and Badges:** Whenever placing metadata tags, counters, or badges (e.g., "7 Falhas", "100% OK") next to a section title inside a card, you MUST wrap them together using a `<div class="lazy-card-header">` to guarantee perfect flexbox horizontal alignment. Never let them float or sit loosely.
 5. **Form Layout TIGHT constraints:** Form actions (buttons) should be adjacent to their input rows. Wrap search filters and their buttons in structured layouts to avoid vertical height bloating.
 6. **Strict Flow Boundaries (No Overlaps):** You are strictly forbidden from leaving inputs, buttons, or labels floating freely. All form elements and custom sections must maintain their standard block/flex document flow. Never use CSS properties that cause elements to break out of their parent container's physical height boundaries.
+7. **Data Table Isolation (No Horizontal Bleeding):** Whenever generating tabular reports or grid listings using `.lazy-table`, you MUST strictly encapsulate the `<table>` element inside a `<div class="lazy-table-wrapper">`. This isolates the horizontal overflow scroll scope. Furthermore, any long cryptographic hash, hex token, or long unspaced text inside table cells must be wrapped with the `.lazy-text-break` utility class to enforce safe character wrapping.
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: BASE
@@ -232,40 +233,45 @@ Replicate these structural combinations precisely when generating user interface
 Fornece estilização nativa, limpa e de alta densidade para listagem de dados,
 relatórios e painéis gerenciais. Inclui suporte a cabeçalhos otimizados,
 alinhamento ergonômico, efeito zebra alternado e destaque visual de linha (hover).
+Tratado para suportar grandes massas de dados sem estouro horizontal.
 
 ### 🔐 ALLOWED CLASS CONTRACTS & SELECTORS
 The AI can ONLY use the following class signatures for this category. Do not hallucinate variants.
 
 | Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
 | :--- | :--- | :--- |
-| `.lazy-table` | `tables` | Componente de tabela principal. Ocupa toda a largura disponível, herda o fundo de cards e força o arredondamento padrão do sistema nas extremidades. |
+| `.lazy-table-wrapper` | `tables` | Wrapper de contenção mecânica. Obrigatoriamente envelopa a tag <table>. Garante o arredondamento perfeito do contêiner e isola o escopo de scroll horizontal em viewports menores ou massas de dados extremas. |
+| `.lazy-table` | `tables` | Componente de tabela principal. Ocupa toda a largura disponível e herda a tipografia. |
+| `.lazy-text-break` | `tables` | Utilitário de segurança para quebra inteligente de strings massivas (Hashes, Tokens, URLs). Impede que sequências longas de caracteres sem espaço forcem o esticamento da célula. |
 
 ### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
 Replicate these structural combinations precisely when generating user interfaces:
 
-#### Concept: Tabela de Dados Administrativa Padrão
+#### Concept: Tabela de Dados Administrativa Padrão (Alta Densidade)
 ```html
+<div class="lazy-table-wrapper">
 <table class="lazy-table">
 <thead>
 <tr>
 <th>ID</th>
 <th>Nome do Cliente</th>
-<th>Status</th>
+<th>Hash de Verificação</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>#1001</td>
 <td>Ana Silva</td>
-<td>Ativo</td>
+<td><code class="lazy-text-break">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>
 </tr>
 <tr>
 <td>#1002</td>
 <td>Carlos Souza</td>
-<td>Pendente</td>
+<td><code class="lazy-text-break">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>
 </tr>
 </tbody>
 </table>
+</div>
 ```
 
 ---
