@@ -105,7 +105,7 @@ A arquitetura do repositório é rigorosamente separada para manter a manutenibi
 
 Quer propor uma nova classe, corrigir um comportamento visual no Safari ou otimizar o parser? O Lazy CSS adota regras rígidas de engenharia para que humanos e agentes autônomos de IA possam colaborar em harmonia. Leia obrigatoriamente as diretrizes antes de abrir uma Issue ou Pull Request:
 
-* Verifique o nosso guia oficial em **[`CONTRIBUTING.md`](https://www.google.com/search?q=./CONTRIBUTING.md)**.
+* Verifique o nosso guia oficial em **[`CONTRIBUTING.md`](https://github.com/asideia/lazy-css/blob/main/CONTRIBUTING.md)**.
 
 ---
 
