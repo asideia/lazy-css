@@ -1,0 +1,419 @@
+[
+  {
+    "category": "base",
+    "id": "reset",
+    "description": "Reset e Normalização Base do Lazy CSS.\nZera margens e paddings nativos, força o cálculo de tamanho previsível (box-sizing),\ndesativa list-styles, normaliza elementos de mídia para comportamento responsivo\ne estabelece a herança tipográfica e cromática compulsória a partir das tags raiz (html, body).",
+    "blueprint_specs": [],
+    "sandbox_elements": [
+      {
+        "name": "Demonstração de Herança Nativa de Input e Listas",
+        "html": "<div class=\"lazy-stack lazy-gap-xs\">\n<ul style=\"padding: 0;\">\n<li>Este item não possui marcadores/bolinhas nativas por padrão.</li>\n</ul>\n<input type=\"text\" placeholder=\"Herda fonte, cor e remove outline automaticamente.\">\n</div>"
+      }
+    ]
+  },
+  {
+    "category": "components",
+    "id": "buttons",
+    "description": "Componentes de Botões e Elementos de Ação do Lazy CSS.\nFornece a fundação interativa para gatilhos, submissões de formulários e navegação.\nUtiliza modificadores de filtro nativo (brightness) para gerenciar estados de hover\ne clique de forma agnóstica a cores, reduzindo drasticamente a verbosidade do código.",
+    "blueprint_specs": [
+      {
+        "signature": ".lazy-btn",
+        "context": "buttons",
+        "description": "Assinatura base indestrutível para elementos interativos. Fornece alinhamento flexível interno (inline-flex), tipografia integrada, padding fluido médio, proteção contra quebra de linha (nowrap) e transições suaves de estado."
+      },
+      {
+        "signature": ".lazy-btn-primary",
+        "context": "buttons",
+        "description": "Modificador de variante para ação primária. Aplica o token de cor institucional principal do sistema como plano de fundo e adiciona um anel sutil de elevação via sombra projetada."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Grupo de Ações Primária e Secundária (Inline Row)",
+        "html": "<div class=\"lazy-row lazy-gap-xs\">\n<button type=\"button\" class=\"lazy-btn\">Cancelar</button>\n<button type=\"submit\" class=\"lazy-btn lazy-btn-primary\">Confirmar Registro</button>\n</div>"
+      },
+      {
+        "name": "Botão Composto com Estado Cromático Destrutivo",
+        "html": "<button type=\"button\" class=\"lazy-btn lazy-status-danger\" style=\"border-radius: var(--lazy-radius-md);\">\nExcluir Conta\n</button>"
+      }
+    ]
+  },
+  {
+    "category": "components",
+    "id": "cards",
+    "description": "Componentes de Cartões Elevados (Cards) do Lazy CSS.\nAtua como o contêiner estrutural primário para isolamento de blocos lógicos,\ngráficos, relatórios, formulários e agrupamento de dados em dashboards.\nAplica automaticamente os tokens de fundo de superfície, bordas sutis e elevação de sombra.",
+    "blueprint_specs": [
+      {
+        "signature": ".lazy-card",
+        "context": "cards",
+        "description": "Contêiner isolado de superfície (Card). Base com cor de fundo oposta à viewport principal, bordas limpas e elevação de sombra do tipo 'raised' para destacar o bloco visualmente."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Cartão de Conteúdo Padrão (Simple Card)",
+        "html": "<div class=\"lazy-card lazy-stack lazy-gap-sm\">\n<h3 style=\"margin: 0; font-family: var(--lazy-font-sans); color: hsl(var(--lazy-text-main-raw));\">Configurações Gerais</h3>\n<p style=\"margin: 0; font-family: var(--lazy-font-sans); color: hsl(var(--lazy-text-muted-raw)); font-size: 0.9rem;\">Gerencie as preferências de segurança e tokens de acesso da API de sua aplicação.</p>\n</div>"
+      },
+      {
+        "name": "Cartão de Métrica Avançado com Indicador de Status",
+        "html": "<div class=\"lazy-card lazy-stack lazy-gap-xs\">\n<div class=\"lazy-row lazy-row-between\">\n<span style=\"font-family: var(--lazy-font-sans); font-size: 0.85rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-muted-raw));\">Faturamento Mensal</span>\n<span class=\"lazy-status-success\" style=\"padding: 2px 6px; border-radius: var(--lazy-radius-sm); font-size: 0.75rem; font-weight: var(--lazy-weight-bold);\">+12.4%</span>\n</div>\n<h2 style=\"margin: var(--lazy-space-xs) 0 0 0; font-family: var(--lazy-font-sans); color: hsl(var(--lazy-text-main-raw)); font-size: 1.75rem;\">R$ 84.230,00</h2>\n</div>"
+      }
+    ]
+  },
+  {
+    "category": "components",
+    "id": "forms",
+    "description": "Componentes e Utilitários de Formulários do Lazy CSS.\nFornece controles de entrada de dados (inputs, textareas) com comportamento fluido,\ntipografia integrada aos tokens do sistema, placeholders atenuados e estados de foco\nacessíveis com feedback visual suave por transição de CSS.",
+    "blueprint_specs": [
+      {
+        "signature": ".lazy-field",
+        "context": "forms",
+        "description": "Campo de entrada de dados genérico. Aplica largura total, padding baseado nos tokens de espaçamento fluido, fundo de card para contraste e cantos arredondados padrão. Possui animação de transição nativa para estados de foco."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Grupo de Campo de Entrada Padrão (Vertical Stack)",
+        "html": "<div class=\"lazy-stack lazy-gap-xs\">\n<label style=\"font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));\">E-mail Corporativo</label>\n<input type=\"email\" class=\"lazy-field\" placeholder=\"exemplo@empresa.com\">\n</div>"
+      },
+      {
+        "name": "Formulário em Linha Composto (Row Layout)",
+        "html": "<div class=\"lazy-row lazy-gap-sm\">\n<div class=\"lazy-fill lazy-stack lazy-gap-xs\">\n<label style=\"font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));\">Primeiro Nome</label>\n<input type=\"text\" class=\"lazy-field\" placeholder=\"John\">\n</div>\n<div class=\"lazy-fill lazy-stack lazy-gap-xs\">\n<label style=\"font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));\">Sobrenome</label>\n<input type=\"text\" class=\"lazy-field\" placeholder=\"Doe\">\n</div>\n</div>"
+      }
+    ]
+  },
+  {
+    "category": "components",
+    "id": "lists",
+    "description": "Componentes e Utilitários de Listas do Lazy CSS.\nRestaura e padroniza o comportamento de listas ordenadas e textuais que foram\nnormalizadas pelo Reset global. Garante espaçamento horizontal (padding)\nergonômico para que marcadores e numerações não vazem para fora dos contêineres.",
+    "blueprint_specs": [
+      {
+        "signature": ".lazy-list",
+        "context": "lists",
+        "description": "Assinatura base para listas textuais. Garante o recuo à esquerda baseado nos tokens de espaçamento fluido do framework para abrigar os marcadores com segurança."
+      },
+      {
+        "signature": ".lazy-list-ordered",
+        "context": "lists",
+        "description": "Modificador para listas ordenadas. Restaura o contador decimal nativo do navegador e define o alinhamento correto dos numerais."
+      },
+      {
+        "signature": ".lazy-list-bullet",
+        "context": "lists",
+        "description": "Modificador para listas não-ordenadas (bullet points). Restaura o marcador circular clássico de forma limpa e sutil."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Lista Ordenada de Passos (Ordered Guide)",
+        "html": "<ol class=\"lazy-list lazy-list-ordered\">\n<li>Baixar o manifesto técnico do blueprint.</li>\n<li>Injetar o arquivo Markdown na sessão da LLM.</li>\n<li>Solicitar a geração da interface base.</li>\n</ol>"
+      },
+      {
+        "name": "Lista com Marcadores Tradicionais (Bullet List)",
+        "html": "<ul class=\"lazy-list lazy-list-bullet\">\n<li>Suporte nativo a variáveis HSL.</li>\n<li>Contrato semântico otimizado para IA.</li>\n<li>Renderização isolada de viewports.</li>\n</ul>"
+      }
+    ]
+  },
+  {
+    "category": "components",
+    "id": "status",
+    "description": "Utilitários de Estado e Status Cromáticos do Lazy CSS.\nControla exclusivamente o comportamento semântico de cores (sucesso, alerta, perigo e informação).\nDesenvolvido sob a arquitetura de composição flexível (estilo LEGO): não possui paddings,\nmargens ou regras de display, permitindo o acoplamento seguro sobre botões, badges, cards ou alertas.",
+    "blueprint_specs": [
+      {
+        "signature": ".lazy-status-success",
+        "context": "status",
+        "description": "Estado de Sucesso Semântico. Aplica fundo atenuado verde, borda fina e texto de alta legibilidade. Ideal para fluxos concluídos, registros ativos ou operações validadas."
+      },
+      {
+        "signature": ".lazy-status-warning",
+        "context": "status",
+        "description": "Estado de Alerta/Atenção Semântico. Aplica fundo atenuado amarelo/laranja, borda fina e texto com compensação tonal de luminosidade para legibilidade em telas claras. Indicado para processos pendentes ou logs sob observação."
+      },
+      {
+        "signature": ".lazy-status-danger",
+        "context": "status",
+        "description": "Estado de Perigo/Erro Semântico. Aplica fundo atenuado vermelho, borda fina de demarcação e texto vibrante. Voltado para ações críticas destrutivas, interrupção de processos ou mensagens de erro em formulários."
+      },
+      {
+        "signature": ".lazy-status-info",
+        "context": "status",
+        "description": "Estado Informativo Semântico. Aplica fundo atenuado azul claro, borda fina e texto análogo. Perfeito para caixas de dicas, componentes de ajuda contextual ou centralização de logs do sistema."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Badges de Status para Tabelas Corporativas",
+        "html": "<div class=\"lazy-row lazy-gap-xs\">\n<span class=\"lazy-status-success\" style=\"padding: var(--lazy-space-xs) var(--lazy-space-sm); border-radius: var(--lazy-radius-sm); font-family: var(--lazy-font-sans); font-size: 0.85rem; font-weight: var(--lazy-weight-medium);\">Ativo</span>\n<span class=\"lazy-status-warning\" style=\"padding: var(--lazy-space-xs) var(--lazy-space-sm); border-radius: var(--lazy-radius-sm); font-family: var(--lazy-font-sans); font-size: 0.85rem; font-weight: var(--lazy-weight-medium);\">Pendente</span>\n<span class=\"lazy-status-danger\" style=\"padding: var(--lazy-space-xs) var(--lazy-space-sm); border-radius: var(--lazy-radius-sm); font-family: var(--lazy-font-sans); font-size: 0.85rem; font-weight: var(--lazy-weight-medium);\">Cancelado</span>\n</div>"
+      },
+      {
+        "name": "Banner de Alerta Informativo Espacializado",
+        "html": "<div class=\"lazy-status-info lazy-stack lazy-gap-xs\" style=\"padding: var(--lazy-space-md); border-radius: var(--lazy-radius-lg);\">\n<h4 style=\"margin: 0; font-family: var(--lazy-font-sans); font-weight: var(--lazy-weight-bold);\">Nota de Atualização</h4>\n<p style=\"margin: 0; font-family: var(--lazy-font-sans); font-size: 0.9rem;\">O sistema passará por uma manutenção preventiva hoje às 23:00h.</p>\n</div>"
+      }
+    ]
+  },
+  {
+    "category": "components",
+    "id": "tables",
+    "description": "Componentes de Tabelas Estruturadas do Lazy CSS.\nFornece estilização nativa, limpa e de alta densidade para listagem de dados,\nrelatórios e painéis gerenciais. Inclui suporte a cabeçalhos otimizados,\nalinhamento ergonômico, efeito zebra alternado e destaque visual de linha (hover).",
+    "blueprint_specs": [
+      {
+        "signature": ".lazy-table",
+        "context": "tables",
+        "description": "Componente de tabela principal. Ocupa toda a largura disponível, herda o fundo de cards e força o arredondamento padrão do sistema nas extremidades."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Tabela de Dados Administrativa Padrão",
+        "html": "<table class=\"lazy-table\">\n<thead>\n<tr>\n<th>ID</th>\n<th>Nome do Cliente</th>\n<th>Status</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>#1001</td>\n<td>Ana Silva</td>\n<td>Ativo</td>\n</tr>\n<tr>\n<td>#1002</td>\n<td>Carlos Souza</td>\n<td>Pendente</td>\n</tr>\n</tbody>\n</table>"
+      }
+    ]
+  },
+  {
+    "category": "layouts",
+    "id": "page-grid",
+    "description": "Macroestruturas de Páginas e Grids Resilientes do Lazy CSS.\nFornece a fundação de posicionamento estrutural e visualização para dashboards\ncorporativos com rolagem isolada, grids de dados auto-responsivos via CSS Grid\ne contêineres centrais com limitação de largura ergonômica.",
+    "blueprint_specs": [
+      {
+        "signature": ".lazy-layout-dashboard",
+        "context": "page-grid",
+        "description": "Contêiner macro de tela cheia para dashboards. Cria um layout de duas colunas (sidebar + conteúdo) flexível e isola o comportamento da viewport."
+      },
+      {
+        "signature": ".lazy-dashboard-sidebar",
+        "context": "page-grid",
+        "description": "Painel lateral fixo para navegação. Largura estrita de 260px, com borda direita demarcadora e rolagem vertical isolada se o menu estourar."
+      },
+      {
+        "signature": ".lazy-dashboard-content",
+        "context": "page-grid",
+        "description": "Área de conteúdo principal do dashboard. Ocupa todo o espaço restante e possui rolagem independente para travar o scrollbar na raiz do body."
+      },
+      {
+        "signature": ".lazy-grid-cards",
+        "context": "page-grid",
+        "description": "Grid responsivo baseado em CSS Grid. Distribui cartões de forma fluida sem quebrar o layout, quebrando linhas apenas se o espaço interno cair abaixo de 280px."
+      },
+      {
+        "signature": ".lazy-container",
+        "context": "page-grid",
+        "description": "Contêiner de largura máxima limitada para áreas institucionais ou leitura de relatórios lineares longos."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Estrutura de Dashboard Corporativo de Tela Cheia",
+        "html": "<div class=\"lazy-layout-dashboard\" style=\"height: 350px; border-radius: var(--lazy-radius-md); overflow: hidden; border: 1px solid hsl(var(--lazy-border-raw));\">\n<aside class=\"lazy-dashboard-sidebar\">\n<div style=\"padding: var(--lazy-space-md); font-weight: var(--lazy-weight-bold); font-family: var(--lazy-font-sans);\">Menu LazyCSS</div>\n</aside>\n<main class=\"lazy-dashboard-content\">\n<h2 style=\"margin: 0; font-family: var(--lazy-font-sans); color: hsl(var(--lazy-text-main-raw));\">Dashboard Principal</h2>\n</main>\n</div>"
+      },
+      {
+        "name": "Grid de Cards de Métricas Auto-Responsivo",
+        "html": "<div class=\"lazy-grid-cards\">\n<div class=\"lazy-card\">\n<small style=\"color: hsl(var(--lazy-text-muted-raw)); font-family: var(--lazy-font-sans);\">Total Vendas</small>\n<h3 style=\"margin: var(--lazy-space-xs) 0 0 0; font-family: var(--lazy-font-sans);\">R$ 45.000</h3>\n</div>\n<div class=\"lazy-card\">\n<small style=\"color: hsl(var(--lazy-text-muted-raw)); font-family: var(--lazy-font-sans);\">Novos Clientes</small>\n<h3 style=\"margin: var(--lazy-space-xs) 0 0 0; font-family: var(--lazy-font-sans);\">+128</h3>\n</div>\n</div>"
+      }
+    ]
+  },
+  {
+    "category": "layouts",
+    "id": "structure",
+    "description": "Sistema de Microlayouts e Fluxos Atômicos do Lazy CSS. Controle indestrutível de alinhamento\nespacial baseado em CSS Flexbox responsivo. Fornece contêineres de empilhamento vertical,\nalinhamento horizontal com quebra nativa para mobile (wrap) e modificadores de densidade (gaps).",
+    "blueprint_specs": [
+      {
+        "signature": ".lazy-stack",
+        "context": "structure",
+        "description": "Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna e aplica o espaçamento fluido padrão automaticamente."
+      },
+      {
+        "signature": ".lazy-row",
+        "context": "structure",
+        "description": "Alinhador horizontal baseado em Flexbox. Posiciona os elementos lado a lado com quebra automática (wrap) ativada para telas pequenas. Centraliza itens verticalmente."
+      },
+      {
+        "signature": ".lazy-row-between",
+        "context": "structure",
+        "description": "Modificador para .lazy-row. Distribui os elementos uniformemente ao longo do eixo horizontal, empurrando o primeiro e o último para as extremidades opostas."
+      },
+      {
+        "signature": ".lazy-row-center",
+        "context": "structure",
+        "description": "Modificador para .lazy-row. Centraliza rigidamente todos os elementos filhos no eixo horizontal."
+      },
+      {
+        "signature": ".lazy-row-end",
+        "context": "structure",
+        "description": "Modificador para .lazy-row. Alinha todos os elementos filhos ao final do eixo horizontal (alinhamento à direita)."
+      },
+      {
+        "signature": ".lazy-gap-xs",
+        "context": "structure",
+        "description": "Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala extra-pequena (4px a 8px)."
+      },
+      {
+        "signature": ".lazy-gap-sm",
+        "context": "structure",
+        "description": "Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala pequena (8px a 12px)."
+      },
+      {
+        "signature": ".lazy-gap-md",
+        "context": "structure",
+        "description": "Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala média padrão (16px a 24px)."
+      },
+      {
+        "signature": ".lazy-gap-lg",
+        "context": "structure",
+        "description": "Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala grande (24px a 40px)."
+      },
+      {
+        "signature": ".lazy-gap-xl",
+        "context": "structure",
+        "description": "Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala extra-grande (32px a 64px)."
+      },
+      {
+        "signature": ".lazy-fill",
+        "context": "structure",
+        "description": "Utilitário de expansão fluida (Flex Grow). Força o elemento filho a inflar e ocupar todo o espaço horizontal ou vertical restante disponível no contêiner pai."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Layout de Fluxo Vertical (Stack) com Inputs",
+        "html": "<div class=\"lazy-stack lazy-gap-sm\">\n<label class=\"lazy-text-main\" style=\"font-weight: var(--lazy-weight-medium);\">Nome do Usuário</label>\n<input type=\"text\" class=\"lazy-field\" placeholder=\"Digite o nome completo...\">\n</div>"
+      },
+      {
+        "name": "Barra de Ações Alinhada (Row Between)",
+        "html": "<div class=\"lazy-row lazy-row-between\">\n<div>\n<h3 style=\"margin: 0; color: hsl(var(--lazy-text-main-raw));\">Listagem de Clientes</h3>\n</div>\n<div class=\"lazy-row lazy-gap-xs\">\n<button type=\"button\" class=\"lazy-btn\">Filtrar</button>\n<button type=\"button\" class=\"lazy-btn lazy-btn-primary\">Exportar</button>\n</div>\n</div>"
+      }
+    ]
+  },
+  {
+    "category": "tokens",
+    "id": "variables",
+    "description": "Central de Design Tokens do Lazy CSS. Contém a fundação matemática do ecossistema,\ncontrolando cores estruturais puras (Raw HSL), escala de espaçamento fluido responsivo via clamp(),\ntipografia nativa e regras de arredondamento/elevação para interfaces administrativas.",
+    "blueprint_specs": [
+      {
+        "signature": "--lazy-primary-raw",
+        "context": "variables",
+        "description": "Azul Corporativo / Ações Principais. Ideal para botões primários, links e destaques de foco."
+      },
+      {
+        "signature": "--lazy-success-raw",
+        "context": "variables",
+        "description": "Verde Administrativo / Sucesso / Concluído. Indicado para fluxos aprovados, badges positivos e tabelas financeiras."
+      },
+      {
+        "signature": "--lazy-danger-raw",
+        "context": "variables",
+        "description": "Vermelho Alerta / Erros / Destrutivo. Usado em ações críticas, modais de confirmação de exclusão e notificações de falha."
+      },
+      {
+        "signature": "--lazy-warning-raw",
+        "context": "variables",
+        "description": "Amarelo/Laranja / Avisos / Pendente. Perfeito para estados em processamento, logs de aviso ou ações secundárias sob atenção."
+      },
+      {
+        "signature": "--lazy-info-raw",
+        "context": "variables",
+        "description": "Azul Claro / Informativo / Notas. Utilizado para banners informativos, dicas de usabilidade e central de ajuda."
+      },
+      {
+        "signature": "--lazy-bg-raw",
+        "context": "variables",
+        "description": "Fundo da Viewport Geral. Tom cinza ultra-claro para descanso visual em dashboards extensos."
+      },
+      {
+        "signature": "--lazy-card-raw",
+        "context": "variables",
+        "description": "Fundo de Blocos Elevados. Base para tabelas, cards e menus que demandam contraste contra o fundo da viewport."
+      },
+      {
+        "signature": "--lazy-text-main-raw",
+        "context": "variables",
+        "description": "Texto Principal. Tom grafite escuro que garante o máximo de acessibilidade e leitura sem o peso do preto puro."
+      },
+      {
+        "signature": "--lazy-text-muted-raw",
+        "context": "variables",
+        "description": "Texto Secundário. Tom atenuado para descrições, sub-rótulos e metadados de tabelas."
+      },
+      {
+        "signature": "--lazy-border-raw",
+        "context": "variables",
+        "description": "Linhas de Divisão e Bordas. Linha sutil para separar elementos sem poluir a densidade visual."
+      },
+      {
+        "signature": "--lazy-space-xs",
+        "context": "variables",
+        "description": "Espaçamento Extra-Pequeno (4px a 8px). Ideal para paddings internos de badges e gaps de micro-elementos."
+      },
+      {
+        "signature": "--lazy-space-sm",
+        "context": "variables",
+        "description": "Espaçamento Pequeno (8px a 12px). Utilizado para gaps em linhas de botões e paddings de inputs."
+      },
+      {
+        "signature": "--lazy-space-md",
+        "context": "variables",
+        "description": "Espaçamento Médio (16px a 24px). O padrão dourado para paddings de cards corporativos e gaps de formulários."
+      },
+      {
+        "signature": "--lazy-space-lg",
+        "context": "variables",
+        "description": "Espaçamento Grande (24px a 40px). Distanciamento entre grandes seções de layout ou margens macro."
+      },
+      {
+        "signature": "--lazy-space-xl",
+        "context": "variables",
+        "description": "Espaçamento Extra-Grande (32px a 64px). Margens de respiro superiores e inferiores para viewports largas."
+      },
+      {
+        "signature": "--lazy-font-sans",
+        "context": "variables",
+        "description": "Pilha de fontes sans-serif nativa do sistema operacional para performance máxima e fricção zero."
+      },
+      {
+        "signature": "--lazy-weight-normal",
+        "context": "variables",
+        "description": "Peso normal de fonte (Regular)."
+      },
+      {
+        "signature": "--lazy-weight-medium",
+        "context": "variables",
+        "description": "Peso médio de fonte (Medium). Ideal para sub-rótulos e cabeçalhos de tabelas."
+      },
+      {
+        "signature": "--lazy-weight-bold",
+        "context": "variables",
+        "description": "Peso em negrito (Bold). Utilizado restritamente em títulos e elementos de forte impacto hierárquico."
+      },
+      {
+        "signature": "--lazy-radius-sm",
+        "context": "variables",
+        "description": "Raio sutil para pequenos componentes (Checkboxes, switches, badges)."
+      },
+      {
+        "signature": "--lazy-radius-md",
+        "context": "variables",
+        "description": "Raio padrão para elementos de ação padrão (Inputs, botões primários/secundários)."
+      },
+      {
+        "signature": "--lazy-radius-lg",
+        "context": "variables",
+        "description": "Raio macro para grandes estruturas isoladas (Cards, tabelas, modais, sidebars)."
+      },
+      {
+        "signature": "--lazy-shadow-flat",
+        "context": "variables",
+        "description": "Sombra plana e sutil para assentar blocos na viewport sem poluir gráficos ou dados adjacentes."
+      },
+      {
+        "signature": "--lazy-shadow-raised",
+        "context": "variables",
+        "description": "Sombra elevada para destacar elementos sobrepostos (Dropdowns, modais, tooltips)."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Manipulação Dinâmica de Cores e Espaços Fluidos",
+        "html": "<div style=\"background-color: hsl(var(--lazy-primary-raw) / 0.08); border: 1px solid hsl(var(--lazy-primary-raw) / 0.2); padding: var(--lazy-space-md); border-radius: var(--lazy-radius-lg);\">\n<h4 style=\"margin: 0; font-family: var(--lazy-font-sans); color: hsl(var(--lazy-primary-raw) / 1); font-weight: var(--lazy-weight-bold);\">Token Sandbox</h4>\n<p style=\"margin: var(--lazy-space-xs) 0 0 0; font-family: var(--lazy-font-sans); color: hsl(var(--lazy-text-main-raw) / 0.8); font-size: 0.9rem;\">Demonstração de opacidade inline com Raw HSL e padding responsivo.</p>\n</div>"
+      }
+    ]
+  }
+]

@@ -1,0 +1,64 @@
+/**
+ * [DESCRIPTION]
+ * Componentes e Utilitários de Listas do Lazy CSS.
+ * Restaura e padroniza o comportamento de listas ordenadas e textuais que foram 
+ * normalizadas pelo Reset global. Garante espaçamento horizontal (padding) 
+ * ergonômico para que marcadores e numerações não vazem para fora dos contêineres.
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Lista Ordenada de Passos (Ordered Guide)
+ * [SANDBOX_ELEMENT_HTML]
+ * <ol class="lazy-list lazy-list-ordered">
+ * <li>Baixar o manifesto técnico do blueprint.</li>
+ * <li>Injetar o arquivo Markdown na sessão da LLM.</li>
+ * <li>Solicitar a geração da interface base.</li>
+ * </ol>
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Lista com Marcadores Tradicionais (Bullet List)
+ * [SANDBOX_ELEMENT_HTML]
+ * <ul class="lazy-list lazy-list-bullet">
+ * <li>Suporte nativo a variáveis HSL.</li>
+ * <li>Contrato semântico otimizado para IA.</li>
+ * <li>Renderização isolada de viewports.</li>
+ * </ul>
+ */
+
+/**
+ * Assinatura base para listas textuais. Garante o recuo à esquerda baseado nos tokens de espaçamento fluido do framework para abrigar os marcadores com segurança.
+ */
+.lazy-list {
+  padding-left: var(--lazy-space-lg);
+  margin-top: 0;
+  margin-bottom: var(--lazy-space-sm);
+  font-family: var(--lazy-font-sans);
+  color: hsl(var(--lazy-text-main-raw));
+}
+
+/**
+ * Modificador para listas ordenadas. Restaura o contador decimal nativo do navegador e define o alinhamento correto dos numerais.
+ */
+.lazy-list-ordered {
+  list-style-type: decimal !important;
+}
+
+/**
+ * Modificador para listas não-ordenadas (bullet points). Restaura o marcador circular clássico de forma limpa e sutil.
+ */
+.lazy-list-bullet {
+  list-style-type: disc !important;
+}
+
+/* Estilização interna opcional para dar mais respiro aos itens de lista densos */
+.lazy-list li {
+  margin-bottom: var(--lazy-space-xs);
+  line-height: 1.5;
+}
+
+.lazy-list li:last-child {
+  margin-bottom: 0;
+}

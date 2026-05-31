@@ -5,161 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lazy CSS - Quickstart & Contexto de IA</title>
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    
     <link rel="stylesheet" href="dist/lazycss.min.css">
+    
     <style>
-        /* Estilos temporários de apoio para o Quickstart enquanto a pasta src/ está vazia */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8fafc;
-            color: #1e293b;
-            line-height: 1.6;
+        /* Ajustes macro de espaçamento e envelopamento da página institucional */
+        main {
+            max-width: 840px;
+            margin: 0 auto;
+            padding: var(--lazy-space-xl) var(--lazy-space-md);
         }
         header {
-            background-color: #fff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 1rem 2rem;
+            background-color: hsl(var(--lazy-card-raw));
+            border-bottom: 1px solid hsl(var(--lazy-border-raw));
+            padding: var(--lazy-space-md) var(--lazy-space-xl);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+        nav {
+            display: flex;
+            gap: var(--lazy-space-md);
+        }
         nav a {
-            color: #475569;
-            text-decoration: none;
-            margin-left: 1.5rem;
-            font-weight: 500;
-            transition: color 0.2s;
+            color: hsl(var(--lazy-text-muted-raw));
+            font-weight: var(--lazy-weight-medium);
+            transition: color 0.2s ease;
         }
-        nav a:hover {
-            color: #2563eb;
+        nav a:hover, nav a.active {
+            color: hsl(var(--lazy-primary-raw));
         }
-        main {
-            max-width: 800px;
-            margin: 4rem auto;
-            padding: 0 2rem;
+        .step-list li {
+            margin-bottom: var(--lazy-space-sm);
+            padding-left: var(--lazy-space-xs);
         }
-        h1 {
-            font-size: 2.5rem;
-            color: #0f172a;
-            margin-bottom: 1rem;
-            letter-spacing: -0.025em;
-        }
-        p {
-            color: #475569;
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-        .blueprint-box {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01);
-            margin-bottom: 3rem;
-        }
-        .btn-download {
-            display: inline-block;
-            background-color: #2563eb;
-            color: #fff;
-            padding: 1rem 2rem;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-        }
-        .btn-download:hover {
-            background-color: #1d4ed8;
-        }
-        .btn-download:disabled {
-            background-color: #94a3b8;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-        .steps {
-            background: #f1f5f9;
-            border-radius: 8px;
-            padding: 1.5rem 2rem;
-        }
-        .steps ol {
-            margin: 0;
-            padding-left: 1.2rem;
-            color: #334155;
-        }
-        .steps li {
-            margin-bottom: 0.75rem;
-        }
-        .steps code {
-            background: #e2e8f0;
+        .step-list code {
+            background-color: hsl(var(--lazy-bg-raw));
             padding: 2px 6px;
-            border-radius: 4px;
+            border-radius: var(--lazy-radius-sm);
             font-family: monospace;
-            font-size: 0.95rem;
-            color: #0f172a;
+            font-size: 0.9rem;
+            color: hsl(var(--lazy-text-main-raw));
+            border: 1px solid hsl(var(--lazy-border-raw));
         }
         footer {
             text-align: center;
-            padding: 3rem 2rem;
-            color: #64748b;
+            padding: var(--lazy-space-xl) var(--lazy-space-md);
+            color: hsl(var(--lazy-text-muted-raw));
             font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 6rem;
-            background: #fff;
+            border-top: 1px solid hsl(var(--lazy-border-raw));
+            margin-top: var(--lazy-space-xl);
+            background: hsl(var(--lazy-card-raw));
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #0f172a;">🦥 Lazy<span style="color: #2563eb;">CSS</span></span>
+        <div style="display: flex; align-items: center;">
+            <span style="font-weight: var(--lazy-weight-bold); font-size: 1.4rem; letter-spacing: -0.05em; color: hsl(var(--lazy-text-main-raw));">
+                🦥 Lazy<span style="color: hsl(var(--lazy-primary-raw));">CSS</span>
+            </span>
         </div>
         <nav>
             <a href="index.html">Home</a>
-            <a href="quickstart.html" style="color: #2563eb;">Quickstart & IA</a>
+            <a href="quickstart.html" class="active">Quickstart & IA</a>
             <a href="showcase.html">Componentes</a>
             <a href="playground.html">Playground</a>
             <a href="https://github.com/asideia/lazy-css" target="_blank" rel="noopener noreferrer">📦 GitHub</a>
         </nav>
     </header>
 
-    <main>
-        <section class="lazy-card" style="padding: var(--lazy-space-md); margin-bottom: var(--lazy-space-md); background-color: var(--lazy-card-raw); border-radius: var(--lazy-radius-lg); box-shadow: var(--lazy-shadow-flat);">
-            <h1 style="color: var(--lazy-text-main-raw); margin-top: 0;">🌐 Uso via CDN (Sem NPM)</h2>
-            <p style="color: var(--lazy-text-muted-raw);">Ideal para desenvolvimento ágil, arquiteturas monolíticas e integração simplificada com LLMs. Insira o link abaixo no <code>&lt;head&gt;</code> do seu projeto:</p>
+    <main class="lazy-stack lazy-gap-md">
+        
+        <section class="lazy-card lazy-stack lazy-gap-sm">
+            <h1 style="color: hsl(var(--lazy-text-main-raw)); margin: 0; font-size: 1.8rem;">🌐 Uso via CDN (Sem NPM)</h1>
+            <p style="color: hsl(var(--lazy-text-muted-raw)); margin: 0;">
+                Ideal para desenvolvimento ágil, arquiteturas monolíticas e integração simplificada com LLMs. Insira o link abaixo diretamente no <code>&lt;head&gt;</code> do seu projeto:
+            </p>
             
-            <div style="background-color: #0f172a; color: #38bdf8; padding: var(--lazy-space-sm); border-radius: var(--lazy-radius-md); font-family: monospace; font-size: 0.9rem; overflow-x: auto; border: 1px solid #334155; margin-bottom: var(--lazy-space-sm);">
+            <div style="background-color: #0f172a; color: #38bdf8; padding: var(--lazy-space-md); border-radius: var(--lazy-radius-md); font-family: monospace; font-size: 0.9rem; overflow-x: auto; border: 1px solid #334155; line-height: 1.4;">
                 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/asideia/lazy-css@main/dist/lazycss.min.css"&gt;
             </div>
-            <p style="font-size: 0.85rem; color: var(--lazy-text-muted-raw); margin: 0;">💡 <strong>Nota:</strong> Esta URL aponta diretamente para a branch principal (<code>main</code>), garantindo que você sempre consuma as últimas atualizações de componentes homologadas.</p>
-        </section>
-
-        <section class="lazy-card" style="padding: var(--lazy-space-md); margin-bottom: var(--lazy-space-md); background-color: var(--lazy-card-raw); border-radius: var(--lazy-radius-lg); box-shadow: var(--lazy-shadow-flat);">
-        <h1>Alimente sua Inteligência Artificial</h1>
-        <p>O Lazy CSS não exige que você decore classes utilitárias. O segredo é baixar o nosso manifesto de especificação técnica compilado e injetá-lo diretamente no prompt do seu modelo de linguagem (Claude, ChatGPT ou Gemini) antes de pedir para ele codificar suas telas.</p>
-
-        <div class="blueprint-box">
-            <h3 style="margin-top: 0; font-size: 1.3rem; color: #0f172a; margin-bottom: 0.5rem;">Compilador de Blueprint Nativo</h3>
-            <p style="font-size: 0.95rem; color: #64748b; margin-bottom: 1.5rem;">Gera o arquivo Markdown unificado combinando as regras de engenharia e os exemplos reais contidos no manifesto do sistema.</p>
             
-            <button id="lazy-download-blueprint-btn" class="btn-download">🤖 Baixar Contexto para IA (.md)</button>
-        </div>
-
-        <h2>Como Utilizar no Fluxo de Trabalho (Workflow)</h2>
-        <div class="steps">
-            <ol>
-                <li>1. Clique no botão acima para baixar o arquivo <code>lazycss-blueprint.md</code>.</li>
-                <li>2. Inicie uma nova conversa limpa com a sua LLM de preferência.</li>
-                <li>3. Anexe ou copie o conteúdo do arquivo baixado no primeiro prompt e envie.</li>
-                <li>4. Após a IA confirmar que aprendeu as especificações, faça o seu pedido técnico de tela corporativa (Ex: <em>"Crie um formulário de cadastro de usuários administrativos usando o Lazy CSS"</em>).</li>
-            </ol>
-        </div>
+            <div class="lazy-status-info" style="padding: var(--lazy-space-sm); border-radius: var(--lazy-radius-md); font-size: 0.85rem;">
+                💡 <strong>Nota de Distribuição:</strong> Esta URL aponta diretamente para a branch principal (<code>main</code>), garantindo que seu ambiente consuma as últimas atualizações de componentes homologadas em tempo real.
+            </div>
         </section>
+
+        <section class="lazy-card lazy-stack lazy-gap-md">
+            <div class="lazy-stack lazy-gap-xs">
+                <h1 style="color: hsl(var(--lazy-text-main-raw)); margin: 0; font-size: 1.8rem;">Alimente sua Inteligência Artificial</h1>
+                <p style="color: hsl(var(--lazy-text-muted-raw)); margin: 0;">
+                    O Lazy CSS não exige que você decore classes utilitárias complexas. O grande segredo é baixar o nosso manifesto de especificação técnica unificado e injetá-lo diretamente no prompt do seu modelo de linguagem (Claude, ChatGPT ou Gemini) antes de pedir para ele codificar suas interfaces.
+                </p>
+            </div>
+
+            <div style="text-align: center; padding: var(--lazy-space-lg); border: 1px dashed hsl(var(--lazy-border-raw)); border-radius: var(--lazy-radius-lg); background-color: hsl(var(--lazy-bg-raw) / 0.3);" class="lazy-stack lazy-gap-sm">
+                <div class="lazy-stack lazy-gap-xs">
+                    <h3 style="margin: 0; font-size: 1.2rem; color: hsl(var(--lazy-text-main-raw));">Compilador de Blueprint Nativo</h3>
+                    <p style="font-size: 0.95rem; color: hsl(var(--lazy-text-muted-raw)); margin: 0;">
+                        Gera o arquivo Markdown unificado combinando as regras estritas de arquitetura e os exemplos reais contidos no manifesto do sistema.
+                    </p>
+                </div>
+                
+                <div style="display: inline-block;">
+                    <button id="lazy-download-blueprint-btn" class="lazy-btn lazy-btn-primary" style="font-size: 1rem; padding: var(--lazy-space-sm) var(--lazy-space-lg);">
+                        🤖 Baixar Contexto para IA (.md)
+                    </button>
+                </div>
+            </div>
+
+            <div class="lazy-stack lazy-gap-xs">
+                <h2 style="color: hsl(var(--lazy-text-main-raw)); margin: 0; font-size: 1.3rem;">Como Utilizar no seu Workflow Diário</h2>
+                <div style="padding: var(--lazy-space-md); border-radius: var(--lazy-radius-md); background-color: hsl(var(--lazy-bg-raw) / 0.5); border: 1px solid hsl(var(--lazy-border-raw));">
+                    <ol class="step-list lazy-list lazy-list-ordered" style="margin: 0; padding-left: var(--lazy-space-md); color: hsl(var(--lazy-text-main-raw));">
+                        <li>Clique no botão acima para baixar o arquivo compilado dinamicamente <code>lazycss-blueprint.md</code>.</li>
+                        <li>Inicie uma nova conversa ou sessão limpa com a sua LLM de preferência.</li>
+                        <li>Anexe ou copie integralmente o conteúdo do arquivo baixado no primeiro prompt estrutural e envie.</li>
+                        <li>Após a IA confirmar que absorveu o contrato das assinaturas, faça o seu pedido de UI corporativa (Ex: <em>"Crie um formulário de cadastro de usuários administrativos usando o Lazy CSS"</em>).</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer>

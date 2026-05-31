@@ -1,72 +1,94 @@
-/* ==========================================================================
-   ⚡ LAZY CSS - MACRO PAGE STRUCTURES & GRIDS (src/layouts/page-grid.css)
-   ========================================================================== */
+/**
+ * [DESCRIPTION]
+ * Macroestruturas de Páginas e Grids Resilientes do Lazy CSS.
+ * Fornece a fundação de posicionamento estrutural e visualização para dashboards 
+ * corporativos com rolagem isolada, grids de dados auto-responsivos via CSS Grid 
+ * e contêineres centrais com limitação de largura ergonômica.
+ */
 
-/* ------------------------------------------------------------------------
-   1. VIEWPORT CORPORATIVA FIXA (Dashboard Layout)
-   Cria um layout de tela cheia (100vh) ideal para painéis administrativos.
-   Divide a tela em uma barra lateral de navegação (sidebar) e uma área
-   de conteúdo principal que controla sua própria rolagem.
-   ------------------------------------------------------------------------ */
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Estrutura de Dashboard Corporativo de Tela Cheia
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-layout-dashboard" style="height: 350px; border-radius: var(--lazy-radius-md); overflow: hidden; border: 1px solid hsl(var(--lazy-border-raw));">
+ * <aside class="lazy-dashboard-sidebar">
+ * <div style="padding: var(--lazy-space-md); font-weight: var(--lazy-weight-bold); font-family: var(--lazy-font-sans);">Menu LazyCSS</div>
+ * </aside>
+ * <main class="lazy-dashboard-content">
+ * <h2 style="margin: 0; font-family: var(--lazy-font-sans); color: hsl(var(--lazy-text-main-raw));">Dashboard Principal</h2>
+ * </main>
+ * </div>
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Grid de Cards de Métricas Auto-Responsivo
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-grid-cards">
+ * <div class="lazy-card">
+ * <small style="color: hsl(var(--lazy-text-muted-raw)); font-family: var(--lazy-font-sans);">Total Vendas</small>
+ * <h3 style="margin: var(--lazy-space-xs) 0 0 0; font-family: var(--lazy-font-sans);">R$ 45.000</h3>
+ * </div>
+ * <div class="lazy-card">
+ * <small style="color: hsl(var(--lazy-text-muted-raw)); font-family: var(--lazy-font-sans);">Novos Clientes</small>
+ * <h3 style="margin: var(--lazy-space-xs) 0 0 0; font-family: var(--lazy-font-sans);">+128</h3>
+ * </div>
+ * </div>
+ */
+
+/**
+ * Contêiner macro de tela cheia para dashboards. Cria um layout de duas colunas (sidebar + conteúdo) flexível e isola o comportamento da viewport.
+ */
 .lazy-layout-dashboard {
-  display: grid;
-  grid-template-columns: 260px 1fr; /* Sidebar fixa com 260px e conteúdo flexível */
-  grid-template-rows: 100vh;
+  display: flex;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
   background-color: hsl(var(--lazy-bg-raw));
 }
 
-/* Comportamento responsivo intrínseco para telas móveis */
-@media (max-width: 768px) {
-  .lazy-layout-dashboard {
-    grid-template-columns: 1fr; /* No mobile, a barra lateral colapsa ou empilha */
-    grid-template-rows: auto 1fr;
-    height: auto;
-    overflow: auto;
-  }
+/* Ajuste específico para quando o dashboard for renderizado dentro de uma área controlada (como o Showcase) */
+.lazy-showcase-preview .lazy-layout-dashboard,
+[style*="height"] .lazy-layout-dashboard {
+  min-height: 100% !important;
+  height: 100% !important;
 }
 
-/* ------------------------------------------------------------------------
-   2. ELEMENTOS DO DASHBOARD
-   ------------------------------------------------------------------------ */
-
-/* Barra lateral fixa para menus e identidade do software */
+/**
+ * Painel lateral fixo para navegação. Largura estrita de 260px, com borda direita demarcadora e rolagem vertical isolada se o menu estourar.
+ */
 .lazy-dashboard-sidebar {
+  width: 260px;
+  flex-shrink: 0;
   background-color: hsl(var(--lazy-card-raw));
   border-right: 1px solid hsl(var(--lazy-border-raw));
   display: flex;
   flex-direction: column;
-  height: 100%;
   overflow-y: auto;
 }
 
-/* Painel de conteúdo com rolagem isolada (evita o scroll na página inteira) */
+/**
+ * Área de conteúdo principal do dashboard. Ocupa todo o espaço restante e possui rolagem independente para travar o scrollbar na raiz do body.
+ */
 .lazy-dashboard-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  flex-grow: 1;
+  padding: var(--lazy-space-xl);
   overflow-y: auto;
-  padding: var(--lazy-space-lg); /* Padding fluido que se adapta ao tamanho da tela */
+  background-color: hsl(var(--lazy-bg-raw));
 }
 
-/* ------------------------------------------------------------------------
-   3. GRID DE CARD DE MÉTRICAS (Data Grid)
-   Distribui cartões de informação ou formulários em colunas que se auto-ajustam.
-   Se os cards não couberem com o tamanho mínimo de 280px, eles quebram de linha sozinhos.
-   ------------------------------------------------------------------------ */
+/**
+ * Grid responsivo baseado em CSS Grid. Distribui cartões de forma fluida sem quebrar o layout, quebrando linhas apenas se o espaço interno cair abaixo de 280px.
+ */
 .lazy-grid-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--lazy-space-md);
   width: 100%;
 }
 
-/* ------------------------------------------------------------------------
-   4. CONTAINER DE CONTEÚDO CENTRALIZADO (Páginas Estáticas/Simples)
-   Limita a largura máxima para leitura confortável em monitores muito grandes.
-   ------------------------------------------------------------------------ */
+/**
+ * Contêiner de largura máxima limitada para áreas institucionais ou leitura de relatórios lineares longos.
+ */
 .lazy-container {
   width: 100%;
   max-width: 1280px;

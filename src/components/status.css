@@ -1,17 +1,35 @@
-/* ==========================================================================
-   🧱 LAZY CSS - UTILIÁRIOS DE ESTADO E STATUS (src/components/status.css)
-   ========================================================================== */
-
 /**
- * NOTA DE ARQUITETURA:
- * Estas classes controlam exclusivamente o comportamento cromático dos estados,
- * permitindo composição flexível (Lego-style) com outros componentes do framework.
- * Elas não possuem padding, margens ou regras de display.
+ * [DESCRIPTION]
+ * Utilitários de Estado e Status Cromáticos do Lazy CSS. 
+ * Controla exclusivamente o comportamento semântico de cores (sucesso, alerta, perigo e informação).
+ * Desenvolvido sob a arquitetura de composição flexível (estilo LEGO): não possui paddings,
+ * margens ou regras de display, permitindo o acoplamento seguro sobre botões, badges, cards ou alertas.
  */
 
-/* ==========================================================================
-   🟢 1. STATUS: SUCESSO (Concluído / Ativo / Operacional)
-   ========================================================================== */
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Badges de Status para Tabelas Corporativas
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-row lazy-gap-xs">
+ * <span class="lazy-status-success" style="padding: var(--lazy-space-xs) var(--lazy-space-sm); border-radius: var(--lazy-radius-sm); font-family: var(--lazy-font-sans); font-size: 0.85rem; font-weight: var(--lazy-weight-medium);">Ativo</span>
+ * <span class="lazy-status-warning" style="padding: var(--lazy-space-xs) var(--lazy-space-sm); border-radius: var(--lazy-radius-sm); font-family: var(--lazy-font-sans); font-size: 0.85rem; font-weight: var(--lazy-weight-medium);">Pendente</span>
+ * <span class="lazy-status-danger" style="padding: var(--lazy-space-xs) var(--lazy-space-sm); border-radius: var(--lazy-radius-sm); font-family: var(--lazy-font-sans); font-size: 0.85rem; font-weight: var(--lazy-weight-medium);">Cancelado</span>
+ * </div>
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Banner de Alerta Informativo Espacializado
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-status-info lazy-stack lazy-gap-xs" style="padding: var(--lazy-space-md); border-radius: var(--lazy-radius-lg);">
+ * <h4 style="margin: 0; font-family: var(--lazy-font-sans); font-weight: var(--lazy-weight-bold);">Nota de Atualização</h4>
+ * <p style="margin: 0; font-family: var(--lazy-font-sans); font-size: 0.9rem;">O sistema passará por uma manutenção preventiva hoje às 23:00h.</p>
+ * </div>
+ */
+
+/**
+ * Estado de Sucesso Semântico. Aplica fundo atenuado verde, borda fina e texto de alta legibilidade. Ideal para fluxos concluídos, registros ativos ou operações validadas.
+ */
 .lazy-status-success {
     background-color: hsl(var(--lazy-success-raw) / 0.08);
     border: 1px solid hsl(var(--lazy-success-raw) / 0.15);
@@ -25,46 +43,48 @@ button.lazy-status-success:hover {
     border-color: hsl(var(--lazy-success-raw) / 0.25);
 }
 
-/* ==========================================================================
-   🟡 2. STATUS: ALERTA (Pendente / Processando / Atenção)
-   ========================================================================== */
+/**
+ * Estado de Alerta/Atenção Semântico. Aplica fundo atenuado amarelo/laranja, borda fina e texto com compensação tonal de luminosidade para legibilidade em telas claras. Indicado para processos pendentes ou logs sob observação.
+ */
 .lazy-status-warning {
     background-color: hsl(var(--lazy-warning-raw) / 0.08);
     border: 1px solid hsl(var(--lazy-warning-raw) / 0.2);
-    /* Um multiplicador sutil de luminosidade para garantir contraste em fundos claros */
     color: hsl(var(--lazy-warning-raw) / 0.95); 
 }
 
+/* Interação sutil caso o elemento seja um link ou botão clicável */
 a.lazy-status-warning:hover,
 button.lazy-status-warning:hover {
     background-color: hsl(var(--lazy-warning-raw) / 0.15);
     border-color: hsl(var(--lazy-warning-raw) / 0.3);
 }
 
-/* ==========================================================================
-   🔴 3. STATUS: PERIGO (Erro / Falha / Crítico / Destrutivo)
-   ========================================================================== */
+/**
+ * Estado de Perigo/Erro Semântico. Aplica fundo atenuado vermelho, borda fina de demarcação e texto vibrante. Voltado para ações críticas destrutivas, interrupção de processos ou mensagens de erro em formulários.
+ */
 .lazy-status-danger {
     background-color: hsl(var(--lazy-danger-raw) / 0.08);
     border: 1px solid hsl(var(--lazy-danger-raw) / 0.15);
     color: hsl(var(--lazy-danger-raw) / 1);
 }
 
+/* Interação sutil caso o elemento seja um link ou botão clicável */
 a.lazy-status-danger:hover,
 button.lazy-status-danger:hover {
     background-color: hsl(var(--lazy-danger-raw) / 0.15);
     border-color: hsl(var(--lazy-danger-raw) / 0.25);
 }
 
-/* ==========================================================================
-   🔵 4. STATUS: INFORMATIVO (Notas / Links / Dicas / Logs)
-   ========================================================================== */
+/**
+ * Estado Informativo Semântico. Aplica fundo atenuado azul claro, borda fina e texto análogo. Perfeito para caixas de dicas, componentes de ajuda contextual ou centralização de logs do sistema.
+ */
 .lazy-status-info {
     background-color: hsl(var(--lazy-info-raw) / 0.08);
     border: 1px solid hsl(var(--lazy-info-raw) / 0.15);
     color: hsl(var(--lazy-info-raw) / 1);
 }
 
+/* Interação sutil caso o elemento seja um link ou botão clicável */
 a.lazy-status-info:hover,
 button.lazy-status-info:hover {
     background-color: hsl(var(--lazy-info-raw) / 0.15);

@@ -5,8 +5,12 @@
   "main": "dist/lazycss.min.css",
   "style": "dist/lazycss.min.css",
   "scripts": {
-    "build": "postcss src/lazy.css -o dist/lazycss.min.css",
-    "watch": "postcss src/lazy.css -o dist/lazycss.min.css --watch"
+    "build": "npm run build-spec && npm run build-min && npm run build-blueprint",
+    "watch": "postcss src/lazy.css -o dist/lazycss.min.css --watch",
+    "build-spec": "node assets/scripts/buildLazyCSSSpec.js",
+    "build-min": "postcss src/lazy.css -o dist/lazycss.min.css",
+    "build-blueprint": "node assets/scripts/buildLazyCSSBlueprint.js",
+    "new-css": "node assets/scripts/createNewCSS.js"
   },
   "files": [
     "dist/",

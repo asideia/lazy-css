@@ -1,3 +1,37 @@
+/**
+ * [DESCRIPTION]
+ * Componentes de Cartões Elevados (Cards) do Lazy CSS.
+ * Atua como o contêiner estrutural primário para isolamento de blocos lógicos, 
+ * gráficos, relatórios, formulários e agrupamento de dados em dashboards. 
+ * Aplica automaticamente os tokens de fundo de superfície, bordas sutis e elevação de sombra.
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Cartão de Conteúdo Padrão (Simple Card)
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-card lazy-stack lazy-gap-sm">
+ * <h3 style="margin: 0; font-family: var(--lazy-font-sans); color: hsl(var(--lazy-text-main-raw));">Configurações Gerais</h3>
+ * <p style="margin: 0; font-family: var(--lazy-font-sans); color: hsl(var(--lazy-text-muted-raw)); font-size: 0.9rem;">Gerencie as preferências de segurança e tokens de acesso da API de sua aplicação.</p>
+ * </div>
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Cartão de Métrica Avançado com Indicador de Status
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-card lazy-stack lazy-gap-xs">
+ * <div class="lazy-row lazy-row-between">
+ * <span style="font-family: var(--lazy-font-sans); font-size: 0.85rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-muted-raw));">Faturamento Mensal</span>
+ * <span class="lazy-status-success" style="padding: 2px 6px; border-radius: var(--lazy-radius-sm); font-size: 0.75rem; font-weight: var(--lazy-weight-bold);">+12.4%</span>
+ * </div>
+ * <h2 style="margin: var(--lazy-space-xs) 0 0 0; font-family: var(--lazy-font-sans); color: hsl(var(--lazy-text-main-raw)); font-size: 1.75rem;">R$ 84.230,00</h2>
+ * </div>
+ */
+
+/**
+ * Contêiner isolado de superfície (Card). Base com cor de fundo oposta à viewport principal, bordas limpas e elevação de sombra do tipo 'raised' para destacar o bloco visualmente.
+ */
 .lazy-card {
   background-color: hsl(var(--lazy-card-raw));
   border: 1px solid hsl(var(--lazy-border-raw));

@@ -2,7 +2,7 @@
 @import "./tokens/variables.css";
 
 /*base*/
-@import "./base/reset.css";
+ @import "./base/reset.css";
 
 /*layouts*/
 @import "./layouts/structure.css";
@@ -14,3 +14,4 @@
 @import "./components/cards.css";
 @import "./components/forms.css";
 @import "./components/buttons.css";
+@import "./components/lists.css";

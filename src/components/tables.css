@@ -1,3 +1,41 @@
+/**
+ * [DESCRIPTION]
+ * Componentes de Tabelas Estruturadas do Lazy CSS. 
+ * Fornece estilização nativa, limpa e de alta densidade para listagem de dados, 
+ * relatórios e painéis gerenciais. Inclui suporte a cabeçalhos otimizados, 
+ * alinhamento ergonômico, efeito zebra alternado e destaque visual de linha (hover).
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Tabela de Dados Administrativa Padrão
+ * [SANDBOX_ELEMENT_HTML]
+ * <table class="lazy-table">
+ * <thead>
+ * <tr>
+ * <th>ID</th>
+ * <th>Nome do Cliente</th>
+ * <th>Status</th>
+ * </tr>
+ * </thead>
+ * <tbody>
+ * <tr>
+ * <td>#1001</td>
+ * <td>Ana Silva</td>
+ * <td>Ativo</td>
+ * </tr>
+ * <tr>
+ * <td>#1002</td>
+ * <td>Carlos Souza</td>
+ * <td>Pendente</td>
+ * </tr>
+ * </tbody>
+ * </table>
+ */
+
+/**
+ * Componente de tabela principal. Ocupa toda a largura disponível, herda o fundo de cards e força o arredondamento padrão do sistema nas extremidades.
+ */
 .lazy-table {
   width: 100%;
   text-align: left;
@@ -6,7 +44,7 @@
   overflow: hidden;
 }
 
-/* Cabeçalho da Tabela */
+/* Cabeçalho da Tabela - Estilização nativa interna aplicada via herança */
 .lazy-table th {
   background-color: hsl(var(--lazy-bg-raw));
   color: hsl(var(--lazy-text-muted-raw));
@@ -18,7 +56,7 @@
   border-bottom: 1px solid hsl(var(--lazy-border-raw));
 }
 
-/* Células de Dados */
+/* Células de Dados - Alinhamento e espaçamento fluido para garantir legibilidade de registros */
 .lazy-table td {
   padding: var(--lazy-space-sm) var(--lazy-space-md);
   border-bottom: 1px solid hsl(var(--lazy-border-raw));
@@ -27,12 +65,12 @@
   vertical-align: middle;
 }
 
-/* Efeito de linhas alternadas (Zebra Stripe) para alta densidade */
+/* Efeito de linhas alternadas (Zebra Stripe) para alta densidade de dados */
 .lazy-table tbody tr:nth-child(even) {
   background-color: hsl(var(--lazy-bg-raw) / 0.4);
 }
 
-/* Efeito de destaque ao passar o mouse na linha */
+/* Efeito de destaque ao passar o mouse na linha (Row Hover Feedback) */
 .lazy-table tbody tr:hover {
   background-color: hsl(var(--lazy-bg-raw) / 0.8);
 }

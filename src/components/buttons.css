@@ -1,4 +1,33 @@
-/* Botão Base/Neutro */
+/**
+ * [DESCRIPTION]
+ * Componentes de Botões e Elementos de Ação do Lazy CSS.
+ * Fornece a fundação interativa para gatilhos, submissões de formulários e navegação.
+ * Utiliza modificadores de filtro nativo (brightness) para gerenciar estados de hover 
+ * e clique de forma agnóstica a cores, reduzindo drasticamente a verbosidade do código.
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Grupo de Ações Primária e Secundária (Inline Row)
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-row lazy-gap-xs">
+ * <button type="button" class="lazy-btn">Cancelar</button>
+ * <button type="submit" class="lazy-btn lazy-btn-primary">Confirmar Registro</button>
+ * </div>
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Botão Composto com Estado Cromático Destrutivo
+ * [SANDBOX_ELEMENT_HTML]
+ * <button type="button" class="lazy-btn lazy-status-danger" style="border-radius: var(--lazy-radius-md);">
+ * Excluir Conta
+ * </button>
+ */
+
+/**
+ * Assinatura base indestrutível para elementos interativos. Fornece alinhamento flexível interno (inline-flex), tipografia integrada, padding fluido médio, proteção contra quebra de linha (nowrap) e transições suaves de estado.
+ */
 .lazy-btn {
   display: inline-flex;
   align-items: center;
@@ -12,16 +41,19 @@
   transition: filter 0.2s ease, box-shadow 0.2s ease;
   user-select: none;
   white-space: nowrap;
+  cursor: pointer;
 }
 
-/* Variante Principal (Primary Action) */
+/**
+ * Modificador de variante para ação primária. Aplica o token de cor institucional principal do sistema como plano de fundo e adiciona um anel sutil de elevação via sombra projetada.
+ */
 .lazy-btn-primary {
   background-color: hsl(var(--lazy-primary-raw));
   color: hsl(var(--lazy-card-raw));
   box-shadow: 0 2px 4px hsl(var(--lazy-primary-raw) / 0.15);
 }
 
-/* Modificação de Estados (Hover/Active) via Filtros Nativos */
+/* Modificação de Estados (Hover/Active) via Filtros Nativos - Aplicado globalmente à assinatura base */
 .lazy-btn:hover {
   filter: brightness(0.92);
 }
@@ -30,7 +62,7 @@
   filter: brightness(0.85);
 }
 
-/* Estado Desabilitado */
+/* Estado Desabilitado - Blindagem visual e bloqueio de comportamento para travar interações espúrias */
 .lazy-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;

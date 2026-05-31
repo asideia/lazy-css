@@ -1,4 +1,40 @@
-/* Campo de Entrada Padrão */
+/**
+ * [DESCRIPTION]
+ * Componentes e Utilitários de Formulários do Lazy CSS.
+ * Fornece controles de entrada de dados (inputs, textareas) com comportamento fluido,
+ * tipografia integrada aos tokens do sistema, placeholders atenuados e estados de foco 
+ * acessíveis com feedback visual suave por transição de CSS.
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Grupo de Campo de Entrada Padrão (Vertical Stack)
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-stack lazy-gap-xs">
+ * <label style="font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));">E-mail Corporativo</label>
+ * <input type="email" class="lazy-field" placeholder="exemplo@empresa.com">
+ * </div>
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Formulário em Linha Composto (Row Layout)
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-row lazy-gap-sm">
+ * <div class="lazy-fill lazy-stack lazy-gap-xs">
+ * <label style="font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));">Primeiro Nome</label>
+ * <input type="text" class="lazy-field" placeholder="John">
+ * </div>
+ * <div class="lazy-fill lazy-stack lazy-gap-xs">
+ * <label style="font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));">Sobrenome</label>
+ * <input type="text" class="lazy-field" placeholder="Doe">
+ * </div>
+ * </div>
+ */
+
+/**
+ * Campo de entrada de dados genérico. Aplica largura total, padding baseado nos tokens de espaçamento fluido, fundo de card para contraste e cantos arredondados padrão. Possui animação de transição nativa para estados de foco.
+ */
 .lazy-field {
   width: 100%;
   padding: var(--lazy-space-sm) var(--lazy-space-md);
@@ -10,14 +46,15 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Placeholder discreto */
+/* Placeholder discreto - Estilização atenuada para indicação de dados */
 .lazy-field::placeholder {
   color: hsl(var(--lazy-text-muted-raw));
   opacity: 0.7;
 }
 
-/* Estado de Foco (Focus) Seguro e Elegante */
+/* Estado de Foco (Focus) Seguro e Elegante - Feedback de acessibilidade usando anel de destaque suave */
 .lazy-field:focus {
   border-color: hsl(var(--lazy-primary-raw));
   box-shadow: 0 0 0 3px hsl(var(--lazy-primary-raw) / 0.15);
+  outline: none; /* Remove o outline nativo do browser para manter a consistência do design token */
 }

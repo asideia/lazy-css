@@ -1,17 +1,42 @@
-/* ==========================================================================
-   ⚡ LAZY CSS - MICROLAYOUTS & ATOMIC FLOWS (src/layouts/structure.css)
-   ========================================================================== */
+/**
+ * [DESCRIPTION]
+ * Sistema de Microlayouts e Fluxos Atômicos do Lazy CSS. Controle indestrutível de alinhamento 
+ * espacial baseado em CSS Flexbox responsivo. Fornece contêineres de empilhamento vertical, 
+ * alinhamento horizontal com quebra nativa para mobile (wrap) e modificadores de densidade (gaps).
+ */
 
-/* ------------------------------------------------------------------------
-   1. EMPILHADOR VERTICAL (Stack Layout)
-   Alinha todos os elementos filhos em uma única coluna. Ideal para organizar
-   blocos lógicos, seções e empilhar elementos de formulários.
-   ------------------------------------------------------------------------ */
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Layout de Fluxo Vertical (Stack) com Inputs
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-stack lazy-gap-sm">
+ * <label class="lazy-text-main" style="font-weight: var(--lazy-weight-medium);">Nome do Usuário</label>
+ * <input type="text" class="lazy-field" placeholder="Digite o nome completo...">
+ * </div>
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Barra de Ações Alinhada (Row Between)
+ * [SANDBOX_ELEMENT_HTML]
+ * <div class="lazy-row lazy-row-between">
+ * <div>
+ * <h3 style="margin: 0; color: hsl(var(--lazy-text-main-raw));">Listagem de Clientes</h3>
+ * </div>
+ * <div class="lazy-row lazy-gap-xs">
+ * <button type="button" class="lazy-btn">Filtrar</button>
+ * <button type="button" class="lazy-btn lazy-btn-primary">Exportar</button>
+ * </div>
+ * </div>
+ */
+
+/**
+ * Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna e aplica o espaçamento fluido padrão automaticamente.
+ */
 .lazy-stack {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* Blindagem: impede que a stack estoure verticalmente ou horizontalmente */
   box-sizing: border-box;
   min-width: 0;
   min-height: 0;
@@ -21,66 +46,77 @@
 /* Shielding: Reset de margens para garantir integridade do gap */
 .lazy-stack > *, 
 .lazy-row > * {
-  margin: 0; /* Neutraliza margens herdadas para não interferir no space-between */
+  margin: 0;
   box-sizing: border-box;
-  /* Blindagem: Impede que o item seja esmagado por vizinhos largos ou estoure o pai */
   min-width: 0;
   min-height: 0;
   flex-shrink: 0; 
   max-width: 100%;
 }
 
-/* ------------------------------------------------------------------------
-   2. ALINHADOR HORIZONTAL (Row Layout)
-   Posiciona os elementos lado a lado. Possui quebra automática ativa (wrap)
-   que força o empilhamento em telas pequenas de forma natural.
-   ------------------------------------------------------------------------ */
+/**
+ * Alinhador horizontal baseado em Flexbox. Posiciona os elementos lado a lado com quebra automática (wrap) ativada para telas pequenas. Centraliza itens verticalmente.
+ */
 .lazy-row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  /* Garante harmonia visual entre componentes adjacentes de alturas distintas */
   align-items: center;
   justify-content: flex-start;
-  /* Blindagem: isolamento de layout para aninhamento profundo */
   box-sizing: border-box;
   min-width: 0;
   gap: var(--lazy-space-md);
 }
 
-/* ------------------------------------------------------------------------
-   3. VARIAÇÕES DE ALINHAMENTO HORIZONTAL (Justify Content Modifiers)
-   ------------------------------------------------------------------------ */
-
-/* Distribui os elementos uniformemente, empurrando o último para a extremidade */
+/**
+ * Modificador para .lazy-row. Distribui os elementos uniformemente ao longo do eixo horizontal, empurrando o primeiro e o último para as extremidades opostas.
+ */
 .lazy-row-between {
   justify-content: space-between;
 }
 
-/* Centraliza os elementos no eixo horizontal */
+/**
+ * Modificador para .lazy-row. Centraliza rigidamente todos os elementos filhos no eixo horizontal.
+ */
 .lazy-row-center {
   justify-content: center;
 }
 
-/* Alinha os elementos ao final do eixo horizontal (direita) */
+/**
+ * Modificador para .lazy-row. Alinha todos os elementos filhos ao final do eixo horizontal (alinhamento à direita).
+ */
 .lazy-row-end {
   justify-content: flex-end;
 }
 
-/* ------------------------------------------------------------------------
-   4. MODIFICADORES DE ESPAÇAMENTO INTERNO (Gap Overrides)
-   Permitem que a IA altere a densidade do fluxo de acordo com a necessidade.
-   ------------------------------------------------------------------------ */
+/**
+ * Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala extra-pequena (4px a 8px).
+ */
 .lazy-gap-xs { gap: var(--lazy-space-xs); }
+
+/**
+ * Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala pequena (8px a 12px).
+ */
 .lazy-gap-sm { gap: var(--lazy-space-sm); }
+
+/**
+ * Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala média padrão (16px a 24px).
+ */
 .lazy-gap-md { gap: var(--lazy-space-md); }
+
+/**
+ * Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala grande (24px a 40px).
+ */
 .lazy-gap-lg { gap: var(--lazy-space-lg); }
+
+/**
+ * Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala extra-grande (32px a 64px).
+ */
 .lazy-gap-xl { gap: var(--lazy-space-xl); }
 
-/* ------------------------------------------------------------------------
-   5. UTILITÁRIOS DE EXPANSÃO (Flex Grow)
-   Força um elemento a ocupar todo o espaço disponível no layout pai.
-   ------------------------------------------------------------------------ */
+/**
+ * Utilitário de expansão fluida (Flex Grow). Força o elemento filho a inflar e ocupar todo o espaço horizontal ou vertical restante disponível no contêiner pai.
+ */
 .lazy-fill {
   flex-grow: 1;
   flex-shrink: 1;

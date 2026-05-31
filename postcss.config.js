@@ -8,7 +8,7 @@ module.exports = {
     
     // 3. Limpa os espaços, deleta comentários e minifica o arquivo final
     require('cssnano')({
-      preset: 'default',
+      preset: ['default', { discardComments: { removeAll: true } }],
     }),
   ],
 };

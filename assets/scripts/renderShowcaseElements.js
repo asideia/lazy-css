@@ -5,7 +5,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    const JSON_PATH = 'assets/data/lazycss.spec.json';
+    const JSON_PATH = 'dist/lazycss.spec.json';
     const container = document.getElementById('showcase-container');
 
     if (!container) {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = `
                 <div style="padding: 2rem; border: 1px solid hsl(0 75% 55% / 0.2); background: hsl(0 75% 55% / 0.05); border-radius: 8px;">
                     <p style="color: hsl(0 75% 55%); font-weight: 500; margin: 0;">❌ Erro ao carregar os dados da documentação.</p>
-                    <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0; color: #666;">Certifique-se de que o arquivo assets/data/lazycss.spec.json existe e está bem formatado.</p>
+                    <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0; color: #666;">Certifique-se de que o arquivo dist/lazycss.spec.json existe e está bem formatado.</p>
                 </div>
             `;
         });
@@ -48,8 +48,8 @@ function renderShowcase(categories, targetContainer) {
         // 2. Cabeçalho da Categoria
         section.innerHTML = `
             <div style="margin-bottom: 2rem; border-bottom: 2px solid hsl(210 20% 90%); padding-bottom: 1rem;">
-                <h2 style="font-size: 1.8rem; color: #1a202c; margin: 0 0 0.5rem 0;">${cat.category}</h2>
-                <p style="color: #4a5568; margin: 0; font-size: 1.1rem;">${cat.description}</p>
+                <h2 style="font-size: 1.8rem; color: #1a202c; margin: 0 0 0.5rem 0; text-transform: capitalize;">${cat.category}: ${cat.id}</h2>
+                <p style="color: #4a5568; margin: 0; font-size: 1.1rem; line-height: 1.6;">${cat.description}</p>
             </div>
         `;
 
@@ -66,9 +66,9 @@ function renderShowcase(categories, targetContainer) {
             table.innerHTML = `
                 <thead>
                     <tr style="background: #f7fafc; text-align: left; border-bottom: 1px solid #edf2f7;">
-                        <th style="padding: 1rem;">Seletor / Classe</th>
-                        <th style="padding: 1rem;">Contexto Semântico</th>
-                        <th style="padding: 1rem;">Regra de Aplicação e Comportamento</th>
+                        <th style="padding: 1rem; width: 25%;">Signature / Selector</th>
+                        <th style="padding: 1rem; width: 20%;">Parent Context</th>
+                        <th style="padding: 1rem; width: 55%;">Strict Architectural Rule & Expected Behavior</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,11 +80,11 @@ function renderShowcase(categories, targetContainer) {
                 const tr = document.createElement('tr');
                 tr.style.borderBottom = '1px solid #edf2f7';
                 
-                // Define a cor da etiqueta baseada no contexto semântico
+                // Define a cor da etiqueta baseada no contexto semântico real do arquivo (fileId)
                 const badgeStyle = getContextBadgeStyle(spec.context);
 
                 tr.innerHTML = `
-                    <td style="padding: 1rem; font-family: monospace; font-size: 0.95rem; color: #c53030; font-weight: bold;">${spec.class}</td>
+                    <td style="padding: 1rem; font-family: monospace; font-size: 0.95rem; color: #c53030; font-weight: bold; white-space: nowrap;">\`${spec.signature}\`</td>
                     <td style="padding: 1rem;"><span style="${badgeStyle}">${spec.context}</span></td>
                     <td style="padding: 1rem; color: #4a5568; line-height: 1.5; font-size: 0.95rem;">${spec.description}</td>
                 `;
@@ -103,7 +103,7 @@ function renderShowcase(categories, targetContainer) {
             const grid = document.createElement('div');
             grid.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;';
 
-            cat.sandbox_elements.forEach((element, index) => {
+            cat.sandbox_elements.forEach((element) => {
                 const card = document.createElement('div');
                 card.style.cssText = 'border: 1px solid #e2e8f0; background: #fff; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);';
 
@@ -113,29 +113,29 @@ function renderShowcase(categories, targetContainer) {
                 cardHeader.innerHTML = `
                     <span style="font-weight: 500; font-size: 0.9rem; color: #4a5568;">${element.name}</span>
                     <div style="display: flex; gap: 0.5rem;">
-                        <button class="lazy-toggle-code-btn" style="padding: 4px 8px; font-size: 0.8rem; cursor: pointer; border: 1px solid #cbd5e0; background: #fff; border-radius: 4px; color: #4a5568; transition: all 0.2s;">
+                        <button class="lazy-toggle-code-btn" style="padding: 4px 8px; font-size: 0.8rem; cursor: pointer; border: 1px solid #cbd5e0; background: #fff; border-radius: 4px; color: #4a5568; transition: all 0.2s; font-weight: 500;">
                             &lt;/&gt; Ver Código
                         </button>
-                        <button class="lazy-copy-btn" style="padding: 4px 8px; font-size: 0.8rem; cursor: pointer; border: 1px solid #cbd5e0; background: #fff; border-radius: 4px; color: #4a5568; transition: all 0.2s;" data-html="${encodeURIComponent(element.html)}">📑 Copiar</button>
+                        <button class="lazy-copy-btn" style="padding: 4px 8px; font-size: 0.8rem; cursor: pointer; border: 1px solid #cbd5e0; background: #fff; border-radius: 4px; color: #4a5568; transition: all 0.2s; font-weight: 500;" data-html="${encodeURIComponent(element.html)}">📑 Copiar</button>
                     </div>
                 `;
 
                 // Preview em Tempo Real (Injeta o código gerado)
                 const previewArea = document.createElement('div');
-                previewArea.style.cssText = 'padding: 1.5rem; flex-grow: 1; background: var(--lazy-bg, #f8fafc);';
+
+                previewArea.classList.add('lazy-showcase-preview');
+                previewArea.style.cssText = 'padding: 1.5rem; flex-grow: 1; background: #f8fafc; position: relative;';
                 previewArea.innerHTML = element.html;
 
-                // Bloco de Código Oculto por Padrão (Estilo idêntico ao Playground)
+                // Bloco de Código Oculto por Padrão
                 const codeArea = document.createElement('div');
                 codeArea.style.cssText = 'display: none; border-top: 1px solid #e2e8f0;';
                 
                 const pre = document.createElement('pre');
-                pre.style.cssText = 'margin: 0; background: #0f172a; padding: 1rem; overflow-x: auto;';
+                pre.style.cssText = 'margin: 0; background: #0f172a; padding: 1rem; overflow-x: auto; border-radius: 0;';
                 
                 const code = document.createElement('code');
-                code.style.cssText = 'font-family: "Courier New", Courier, monospace; font-size: 0.85rem; color: #38bdf8; white-space: pre;';
-                
-                // Trata e escapa o HTML puro para exibição em formato de texto seguro
+                code.style.cssText = 'font-family: monospace; font-size: 0.85rem; color: #38bdf8; white-space: pre;';
                 code.textContent = element.html.trim();
                 
                 pre.appendChild(code);
@@ -158,7 +158,7 @@ function renderShowcase(categories, targetContainer) {
 
                 card.appendChild(cardHeader);
                 card.appendChild(previewArea);
-                card.appendChild(codeArea); // Injeta o bloco expansível no card
+                card.appendChild(codeArea);
                 grid.appendChild(card);
             });
 
@@ -178,20 +178,20 @@ function renderShowcase(categories, targetContainer) {
 function setupCopyBehavior() {
     document.querySelectorAll('.lazy-copy-btn').forEach(button => {
         button.addEventListener('click', (e) => {
-            const rawHtml = decodeURIComponent(e.target.getAttribute('data-html'));
+            const rawHtml = decodeURIComponent(e.currentTarget.getAttribute('data-html'));
             
             navigator.clipboard.writeText(rawHtml).then(() => {
-                const originalText = e.target.innerText;
-                e.target.innerText = '✓ Copiado!';
-                e.target.style.background = '#edf2f7';
-                e.target.style.color = '#2b6cb0';
-                e.target.style.borderColor = '#2b6cb0';
+                const originalText = e.currentTarget.innerText;
+                e.currentTarget.innerText = '✓ Copiado!';
+                e.currentTarget.style.background = '#edf2f7';
+                e.currentTarget.style.color = '#2b6cb0';
+                e.currentTarget.style.borderColor = '#2b6cb0';
 
                 setTimeout(() => {
-                    e.target.innerText = originalText;
-                    e.target.style.background = '#fff';
-                    e.target.style.color = '#4a5568';
-                    e.target.style.borderColor = '#cbd5e0';
+                    e.currentTarget.innerText = originalText;
+                    e.currentTarget.style.background = '#fff';
+                    e.currentTarget.style.color = '#4a5568';
+                    e.currentTarget.style.borderColor = '#cbd5e0';
                 }, 2000);
             }).catch(err => {
                 console.error('Erro ao copiar código: ', err);
@@ -201,20 +201,24 @@ function setupCopyBehavior() {
 }
 
 /**
- * Retorna os estilos CSS inline de acordo com o contexto lego da IA
+ * Retorna os estilos CSS inline de acordo com o contexto arquitetural (fileId)
  */
 function getContextBadgeStyle(context) {
-    const base = 'padding: 4px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase;';
+    const base = 'padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; font-family: monospace;';
     switch (context) {
-        case 'Layout':
-            return `${base} background-color: #ebf8ff; color: #2b6cb0;`;
-        case 'Component':
-            return `${base} background-color: #faf5ff; color: #6b46c1;`;
-        case 'Typography':
-            return `${base} background-color: #f0fff4; color: #2f855a;`;
-        case 'Utility':
-            return `${base} background-color: #fffaf0; color: #dd6b20;`;
+        case 'variables':
+            return `${base} background-color: #f0fff4; color: #2f855a; border: 1px solid #c6f6d5;`;
+        case 'structure':
+        case 'page-grid':
+            return `${base} background-color: #ebf8ff; color: #2b6cb0; border: 1px solid #bee3f8;`;
+        case 'buttons':
+        case 'forms':
+        case 'cards':
+        case 'tables':
+            return `${base} background-color: #faf5ff; color: #6b46c1; border: 1px solid #e9d8fd;`;
+        case 'status':
+            return `${base} background-color: #fffaf0; color: #dd6b20; border: 1px solid #feebc8;`;
         default:
-            return `${base} background-color: #edf2f7; color: #4a5568;`;
+            return `${base} background-color: #edf2f7; color: #4a5568; border: 1px solid #e2e8f0;`;
     }
 }
