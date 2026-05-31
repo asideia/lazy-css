@@ -9,6 +9,7 @@
 
 4. **Inline Status and Badges:** Whenever placing metadata tags, counters, or badges (e.g., "7 Falhas", "100% OK") next to a section title inside a card, you MUST wrap them together using a `<div class="lazy-card-header">` to guarantee perfect flexbox horizontal alignment. Never let them float or sit loosely.
 5. **Form Layout TIGHT constraints:** Form actions (buttons) should be adjacent to their input rows. Wrap search filters and their buttons in structured layouts to avoid vertical height bloating.
+6. **Strict Flow Boundaries (No Overlaps):** You are strictly forbidden from leaving inputs, buttons, or labels floating freely. All form elements and custom sections must maintain their standard block/flex document flow. Never use CSS properties that cause elements to break out of their parent container's physical height boundaries.
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: BASE
@@ -285,6 +286,7 @@ The AI can ONLY use the following class signatures for this category. Do not hal
 | `.lazy-dashboard-content` | `page-grid` | Área de conteúdo principal do dashboard. Ocupa todo o espaço restante e possui rolagem independente para travar o scrollbar na raiz do body. |
 | `.lazy-grid-cards` | `page-grid` | Grid responsivo baseado em CSS Grid. Distribui cartões de forma fluida sem quebrar o layout, quebrando linhas apenas se o espaço interno cair abaixo de 280px. |
 | `.lazy-container` | `page-grid` | Contêiner de largura máxima limitada para áreas institucionais ou leitura de relatórios lineares longos. |
+| `.lazy-card` | `page-grid` | Garante isolamento total de fluxo vertical. Nenhum elemento interno (mesmo com floats ou margens colapsadas) consegue vazar deste escopo. |
 
 ### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
 Replicate these structural combinations precisely when generating user interfaces:

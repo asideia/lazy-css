@@ -97,3 +97,13 @@
   padding-left: var(--lazy-space-md);
   padding-right: var(--lazy-space-md);
 }
+
+/**
+ * Garante isolamento total de fluxo vertical. 
+ * Nenhum elemento interno (mesmo com floats ou margens colapsadas) consegue vazar deste escopo.
+ */
+.lazy-card, 
+.lazy-stack, 
+.lazy-row {
+  display: flow-root; /* Cria um bloco de contenção estrito no DOM */
+}

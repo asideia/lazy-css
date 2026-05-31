@@ -203,6 +203,11 @@
         "signature": ".lazy-container",
         "context": "page-grid",
         "description": "Contêiner de largura máxima limitada para áreas institucionais ou leitura de relatórios lineares longos."
+      },
+      {
+        "signature": ".lazy-card",
+        "context": "page-grid",
+        "description": "Garante isolamento total de fluxo vertical.\nNenhum elemento interno (mesmo com floats ou margens colapsadas) consegue vazar deste escopo."
       }
     ],
     "sandbox_elements": [
