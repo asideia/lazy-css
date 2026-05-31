@@ -41,6 +41,7 @@
   min-width: 0;
   min-height: 0;
   gap: var(--lazy-space-md);
+  display: flow-root; /* Cria um bloco de contenção estrito no DOM */
 }
 
 /* Shielding: Reset de margens para garantir integridade do gap */
@@ -66,6 +67,7 @@
   box-sizing: border-box;
   min-width: 0;
   gap: var(--lazy-space-md);
+  display: flow-root; /* Cria um bloco de contenção estrito no DOM */
 }
 
 /**

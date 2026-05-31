@@ -38,6 +38,7 @@
   border-radius: var(--lazy-radius-lg);
   padding: var(--lazy-space-md);
   box-shadow: var(--lazy-shadow-raised);
+  display: flow-root; /* Cria um bloco de contenção estrito no DOM */
 }
 
 /**
