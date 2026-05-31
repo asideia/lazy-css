@@ -7,6 +7,8 @@
 2. **No Arbitrary Inline Colors/Sizing:** Do not inject custom raw hex values (`#ff0000`) or static layout widths (`width: 450px`). You must use the CSS custom variables native to the system.
 3. **Mandatory Flow Wrapping:** Every atomic component or input field MUST be encapsulated inside a valid layout container: `.lazy-stack` for vertical stack flows, and `.lazy-row` for horizontal flows.
 
+4. **Inline Status and Badges:** Whenever placing metadata tags, counters, or badges (e.g., "7 Falhas", "100% OK") next to a section title inside a card, you MUST wrap them together using a `<div class="lazy-card-header">` to guarantee perfect flexbox horizontal alignment. Never let them float or sit loosely.
+5. **Form Layout TIGHT constraints:** Form actions (buttons) should be adjacent to their input rows. Wrap search filters and their buttons in structured layouts to avoid vertical height bloating.
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: BASE
@@ -82,6 +84,7 @@ The AI can ONLY use the following class signatures for this category. Do not hal
 | Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
 | :--- | :--- | :--- |
 | `.lazy-card` | `cards` | Contêiner isolado de superfície (Card). Base com cor de fundo oposta à viewport principal, bordas limpas e elevação de sombra do tipo 'raised' para destacar o bloco visualmente. |
+| `.lazy-card-header` | `cards` | Alinhamento ergonômico para cabeçalhos de cards que possuem títulos e badges/status na mesma linha. |
 
 ### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
 Replicate these structural combinations precisely when generating user interfaces:

@@ -33,6 +33,8 @@ function buildMarkdownBlueprint() {
         md += `1. **No Tailwind/Utility Class Inventions:** You are strictly forbidden from guessing or inventing utility classes (e.g., \`flex\`, \`pt-4\`, \`bg-blue-500\`). If a class is not explicitly declared in this document, it does not exist.\n`;
         md += `2. **No Arbitrary Inline Colors/Sizing:** Do not inject custom raw hex values (\`#ff0000\`) or static layout widths (\`width: 450px\`). You must use the CSS custom variables native to the system.\n`;
         md += `3. **Mandatory Flow Wrapping:** Every atomic component or input field MUST be encapsulated inside a valid layout container: \`.lazy-stack\` for vertical stack flows, and \`.lazy-row\` for horizontal flows.\n\n`;
+        md += `4. **Inline Status and Badges:** Whenever placing metadata tags, counters, or badges (e.g., "7 Falhas", "100% OK") next to a section title inside a card, you MUST wrap them together using a \`<div class="lazy-card-header">\` to guarantee perfect flexbox horizontal alignment. Never let them float or sit loosely.\n`;
+        md += `5. **Form Layout TIGHT constraints:** Form actions (buttons) should be adjacent to their input rows. Wrap search filters and their buttons in structured layouts to avoid vertical height bloating.\n`;
         
         md += `---\n\n`;
 

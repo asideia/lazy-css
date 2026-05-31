@@ -39,3 +39,14 @@
   padding: var(--lazy-space-md);
   box-shadow: var(--lazy-shadow-raised);
 }
+
+/**
+ * Alinhamento ergonômico para cabeçalhos de cards que possuem títulos e badges/status na mesma linha.
+ */
+.lazy-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--lazy-space-sm);
+  width: 100%;
+}

@@ -47,6 +47,11 @@
         "signature": ".lazy-card",
         "context": "cards",
         "description": "Contêiner isolado de superfície (Card). Base com cor de fundo oposta à viewport principal, bordas limpas e elevação de sombra do tipo 'raised' para destacar o bloco visualmente."
+      },
+      {
+        "signature": ".lazy-card-header",
+        "context": "cards",
+        "description": "Alinhamento ergonômico para cabeçalhos de cards que possuem títulos e badges/status na mesma linha."
       }
     ],
     "sandbox_elements": [
