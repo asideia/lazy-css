@@ -27,15 +27,18 @@ jobs:
       - name: 📦 Install ecosystem dependencies
         run: npm ci
 
-      # 4. Compile the core CSS modules into production distribution artifacts
+      # 4. Compile core CSS modules and build AI Specs/Blueprints
       - name: ⚡ Compile Lazy CSS artifacts
         run: npm run build
 
-      # 5. Create an automated GitHub Release and attach the production asset
+      # 5. Create an automated GitHub Release and attach all updated production assets
       - name: 🏆 Generate automated GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/lazycss.min.css
+          files: |
+            dist/lazycss.min.css
+            dist/lazycss.spec.json
+            dist/lazycss-blueprint.md
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
