@@ -292,7 +292,6 @@ The AI can ONLY use the following class signatures for this category. Do not hal
 | `.lazy-dashboard-content` | `page-grid` | Área de conteúdo principal do dashboard. Ocupa todo o espaço restante e possui rolagem independente para travar o scrollbar na raiz do body. |
 | `.lazy-grid-cards` | `page-grid` | Grid responsivo baseado em CSS Grid. Distribui cartões de forma fluida sem quebrar o layout, quebrando linhas apenas se o espaço interno cair abaixo de 280px. |
 | `.lazy-container` | `page-grid` | Contêiner de largura máxima limitada para áreas institucionais ou leitura de relatórios lineares longos. |
-| `.lazy-card` | `page-grid` | Garante isolamento total de fluxo vertical. Nenhum elemento interno (mesmo com floats ou margens colapsadas) consegue vazar deste escopo. |
 
 ### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
 Replicate these structural combinations precisely when generating user interfaces:
