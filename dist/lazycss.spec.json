@@ -234,57 +234,27 @@
       {
         "signature": ".lazy-stack",
         "context": "structure",
-        "description": "Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna e aplica o espaçamento fluido padrão automaticamente."
+        "description": "Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna.\nO gap padrão é estabelecido aqui e pode ser sobrescrito pelos modificadores de densidade."
       },
       {
         "signature": ".lazy-row",
         "context": "structure",
-        "description": "Alinhador horizontal baseado em Flexbox. Posiciona os elementos lado a lado com quebra automática (wrap) ativada para telas pequenas. Centraliza itens verticalmente."
+        "description": "Alinhador horizontal baseado em Flexbox. Posiciona os elementos lado a lado com quebra automática (wrap)\nativada para telas pequenas. Centraliza itens verticalmente por padrão ergonômico."
       },
       {
         "signature": ".lazy-row-between",
         "context": "structure",
-        "description": "Modificador para .lazy-row. Distribui os elementos uniformemente ao longo do eixo horizontal, empurrando o primeiro e o último para as extremidades opostas."
-      },
-      {
-        "signature": ".lazy-row-center",
-        "context": "structure",
-        "description": "Modificador para .lazy-row. Centraliza rigidamente todos os elementos filhos no eixo horizontal."
-      },
-      {
-        "signature": ".lazy-row-end",
-        "context": "structure",
-        "description": "Modificador para .lazy-row. Alinha todos os elementos filhos ao final do eixo horizontal (alinhamento à direita)."
+        "description": "Modificadores de Alinhamento para o eixo principal da .lazy-row"
       },
       {
         "signature": ".lazy-gap-xs",
         "context": "structure",
-        "description": "Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala extra-pequena (4px a 8px)."
-      },
-      {
-        "signature": ".lazy-gap-sm",
-        "context": "structure",
-        "description": "Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala pequena (8px a 12px)."
-      },
-      {
-        "signature": ".lazy-gap-md",
-        "context": "structure",
-        "description": "Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala média padrão (16px a 24px)."
-      },
-      {
-        "signature": ".lazy-gap-lg",
-        "context": "structure",
-        "description": "Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala grande (24px a 40px)."
-      },
-      {
-        "signature": ".lazy-gap-xl",
-        "context": "structure",
-        "description": "Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala extra-grande (32px a 64px)."
+        "description": "Modificadores de densidade do contêiner pai (Gaps Bidimensionais Explícitos).\nDeclaração em formato composto (row-gap column-gap) para garantir que navegadores\napliquem o respiro vertical idêntico ao horizontal em cenários de quebra de linha (wrap)."
       },
       {
         "signature": ".lazy-fill",
         "context": "structure",
-        "description": "Utilitário de expansão fluida (Flex Grow). Força o elemento filho a inflar e ocupar todo o espaço horizontal ou vertical restante disponível no contêiner pai."
+        "description": "Utilitário de expansão fluida (Flex Grow). Força o elemento filho a inflar e ocupar todo o espaço\nhorizontal ou vertical restante disponível no contêiner pai."
       }
     ],
     "sandbox_elements": [

@@ -31,93 +31,66 @@
  */
 
 /**
- * Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna e aplica o espaçamento fluido padrão automaticamente.
+ * Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna.
+ * O gap padrão é estabelecido aqui e pode ser sobrescrito pelos modificadores de densidade.
  */
 .lazy-stack {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   justify-content: flex-start;
   box-sizing: border-box;
   min-width: 0;
   min-height: 0;
   gap: var(--lazy-space-md);
-  display: flow-root; /* Cria um bloco de contenção estrito no DOM */
-}
-
-/* Shielding: Reset de margens para garantir integridade do gap */
-.lazy-stack > *, 
-.lazy-row > * {
-  margin: 0;
-  box-sizing: border-box;
-  min-width: 0;
-  min-height: 0;
-  flex-shrink: 0; 
-  max-width: 100%;
 }
 
 /**
- * Alinhador horizontal baseado em Flexbox. Posiciona os elementos lado a lado com quebra automática (wrap) ativada para telas pequenas. Centraliza itens verticalmente.
+ * Alinhador horizontal baseado em Flexbox. Posiciona os elementos lado a lado com quebra automática (wrap) 
+ * ativada para telas pequenas. Centraliza itens verticalmente por padrão ergonômico.
  */
 .lazy-row {
-  display: flex;
+  display: flex !important;
   flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-wrap: wrap; /* O coração da responsividade passiva e elástica */
+  align-items: center; 
   justify-content: flex-start;
   box-sizing: border-box;
   min-width: 0;
-  gap: var(--lazy-space-md);
-  display: flow-root; /* Cria um bloco de contenção estrito no DOM */
+  gap: var(--lazy-space-md); /* Aplica espaçamento horizontal E vertical nativo */
+}
+
+/* Shielding & Contenção Mecânica: Reset de margens para garantir integridade e simetria do gap */
+.lazy-stack > *, 
+.lazy-row > * {
+  margin: 0 !important; /* Elimina margens fantasmas que sabotam os cálculos de gap do navegador */
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 0;
+  flex-shrink: 1; /* Permite que os elementos encolham elasticamente antes de sofrerem o wrap */
+  max-width: 100%; /* Impede o vazamento físico para fora das bordas do contêiner pai */
 }
 
 /**
- * Modificador para .lazy-row. Distribui os elementos uniformemente ao longo do eixo horizontal, empurrando o primeiro e o último para as extremidades opostas.
+ * Modificadores de Alinhamento para o eixo principal da .lazy-row
  */
-.lazy-row-between {
-  justify-content: space-between;
-}
+.lazy-row-between { justify-content: space-between; }
+.lazy-row-center  { justify-content: center; }
+.lazy-row-end     { justify-content: flex-end; }
 
 /**
- * Modificador para .lazy-row. Centraliza rigidamente todos os elementos filhos no eixo horizontal.
+ * Modificadores de densidade do contêiner pai (Gaps Bidimensionais Explícitos).
+ * Declaração em formato composto (row-gap column-gap) para garantir que navegadores
+ * apliquem o respiro vertical idêntico ao horizontal em cenários de quebra de linha (wrap).
  */
-.lazy-row-center {
-  justify-content: center;
-}
+.lazy-gap-xs { gap: var(--lazy-space-xs) var(--lazy-space-xs); }
+.lazy-gap-sm { gap: var(--lazy-space-sm) var(--lazy-space-sm); }
+.lazy-gap-md { gap: var(--lazy-space-md) var(--lazy-space-md); }
+.lazy-gap-lg { gap: var(--lazy-space-lg) var(--lazy-space-lg); }
+.lazy-gap-xl { gap: var(--lazy-space-xl) var(--lazy-space-xl); }
 
 /**
- * Modificador para .lazy-row. Alinha todos os elementos filhos ao final do eixo horizontal (alinhamento à direita).
- */
-.lazy-row-end {
-  justify-content: flex-end;
-}
-
-/**
- * Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala extra-pequena (4px a 8px).
- */
-.lazy-gap-xs { gap: var(--lazy-space-xs); }
-
-/**
- * Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala pequena (8px a 12px).
- */
-.lazy-gap-sm { gap: var(--lazy-space-sm); }
-
-/**
- * Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala média padrão (16px a 24px).
- */
-.lazy-gap-md { gap: var(--lazy-space-md); }
-
-/**
- * Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala grande (24px a 40px).
- */
-.lazy-gap-lg { gap: var(--lazy-space-lg); }
-
-/**
- * Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala extra-grande (32px a 64px).
- */
-.lazy-gap-xl { gap: var(--lazy-space-xl); }
-
-/**
- * Utilitário de expansão fluida (Flex Grow). Força o elemento filho a inflar e ocupar todo o espaço horizontal ou vertical restante disponível no contêiner pai.
+ * Utilitário de expansão fluida (Flex Grow). Força o elemento filho a inflar e ocupar todo o espaço 
+ * horizontal ou vertical restante disponível no contêiner pai.
  */
 .lazy-fill {
   flex-grow: 1;

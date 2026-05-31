@@ -11,6 +11,7 @@
 5. **Form Layout TIGHT constraints:** Form actions (buttons) should be adjacent to their input rows. Wrap search filters and their buttons in structured layouts to avoid vertical height bloating.
 6. **Strict Flow Boundaries (No Overlaps):** You are strictly forbidden from leaving inputs, buttons, or labels floating freely. All form elements and custom sections must maintain their standard block/flex document flow. Never use CSS properties that cause elements to break out of their parent container's physical height boundaries.
 7. **Data Table Isolation (No Horizontal Bleeding):** Whenever generating tabular reports or grid listings using `.lazy-table`, you MUST strictly encapsulate the `<table>` element inside a `<div class="lazy-table-wrapper">`. This isolates the horizontal overflow scroll scope. Furthermore, any long cryptographic hash, hex token, or long unspaced text inside table cells must be wrapped with the `.lazy-text-break` utility class to enforce safe character wrapping.
+8. **Passive & Elastic Responsiveness (.lazy-row wrap):** Every horizontal container using `.lazy-row` must naturally support element wrapping. When designing multi-input filter rows or button toolbars, assume they will wrap on smaller screens. Never explicitly disable wrapping. The system relies on native CSS `gap` to maintain perfect, consistent vertical and horizontal spacing between elements after a wrap occurs.
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: BASE
@@ -334,16 +335,10 @@ The AI can ONLY use the following class signatures for this category. Do not hal
 
 | Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
 | :--- | :--- | :--- |
-| `.lazy-stack` | `structure` | Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna e aplica o espaçamento fluido padrão automaticamente. |
-| `.lazy-row` | `structure` | Alinhador horizontal baseado em Flexbox. Posiciona os elementos lado a lado com quebra automática (wrap) ativada para telas pequenas. Centraliza itens verticalmente. |
-| `.lazy-row-between` | `structure` | Modificador para .lazy-row. Distribui os elementos uniformemente ao longo do eixo horizontal, empurrando o primeiro e o último para as extremidades opostas. |
-| `.lazy-row-center` | `structure` | Modificador para .lazy-row. Centraliza rigidamente todos os elementos filhos no eixo horizontal. |
-| `.lazy-row-end` | `structure` | Modificador para .lazy-row. Alinha todos os elementos filhos ao final do eixo horizontal (alinhamento à direita). |
-| `.lazy-gap-xs` | `structure` | Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala extra-pequena (4px a 8px). |
-| `.lazy-gap-sm` | `structure` | Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala pequena (8px a 12px). |
-| `.lazy-gap-md` | `structure` | Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala média padrão (16px a 24px). |
-| `.lazy-gap-lg` | `structure` | Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala grande (24px a 40px). |
-| `.lazy-gap-xl` | `structure` | Modificador de densidade do contêiner pai. Altera o espaçamento interno (gap) para a escala extra-grande (32px a 64px). |
+| `.lazy-stack` | `structure` | Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna. O gap padrão é estabelecido aqui e pode ser sobrescrito pelos modificadores de densidade. |
+| `.lazy-row` | `structure` | Alinhador horizontal baseado em Flexbox. Posiciona os elementos lado a lado com quebra automática (wrap) ativada para telas pequenas. Centraliza itens verticalmente por padrão ergonômico. |
+| `.lazy-row-between` | `structure` | Modificadores de Alinhamento para o eixo principal da .lazy-row |
+| `.lazy-gap-xs` | `structure` | Modificadores de densidade do contêiner pai (Gaps Bidimensionais Explícitos). Declaração em formato composto (row-gap column-gap) para garantir que navegadores apliquem o respiro vertical idêntico ao horizontal em cenários de quebra de linha (wrap). |
 | `.lazy-fill` | `structure` | Utilitário de expansão fluida (Flex Grow). Força o elemento filho a inflar e ocupar todo o espaço horizontal ou vertical restante disponível no contêiner pai. |
 
 ### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
