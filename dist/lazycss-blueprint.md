@@ -192,6 +192,51 @@ Replicate these structural combinations precisely when generating user interface
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: COMPONENTS
+**Context Scope & Domain:** Componente de Barra de Navegação Adaptativa (Navbar) do Lazy CSS.
+Fornece uma estrutura de cabeçalho indestrutível com alinhamento flexível,
+suporte a identidade visual (brand), e um mecanismo de Menu Hambúrguer
+puramente declarativo em CSS (Zero JavaScript), utilizando um checkbox invisível
+para controlar o estado de abertura em dispositivos móveis.
+
+### 🔐 ALLOWED CLASS CONTRACTS & SELECTORS
+The AI can ONLY use the following class signatures for this category. Do not hallucinate variants.
+
+| Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
+| :--- | :--- | :--- |
+| `.lazy-navbar` | `navbar` | Estrutura principal da barra de navegação superior. Mantém o alinhamento elástico dos blocos internos e isolamento de profundidade em relação ao conteúdo da página. |
+| `.lazy-navbar-brand` | `navbar` | Estilização do logotipo ou nome da aplicação. Garante peso visual e neutralização de decorações de texto nativas de links. |
+| `.lazy-nav-menu` | `navbar` | Grupo de links de navegação. No ambiente desktop, organiza-se de forma horizontal através de espaçamentos baseados nos tokens do core. |
+| `.lazy-nav-menu` | `navbar` | Elementos de ancoragem contidos no menu. Fornece transição suave de cor para feedbacks de hover e demarcação de estado ativo. |
+| `.lazy-nav-checkbox` | `navbar` | Elementos controladores do Menu Hambúrguer Puro. Permanecem completamente ocultos em resoluções de desktop para não interferir no fluxo padrão. |
+| `.lazy-nav-btn` | `navbar` | Exibe o botão de alternância (hambúrguer) no fluxo móvel. |
+| `.lazy-nav-menu` | `navbar` | Transforma o menu horizontal em um painel vertical absoluto recolhido. Herda dinamicamente o fundo do card para consistência de cor. |
+| `.lazy-nav-checkbox` | `navbar` | Chaveador condicional de estado. Quando o checkbox invisível entra no estado ':checked' via clique na label, o menu adjacente muda seu display para flex. |
+
+### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
+Replicate these structural combinations precisely when generating user interfaces:
+
+#### Concept: Barra de Navegação Principal (Padrão Desktop)
+```html
+<header class="lazy-navbar">
+<a href="#" class="lazy-navbar-brand">LazyCSS</a>
+<input type="checkbox" id="nav-toggle" class="lazy-nav-checkbox">
+<label for="nav-toggle" class="lazy-nav-btn">☰</label>
+<nav class="lazy-nav-menu">
+<a href="#" class="active">Home</a>
+<a href="#">Componentes</a>
+<a href="#">Playground</a>
+</nav>
+</header>
+```
+
+#### Concept: Link de Navegação Individual (Nav Link)
+```html
+<a href="#" class="lazy-nav-menu a">Link de Exemplo</a>
+```
+
+---
+
+## 📦 SYSTEM ARCHITECTURE: COMPONENTS
 **Context Scope & Domain:** Utilitários de Estado e Status Cromáticos do Lazy CSS.
 Controla exclusivamente o comportamento semântico de cores (sucesso, alerta, perigo e informação).
 Desenvolvido sob a arquitetura de composição flexível (estilo LEGO): não possui paddings,
@@ -232,17 +277,17 @@ Replicate these structural combinations precisely when generating user interface
 ## 📦 SYSTEM ARCHITECTURE: COMPONENTS
 **Context Scope & Domain:** Componentes de Tabelas Estruturadas do Lazy CSS.
 Fornece estilização nativa, limpa e de alta densidade para listagem de dados,
-relatórios e painéis gerenciais. Inclui suporte a cabeçalhos otimizados,
-alinhamento ergonômico, efeito zebra alternado e destaque visual de linha (hover).
-Tratado para suportar grandes massas de dados sem estouro horizontal.
+relatórios e painéis gerenciais. Implementa o princípio de responsividade intrínseca,
+convertendo tabelas densas em blocos empilhados (cards) no mobile,
+utilizando atributos de dados sem quebrar a semântica original do HTML.
 
 ### 🔐 ALLOWED CLASS CONTRACTS & SELECTORS
 The AI can ONLY use the following class signatures for this category. Do not hallucinate variants.
 
 | Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
 | :--- | :--- | :--- |
-| `.lazy-table-wrapper` | `tables` | Wrapper de contenção mecânica. Obrigatoriamente envelopa a tag <table>. Garante o arredondamento perfeito do contêiner e isola o escopo de scroll horizontal em viewports menores ou massas de dados extremas. |
-| `.lazy-table` | `tables` | Componente de tabela principal. Ocupa toda a largura disponível e herda a tipografia. |
+| `.lazy-table-wrapper` | `tables` | Wrapper de contenção mecânica. Obrigatoriamente envelopa a tag <table>. Garante o arredondamento perfeito do contêiner e isola o escopo de scroll horizontal se o layout de tabela tradicional for forçado. |
+| `.lazy-table` | `tables` | Componente de tabela principal. Ocupa toda a largura disponível, herda a tipografia e gerencia as margens externas do bloco. |
 | `.lazy-text-break` | `tables` | Utilitário de segurança para quebra inteligente de strings massivas (Hashes, Tokens, URLs). Impede que sequências longas de caracteres sem espaço forcem o esticamento da célula. |
 
 ### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
@@ -261,14 +306,14 @@ Replicate these structural combinations precisely when generating user interface
 </thead>
 <tbody>
 <tr>
-<td>#1001</td>
-<td>Ana Silva</td>
-<td><code class="lazy-text-break">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>
+<td data-label="ID">#1001</td>
+<td data-label="Nome do Cliente">Ana Silva</td>
+<td data-label="Hash de Verificação"><code class="lazy-text-break">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>
 </tr>
 <tr>
-<td>#1002</td>
-<td>Carlos Souza</td>
-<td><code class="lazy-text-break">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>
+<td data-label="ID">#1002</td>
+<td data-label="Nome do Cliente">Carlos Souza</td>
+<td data-label="Hash de Verificação"><code class="lazy-text-break">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>
 </tr>
 </tbody>
 </table>

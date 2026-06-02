@@ -7,7 +7,7 @@
 ---
 
 ## 1. Contexto (Context)
-A análise de telemetria visual na página `showcase.html` (evidenciada nas imagens `1780276312120.jpeg` e `image_b72060.png`) revelou uma quebra estrutural severa: elementos de tabela convencionais (`<table>`, `thead`, `tbody`, `tr`, `td`) quebram a elasticidade do framework em dispositivos móveis, forçando compressão de texto ilegível ou rolagem horizontal indesejada.
+A análise de telemetria visual na página `showcase.html` revelou uma quebra estrutural severa: elementos de tabela convencionais (`<table>`, `thead`, `tbody`, `tr`, `td`) quebram a elasticidade do framework em dispositivos móveis, forçando compressão de texto ilegível ou rolagem horizontal indesejada.
 
 Para manter o princípio de layout indestrutível e garantir que documentações geradas automaticamente por scripts ou consumidas por IAs permaneçam legíveis em qualquer tela, o framework precisa de uma estratégia agnóstica para desconstruir tabelas em blocos empilhados (*cards*) no mobile, sem perder a semântica original do HTML.
 

@@ -121,6 +121,63 @@
   },
   {
     "category": "components",
+    "id": "navbar",
+    "description": "Componente de Barra de Navegação Adaptativa (Navbar) do Lazy CSS.\nFornece uma estrutura de cabeçalho indestrutível com alinhamento flexível,\nsuporte a identidade visual (brand), e um mecanismo de Menu Hambúrguer\npuramente declarativo em CSS (Zero JavaScript), utilizando um checkbox invisível\npara controlar o estado de abertura em dispositivos móveis.",
+    "blueprint_specs": [
+      {
+        "signature": ".lazy-navbar",
+        "context": "navbar",
+        "description": "Estrutura principal da barra de navegação superior. Mantém o alinhamento\nelástico dos blocos internos e isolamento de profundidade em relação ao conteúdo da página."
+      },
+      {
+        "signature": ".lazy-navbar-brand",
+        "context": "navbar",
+        "description": "Estilização do logotipo ou nome da aplicação. Garante peso visual e\nneutralização de decorações de texto nativas de links."
+      },
+      {
+        "signature": ".lazy-nav-menu",
+        "context": "navbar",
+        "description": "Grupo de links de navegação. No ambiente desktop, organiza-se de forma\nhorizontal através de espaçamentos baseados nos tokens do core."
+      },
+      {
+        "signature": ".lazy-nav-menu",
+        "context": "navbar",
+        "description": "Elementos de ancoragem contidos no menu. Fornece transição suave de cor\npara feedbacks de hover e demarcação de estado ativo."
+      },
+      {
+        "signature": ".lazy-nav-checkbox",
+        "context": "navbar",
+        "description": "Elementos controladores do Menu Hambúrguer Puro. Permanecem completamente\nocultos em resoluções de desktop para não interferir no fluxo padrão."
+      },
+      {
+        "signature": ".lazy-nav-btn",
+        "context": "navbar",
+        "description": "Exibe o botão de alternância (hambúrguer) no fluxo móvel."
+      },
+      {
+        "signature": ".lazy-nav-menu",
+        "context": "navbar",
+        "description": "Transforma o menu horizontal em um painel vertical absoluto recolhido.\nHerda dinamicamente o fundo do card para consistência de cor."
+      },
+      {
+        "signature": ".lazy-nav-checkbox",
+        "context": "navbar",
+        "description": "Chaveador condicional de estado. Quando o checkbox invisível entra no\nestado ':checked' via clique na label, o menu adjacente muda seu display para flex."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Barra de Navegação Principal (Padrão Desktop)",
+        "html": "<header class=\"lazy-navbar\">\n<a href=\"#\" class=\"lazy-navbar-brand\">LazyCSS</a>\n<input type=\"checkbox\" id=\"nav-toggle\" class=\"lazy-nav-checkbox\">\n<label for=\"nav-toggle\" class=\"lazy-nav-btn\">☰</label>\n<nav class=\"lazy-nav-menu\">\n<a href=\"#\" class=\"active\">Home</a>\n<a href=\"#\">Componentes</a>\n<a href=\"#\">Playground</a>\n</nav>\n</header>"
+      },
+      {
+        "name": "Link de Navegação Individual (Nav Link)",
+        "html": "<a href=\"#\" class=\"lazy-nav-menu a\">Link de Exemplo</a>"
+      }
+    ]
+  },
+  {
+    "category": "components",
     "id": "status",
     "description": "Utilitários de Estado e Status Cromáticos do Lazy CSS.\nControla exclusivamente o comportamento semântico de cores (sucesso, alerta, perigo e informação).\nDesenvolvido sob a arquitetura de composição flexível (estilo LEGO): não possui paddings,\nmargens ou regras de display, permitindo o acoplamento seguro sobre botões, badges, cards ou alertas.",
     "blueprint_specs": [
@@ -159,17 +216,17 @@
   {
     "category": "components",
     "id": "tables",
-    "description": "Componentes de Tabelas Estruturadas do Lazy CSS.\nFornece estilização nativa, limpa e de alta densidade para listagem de dados,\nrelatórios e painéis gerenciais. Inclui suporte a cabeçalhos otimizados,\nalinhamento ergonômico, efeito zebra alternado e destaque visual de linha (hover).\nTratado para suportar grandes massas de dados sem estouro horizontal.",
+    "description": "Componentes de Tabelas Estruturadas do Lazy CSS.\nFornece estilização nativa, limpa e de alta densidade para listagem de dados,\nrelatórios e painéis gerenciais. Implementa o princípio de responsividade intrínseca,\nconvertendo tabelas densas em blocos empilhados (cards) no mobile,\nutilizando atributos de dados sem quebrar a semântica original do HTML.",
     "blueprint_specs": [
       {
         "signature": ".lazy-table-wrapper",
         "context": "tables",
-        "description": "Wrapper de contenção mecânica. Obrigatoriamente envelopa a tag <table>.\nGarante o arredondamento perfeito do contêiner e isola o escopo de scroll\nhorizontal em viewports menores ou massas de dados extremas."
+        "description": "Wrapper de contenção mecânica. Obrigatoriamente envelopa a tag <table>.\nGarante o arredondamento perfeito do contêiner e isola o escopo de scroll\nhorizontal se o layout de tabela tradicional for forçado."
       },
       {
         "signature": ".lazy-table",
         "context": "tables",
-        "description": "Componente de tabela principal. Ocupa toda a largura disponível e herda a tipografia."
+        "description": "Componente de tabela principal. Ocupa toda a largura disponível, herda a tipografia\ne gerencia as margens externas do bloco."
       },
       {
         "signature": ".lazy-text-break",
@@ -180,7 +237,7 @@
     "sandbox_elements": [
       {
         "name": "Tabela de Dados Administrativa Padrão (Alta Densidade)",
-        "html": "<div class=\"lazy-table-wrapper\">\n<table class=\"lazy-table\">\n<thead>\n<tr>\n<th>ID</th>\n<th>Nome do Cliente</th>\n<th>Hash de Verificação</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>#1001</td>\n<td>Ana Silva</td>\n<td><code class=\"lazy-text-break\">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>\n</tr>\n<tr>\n<td>#1002</td>\n<td>Carlos Souza</td>\n<td><code class=\"lazy-text-break\">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>\n</tr>\n</tbody>\n</table>\n</div>"
+        "html": "<div class=\"lazy-table-wrapper\">\n<table class=\"lazy-table\">\n<thead>\n<tr>\n<th>ID</th>\n<th>Nome do Cliente</th>\n<th>Hash de Verificação</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td data-label=\"ID\">#1001</td>\n<td data-label=\"Nome do Cliente\">Ana Silva</td>\n<td data-label=\"Hash de Verificação\"><code class=\"lazy-text-break\">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>\n</tr>\n<tr>\n<td data-label=\"ID\">#1002</td>\n<td data-label=\"Nome do Cliente\">Carlos Souza</td>\n<td data-label=\"Hash de Verificação\"><code class=\"lazy-text-break\">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>\n</tr>\n</tbody>\n</table>\n</div>"
       }
     ]
   },
