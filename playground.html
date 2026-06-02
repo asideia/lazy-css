@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,180 +7,40 @@
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="dist/lazycss.min.css">
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8fafc;
-            color: #1e293b;
-            line-height: 1.6;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        header {
-            background-color: #fff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        nav a {
-            color: #475569;
-            text-decoration: none;
-            margin-left: 1.5rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        nav a:hover {
-            color: #2563eb;
-        }
-
-        .sandbox-layout {
-            display: flex;
-            flex-grow: 1;
-            overflow: hidden;
-        }
-
-        .editor-pane {
-            width: 40%;
-            background-color: #ffffff;
-            border-right: 1px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
-            padding: 1.5rem;
-            box-sizing: border-box;
-        }
-
-        .editor-pane h3 {
-            margin: 0 0 0.75rem 0;
-            font-size: 1rem;
-            color: #0f172a;
-            font-weight: 600;
-        }
-
-        textarea {
-            width: 100%;
-            flex-grow: 1;
-            background-color: #0f172a;
-            color: #38bdf8;
-            border: 1px solid #334155;
-            border-radius: 6px;
-            padding: 1rem;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.95rem;
-            resize: none;
-            outline: none;
-            box-sizing: border-box;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-            /* Força o comportamento de IDE com rolagem horizontal */
-            white-space: pre;
-            overflow-x: auto;
-        }
-
-        textarea:focus {
-            border-color: #2563eb;
-        }
-
-        /* Customização das barras de rolagem para o padrão dark */
-        textarea::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
-
-        textarea::-webkit-scrollbar-track {
-            background: #0f172a;
-            border-radius: 0 6px 6px 0;
-        }
-
-        textarea::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border: 2px solid #0f172a;
-            border-radius: 4px;
-        }
-
-        textarea::-webkit-scrollbar-thumb:hover {
-            background: #334155;
-        }
-
-        .preview-pane {
-            width: 60%;
-            display: flex;
-            flex-direction: column;
-            background-color: #f8fafc;
-        }
-
-        .preview-toolbar {
-            background-color: #f1f5f9;
-            padding: 0.75rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: #475569;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        /* Banner de Status do CSS */
-        .css-status-badge {
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .status-loading {
-            background: #e2e8f0;
-            color: #475569;
-        }
-
-        .status-success {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .status-error {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        iframe {
-            width: 100%;
-            flex-grow: 1;
-            border: none;
-            background: #f8fafc;
+        /* Apenas travas de tela cheia necessárias para a IDE, sem tocar nos elementos internos */
+        html, body { height: 100vh; overflow: hidden; margin: 0; }
+        .editor-pane, .preview-pane { height: 100%; display: flex; flex-direction: column; box-sizing: border-box; }
+        @media (min-width: 769px) {
+            .editor-pane { width: 40%; }
+            .preview-pane { width: 60%; }
         }
     </style>
 </head>
+<body class="lazy-stack" style="height: 100vh;">
 
-<body>
-
-    <header>
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #0f172a;">🦥 Lazy<span style="color: #2563eb;">CSS</span></span>
-        </div>
-        <nav>
+    <!-- Header Unificado e Responsivo Sem JS -->
+    <header class="lazy-navbar">
+        <a href="index.html" class="lazy-navbar-brand">🦥 Lazy<span>CSS</span></a>
+        <input type="checkbox" id="lazy-menu-toggle" class="lazy-nav-checkbox">
+        <label for="lazy-menu-toggle" class="lazy-nav-btn">☰</label>
+        <nav class="lazy-nav-menu">
             <a href="index.html">Home</a>
             <a href="quickstart.html">Quickstart & IA</a>
             <a href="showcase.html">Componentes</a>
-            <a href="playground.html" style="color: #2563eb;">Playground</a>
+            <a href="playground.html" class="active">Playground</a>
             <a href="https://github.com/asideia/lazy-css" target="_blank" rel="noopener noreferrer">📦 GitHub</a>
         </nav>
     </header>
 
-    <div class="sandbox-layout">
+    <!-- Layout Dividido Adaptativo (Mobile-First) -->
+    <div class="lazy-layout-split" style="flex-grow: 1; overflow: hidden;">
 
-        <section class="editor-pane">
-            <h3>✒️ Seu código aqui</h3>
+        <!-- Painel do Editor -->
+        <section class="editor-pane" style="background-color: hsl(var(--lazy-card-raw)); border-right: 1px solid hsl(var(--lazy-border-raw)); padding: var(--lazy-space-md);">
+            <h3 class="lazy-text-title" style="margin-bottom: var(--lazy-space-xs);">✒️ Seu código aqui</h3>
             <textarea
                 id="lazy-code-input"
+                class="lazy-ide-input"
                 placeholder="Digite ou cole seu HTML estrutural aqui..."
                 spellcheck="false"
                 autocorrect="off"
@@ -189,25 +48,19 @@
             ></textarea>
         </section>
 
+        <!-- Painel do Preview -->
         <section class="preview-pane">
-            <div class="preview-toolbar">
-                <span>🖥️ Real-time Preview (Isolated Environment)</span>
-                <span id="css-status" class="css-status-badge status-loading">🔍 Verificando dist/lazycss.min.css...</span>
+            <div style="background-color: hsl(var(--lazy-bg-raw)); padding: var(--lazy-space-sm) var(--lazy-space-md); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid hsl(var(--lazy-border-raw));">
+                <span class="lazy-text-main" style="font-weight: var(--lazy-weight-medium);">🖥️ Real-time Preview</span>
+                <span id="css-status" style="padding: 4px 8px; border-radius: var(--lazy-radius-sm); font-size: 0.8rem; font-weight: var(--lazy-weight-bold); background: hsl(var(--lazy-success-raw) / 0.1); color: hsl(var(--lazy-success-raw));">🔍 Monitorando...</span>
             </div>
-            <iframe id="lazy-preview-frame" srcdoc="
+            <iframe id="lazy-preview-frame" style="width: 100%; flex-grow: 1; border: none; background: #f8fafc;" srcdoc="
                 <!DOCTYPE html>
                 <html>
                     <head>
                         <meta charset='UTF-8'>
                         <link rel='stylesheet' href='./dist/lazycss.min.css'>
-                        <style>
-                            body { 
-                                padding: 2rem; 
-                                margin: 0; 
-                                background-color: #f8fafc;
-                                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                            }
-                        </style>
+                        <style>body { padding: var(--lazy-space-md); margin: 0; background-color: #f8fafc; }</style>
                     </head>
                     <body id='preview-root'></body>
                 </html>
@@ -215,11 +68,6 @@
         </section>
     </div>
 
-    <script>
-        
-    </script>
-
     <script src="assets/scripts/renderPlaygroundElements.js"></script>
 </body>
-
 </html>

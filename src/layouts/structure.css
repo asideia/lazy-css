@@ -97,3 +97,40 @@
   flex-shrink: 1;
   flex-basis: 0%;
 }
+
+/* Layout Split: Coluna no mobile, Linha no Desktop automaticamente */
+.lazy-layout-split {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 769px) {
+  .lazy-layout-split {
+    flex-direction: row;
+  }
+}
+
+/* Caixa de Código Estilo IDE */
+.lazy-ide-input {
+  width: 100%;
+  height: 100%;
+  background-color: #0f172a;
+  color: #38bdf8;
+  border: 1px solid #334155;
+  border-radius: var(--lazy-radius-md);
+  padding: var(--lazy-space-md);
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+  white-space: pre;
+  overflow: auto;
+}
+
+.lazy-ide-input:focus {
+  border-color: hsl(var(--lazy-primary-raw));
+  box-shadow: 0 0 0 2px hsl(var(--lazy-primary-raw) / 0.2);
+}

@@ -6,125 +6,18 @@
     <title>Lazy CSS - AI-Native Structural Framework</title>
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     <link rel="stylesheet" href="dist/lazycss.min.css">
-    <style>
-        /* Estilos temporários de apoio para a Landing Page enquanto a pasta src/ está vazia */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8fafc;
-            color: #1e293b;
-            line-height: 1.6;
-        }
-        header {
-            background-color: #fff;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        nav a {
-            color: #475569;
-            text-decoration: none;
-            margin-left: 1.5rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        nav a:hover {
-            color: #2563eb;
-        }
-        .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 5rem 2rem;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            color: #0f172a;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-        .hero p {
-            font-size: 1.25rem;
-            color: #475569;
-            max-width: 800px;
-            margin: 0 auto 2.5rem auto;
-        }
-        .cta-group {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-        }
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-        .btn-primary {
-            background-color: #2563eb;
-            color: #fff;
-        }
-        .btn-primary:hover {
-            background-color: #1d4ed8;
-        }
-        .btn-secondary {
-            background-color: #fff;
-            color: #334155;
-            border: 1px solid #cbd5e1;
-        }
-        .btn-secondary:hover {
-            background-color: #f1f5f9;
-        }
-        .features {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .card {
-            background: #fff;
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-        .card h3 {
-            font-size: 1.25rem;
-            color: #0f172a;
-            margin-top: 0;
-            margin-bottom: 0.75rem;
-        }
-        .card p {
-            color: #64748b;
-            margin: 0;
-            font-size: 0.95rem;
-        }
-        footer {
-            text-align: center;
-            padding: 3rem 2rem;
-            color: #64748b;
-            font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 5rem;
-            background: #fff;
-        }
-    </style>
 </head>
-<body>
+<body class="lazy-bg">
 
-    <header>
-        <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="font-weight: 800; font-size: 1.4rem; letter-spacing: -0.05em; color: #0f172a;">🦥 Lazy<span style="color: #2563eb;">CSS</span></span>
-        </div>
-        <nav>
-            <a href="index.html" style="color: #2563eb;">Home</a>
+    <!-- Header Unificado e Responsivo Sem JS -->
+    <header class="lazy-navbar">
+        <a href="index.html" class="lazy-navbar-brand">🦥 Lazy<span>CSS</span></a>
+        
+        <input type="checkbox" id="lazy-menu-toggle" class="lazy-nav-checkbox">
+        <label for="lazy-menu-toggle" class="lazy-nav-btn">☰</label>
+        
+        <nav class="lazy-nav-menu">
+            <a href="index.html" class="active">Home</a>
             <a href="quickstart.html">Quickstart & IA</a>
             <a href="showcase.html">Componentes</a>
             <a href="playground.html">Playground</a>
@@ -132,31 +25,37 @@
         </nav>
     </header>
 
-    <main class="hero">
-        <h1>O Framework CSS Nativo para IA<br><span style="color: #2563eb;">Feito para Desenvolvedores Backend</span></h1>
-        <p>Esqueça a necessidade de microgerenciar centenas de classes utilitárias ou quebrar layouts no mobile. Entregue o blueprint do Lazy CSS para o Claude, ChatGPT ou Gemini e deixe a IA gerar interfaces administrativas indestrutíveis por você.</p>
-        <div class="cta-group">
-            <a href="quickstart.html" class="btn btn-primary">Alimente sua IA (Get Blueprint)</a>
-            <a href="showcase.html" class="btn btn-secondary">Ver Vitrine de Componentes</a>
+    <!-- Seção Hero Fluida -->
+    <main class="lazy-stack lazy-gap-lg" style="max-width: 1200px; margin: 0 auto; padding: var(--lazy-space-xl) var(--lazy-space-md); text-align: center;">
+        <h1 class="lazy-text-lead" style="font-size: clamp(2rem, 5vw, 3.5rem); margin: 0;">
+            O Framework CSS Nativo para IA<br><span style="color: hsl(var(--lazy-primary-raw));">Feito para Desenvolvedores Backend</span>
+        </h1>
+        <p class="lazy-text-main" style="max-width: 800px; margin: 0 auto;">
+            Esqueça a necessidade de microgerenciar centenas de classes utilitárias ou quebrar layouts no mobile. Entregue o blueprint do Lazy CSS para o Claude, ChatGPT ou Gemini e deixe a IA gerar interfaces administrativas indestrutíveis por você.
+        </p>
+        <div class="lazy-row" style="justify-content: center; gap: var(--lazy-space-md);">
+            <a href="quickstart.html" class="lazy-btn lazy-btn-primary">Alimente sua IA (Get Blueprint)</a>
+            <a href="showcase.html" class="lazy-btn lazy-btn-secondary">Ver Vitrine de Componentes</a>
         </div>
     </main>
 
-    <section class="features">
-        <div class="card">
-            <h3>🤖 AI-Native Contract</h3>
-            <p>Um modelo de dados otimizado e compacto em Markdown feito especificamente para ser injetado no prompt das LLMs, garantindo que a IA gere código sem inventar classes.</p>
+    <!-- Grid de Funcionalidades Autogerenciável -->
+    <section class="lazy-grid-auto" style="max-width: 1200px; margin: 0 auto; padding: var(--lazy-space-md);">
+        <div class="lazy-card lazy-stack lazy-gap-xs">
+            <h3 class="lazy-text-title">🤖 AI-Native Contract</h3>
+            <p class="lazy-text-muted">Um modelo de dados otimizado e compacto em Markdown feito especificamente para ser injetado no prompt das LLMs, garantindo que a IA gere código sem inventar classes.</p>
         </div>
-        <div class="card">
-            <h3>📐 Responsividade Intrínseca</h3>
-            <p>Construído sobre layouts fluidos matemáticos usando regras estritas de CSS Grid e Flexbox. O layout se adapta sozinho sem a necessidade de media-queries manuais.</p>
+        <div class="lazy-card lazy-stack lazy-gap-xs">
+            <h3 class="lazy-text-title">📐 Responsividade Intrínseca</h3>
+            <p class="lazy-text-muted">Construído sobre layouts fluidos matemáticos usando regras estritas de CSS Grid e Flexbox. O layout se adapta sozinho sem a necessidade de media-queries manuais.</p>
         </div>
-        <div class="card">
-            <h3>💼 Foco Administrativo</h3>
-            <p>Direcionado cirurgicamente para as necessidades reais de softwares corporativos e backoffice: formulários limpos, tabelas de dados resilientes e painéis divididos.</p>
+        <div class="lazy-card lazy-stack lazy-gap-xs">
+            <h3 class="lazy-text-title">💼 Foco Administrativo</h3>
+            <p class="lazy-text-muted">Direcionado cirurgicamente para as necessidades reais de softwares corporativos e backoffice: formulários limpos, tabelas de dados resilientes e painéis divididos.</p>
         </div>
     </section>
 
-    <footer>
+    <footer style="text-align: center; padding: var(--lazy-space-xl); color: hsl(var(--lazy-text-muted-raw)); border-top: 1px solid hsl(var(--lazy-border-raw)); margin-top: var(--lazy-space-xl); background: hsl(var(--lazy-card-raw));">
         <p>&copy; 2026 Lazy CSS Framework. Distribuído sob a licença MIT. Projetado para engenharia ágil.</p>
     </footer>
 
