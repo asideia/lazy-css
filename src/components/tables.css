@@ -2,9 +2,17 @@
  * [DESCRIPTION]
  * Componentes de Tabelas Estruturadas do Lazy CSS. 
  * Fornece estilização nativa, limpa e de alta densidade para listagem de dados, 
- * relatórios e painéis gerenciais. Inclui suporte a cabeçalhos otimizados, 
- * alinhamento ergonômico, efeito zebra alternado e destaque visual de linha (hover).
- * Tratado para suportar grandes massas de dados sem estouro horizontal.
+ * relatórios e painéis gerenciais. Implementa o princípio de responsividade intrínseca,
+ * convertendo tabelas densas em blocos empilhados (cards) no mobile,
+ * utilizando atributos de dados sem quebrar a semântica original do HTML.
+ */
+
+/**
+ * [BLUEPRINT_SPEC]
+ * - `.lazy-table-wrapper`: Invólucro de contenção mecânica. Isola o estouro horizontal de dados brutos e herda o raio padrão.
+ * - `.lazy-table`: Elemento de tabela adaptativo. Chaveia entre 'display: block' (mobile) e 'display: table' (desktop).
+ * - `td[data-label]`: Célula de dados que armazena textualmente o rótulo de sua coluna para injeção via pseudo-elemento móvel.
+ * - `.lazy-text-break`: Utilitário de segurança indestrutível para quebrar strings massivas (Hashes, Tokens, APIs).
  */
 
 /**
@@ -22,14 +30,14 @@
  * </thead>
  * <tbody>
  * <tr>
- * <td>#1001</td>
- * <td>Ana Silva</td>
- * <td><code class="lazy-text-break">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>
+ * <td data-label="ID">#1001</td>
+ * <td data-label="Nome do Cliente">Ana Silva</td>
+ * <td data-label="Hash de Verificação"><code class="lazy-text-break">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>
  * </tr>
  * <tr>
- * <td>#1002</td>
- * <td>Carlos Souza</td>
- * <td><code class="lazy-text-break">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>
+ * <td data-label="ID">#1002</td>
+ * <td data-label="Nome do Cliente">Carlos Souza</td>
+ * <td data-label="Hash de Verificação"><code class="lazy-text-break">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>
  * </tr>
  * </tbody>
  * </table>
@@ -39,7 +47,7 @@
 /**
  * Wrapper de contenção mecânica. Obrigatoriamente envelopa a tag <table>.
  * Garante o arredondamento perfeito do contêiner e isola o escopo de scroll
- * horizontal em viewports menores ou massas de dados extremas.
+ * horizontal se o layout de tabela tradicional for forçado.
  */
 .lazy-table-wrapper {
   width: 100%;
@@ -52,53 +60,16 @@
 }
 
 /**
- * Componente de tabela principal. Ocupa toda a largura disponível e herda a tipografia.
+ * Componente de tabela principal. Ocupa toda a largura disponível, herda a tipografia
+ * e gerencia as margens externas do bloco.
  */
 .lazy-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
   font-family: var(--lazy-font-sans);
-
   margin: var(--lazy-space-md) 0;
   font-size: 0.95rem;
-}
-
-/* Cabeçalho da Tabela - Estilização nativa interna aplicada via herança */
-.lazy-table th {
-  background-color: hsl(var(--lazy-bg-raw));
-  color: hsl(var(--lazy-text-muted-raw));
-  font-weight: var(--lazy-weight-bold);
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: var(--lazy-space-sm) var(--lazy-space-md);
-  border-bottom: 2px solid hsl(var(--lazy-border-raw));
-}
-
-/* Células de Dados - Alinhamento e espaçamento fluido para garantir legibilidade de registros */
-.lazy-table td {
-  padding: var(--lazy-space-sm) var(--lazy-space-md);
-  border-bottom: 1px solid hsl(var(--lazy-border-raw));
-  color: hsl(var(--lazy-text-main-raw));
-  font-size: 0.95rem;
-  vertical-align: middle;
-  line-height: 1.4;
-}
-
-/* Remove a borda dupla da última linha para casar simetricamente com o raio do wrapper pai */
-.lazy-table tr:last-child td {
-  border-bottom: none;
-}
-
-/* Efeito de linhas alternadas (Zebra Stripe) calibrado para contraste milimétrico */
-.lazy-table tbody tr:nth-child(even) {
-  background-color: hsl(var(--lazy-text-main-raw) / 0.03);
-}
-
-/* Efeito de destaque ao passar o mouse na linha (Row Hover Feedback) */
-.lazy-table tbody tr:hover {
-  background-color: hsl(var(--lazy-text-main-raw) / 0.06);
 }
 
 /**
@@ -112,14 +83,24 @@
   max-width: 100%;
 }
 
-/* --- ABORDAGEM MOBILE-FIRST (Default para Telas Pequenas) --- */
+/* ==========================================================================
+   GATILHO RESPONSIVO MOBILE-FIRST (Default / Telas Pequenas)
+   ========================================================================== */
 @media (max-width: 768px) {
+  /* Suprime bordas do wrapper para evitar linhas duplicadas com os cards */
+  .lazy-table-wrapper {
+    border: none;
+    background: transparent;
+    overflow-x: visible;
+  }
+
   .lazy-table {
     display: block;
     border: none !important;
+    margin: 0;
   }
 
-  /* Oculta o cabeçalho original de forma limpa */
+  /* Oculta o cabeçalho original mantendo a acessibilidade para leitores de tela */
   .lazy-table thead {
     display: none;
   }
@@ -129,9 +110,10 @@
   .lazy-table td {
     display: block;
     width: 100%;
+    box-sizing: border-box;
   }
 
-  /* Cada linha vira um mini-card isolado */
+  /* Cada linha do HTML é reconstruída como um Card independente */
   .lazy-table tr {
     background: hsl(var(--lazy-card-raw));
     border: 1px solid hsl(var(--lazy-border-raw));
@@ -141,30 +123,35 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
   }
 
-  /* Formata as células como linhas de chave-valor */
+  .lazy-table tbody tr:nth-child(even) {
+    background-color: hsl(var(--lazy-card-raw)); /* Desativa zebra stripe no mobile */
+  }
+
+  /* Transforma as células de dados em linhas internas de chave-valor */
   .lazy-table td {
     text-align: right;
     padding: var(--lazy-space-xs) 0;
     border: none;
     border-bottom: 1px dashed hsl(var(--lazy-border-raw) / 0.5);
     position: relative;
-    padding-left: 45%; /* Abre espaço para o rótulo esquerdo */
+    padding-left: 45%; /* Espaço reservado para o rótulo injetado */
   }
 
   .lazy-table td:last-child {
     border-bottom: none;
   }
 
-  /* Injeta o nome da coluna dinamicamente à esquerda */
+  /* Injeta o título da coluna de forma declarativa e limpa à esquerda */
   .lazy-table td::before {
     content: attr(data-label);
     position: absolute;
     left: 0;
+    top: var(--lazy-space-xs);
     width: 40%;
     text-align: left;
     font-weight: var(--lazy-weight-bold);
     color: hsl(var(--lazy-text-muted-raw));
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     white-space: nowrap;
     overflow: hidden;
@@ -172,7 +159,9 @@
   }
 }
 
-/* --- COMPORTAMENTO DESKTOP (Restaura a estrutura de tabela) --- */
+/* ==========================================================================
+   COMPORTAMENTO DESKTOP (Restauração da Matriz Tabular Clássica)
+   ========================================================================== */
 @media (min-width: 769px) {
   .lazy-table {
     display: table;
@@ -180,7 +169,6 @@
   
   .lazy-table thead {
     display: table-header-group;
-    background-color: hsl(var(--lazy-bg-raw) / 0.7);
   }
   
   .lazy-table tbody {
@@ -189,23 +177,41 @@
   
   .lazy-table tr {
     display: table-row;
-    border-bottom: 1px solid hsl(var(--lazy-border-raw));
   }
   
-  .lazy-table tr:hover {
-    background-color: hsl(var(--lazy-bg-raw) / 0.3);
+  /* Cabeçalho de alta densidade gerencial */
+  .lazy-table th {
+    background-color: hsl(var(--lazy-bg-raw));
+    color: hsl(var(--lazy-text-muted-raw));
+    font-weight: var(--lazy-weight-bold);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: var(--lazy-space-sm) var(--lazy-space-md);
+    border-bottom: 2px solid hsl(var(--lazy-border-raw));
   }
   
-  .lazy-table th, 
+  /* Restaura as células para disposição em matriz */
   .lazy-table td {
     display: table-cell;
     padding: var(--lazy-space-sm) var(--lazy-space-md);
     text-align: left;
     border-bottom: 1px solid hsl(var(--lazy-border-raw));
+    vertical-align: middle;
+    line-height: 1.4;
   }
   
-  .lazy-table th {
-    font-weight: var(--lazy-weight-semibold);
-    color: hsl(var(--lazy-text-main-raw));
+  .lazy-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* Efeito Zebra alternado calibrado para o tema */
+  .lazy-table tbody tr:nth-child(even) {
+    background-color: hsl(var(--lazy-text-main-raw) / 0.03);
+  }
+  
+  /* Efeito Hover interativo por linha */
+  .lazy-table tbody tr:hover {
+    background-color: hsl(var(--lazy-text-main-raw) / 0.06);
   }
 }
