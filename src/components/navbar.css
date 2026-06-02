@@ -1,4 +1,48 @@
-/* src/components/navbar.css */
+/**
+ * [DESCRIPTION]
+ * Componente de Barra de Navegação Adaptativa (Navbar) do Lazy CSS.
+ * Fornece uma estrutura de cabeçalho indestrutível com alinhamento flexível, 
+ * suporte a identidade visual (brand), e um mecanismo de Menu Hambúrguer 
+ * puramente declarativo em CSS (Zero JavaScript), utilizando um checkbox invisível 
+ * para controlar o estado de abertura em dispositivos móveis.
+ */
+
+/**
+ * [BLUEPRINT_SPEC]
+ * - `.lazy-navbar`: Container principal flexbox espaçado nas extremidades. Controla profundidade (z-index) e borda inferior.
+ * - `.lazy-navbar-brand`: Elemento de marca com tipografia destacada e redução de espaçamento de caractere.
+ * - `.lazy-nav-checkbox`: Input de controle booleano ocultado visualmente, chaveador do estado aberto/fechado.
+ * - `.lazy-nav-btn`: Gatilho visual (label) que intercepta o clique do usuário no mobile para disparar o checkbox.
+ * - `.lazy-nav-menu`: Grupo flexível de links com alinhamento horizontal (desktop) e vertical absoluto (mobile).
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Barra de Navegação Principal (Padrão Desktop)
+ * [SANDBOX_ELEMENT_HTML]
+ * <header class="lazy-navbar">
+ * <a href="#" class="lazy-navbar-brand">LazyCSS</a>
+ * <input type="checkbox" id="nav-toggle" class="lazy-nav-checkbox">
+ * <label for="nav-toggle" class="lazy-nav-btn">☰</label>
+ * <nav class="lazy-nav-menu">
+ * <a href="#" class="active">Home</a>
+ * <a href="#">Componentes</a>
+ * <a href="#">Playground</a>
+ * </nav>
+ * </header>
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Link de Navegação Individual (Nav Link)
+ * [SANDBOX_ELEMENT_HTML]
+ * <a href="#" class="lazy-nav-menu a">Link de Exemplo</a>
+ */
+
+/**
+ * Estrutura principal da barra de navegação superior. Mantém o alinhamento
+ * elástico dos blocos internos e isolamento de profundidade em relação ao conteúdo da página.
+ */
 .lazy-navbar {
   display: flex;
   align-items: center;
@@ -10,6 +54,10 @@
   z-index: 100;
 }
 
+/**
+ * Estilização do logotipo ou nome da aplicação. Garante peso visual e
+ * neutralização de decorações de texto nativas de links.
+ */
 .lazy-navbar-brand {
   font-weight: var(--lazy-weight-bold);
   font-size: 1.3rem;
@@ -18,12 +66,20 @@
   text-decoration: none;
 }
 
+/**
+ * Grupo de links de navegação. No ambiente desktop, organiza-se de forma
+ * horizontal através de espaçamentos baseados nos tokens do core.
+ */
 .lazy-nav-menu {
   display: flex;
   gap: var(--lazy-space-md);
   align-items: center;
 }
 
+/**
+ * Elementos de ancoragem contidos no menu. Fornece transição suave de cor
+ * para feedbacks de hover e demarcação de estado ativo.
+ */
 .lazy-nav-menu a {
   color: hsl(var(--lazy-text-muted-raw));
   text-decoration: none;
@@ -32,17 +88,27 @@
   transition: color 0.2s ease;
 }
 
-.lazy-nav-menu a:hover, .lazy-nav-menu a.active {
+.lazy-nav-menu a:hover, 
+.lazy-nav-menu a.active {
   color: hsl(var(--lazy-primary-raw));
 }
 
-/* O Segredo do Menu Hamburguer Puro: Ocultando os controladores no Desktop */
-.lazy-nav-checkbox, .lazy-nav-btn {
+/**
+ * Elementos controladores do Menu Hambúrguer Puro. Permanecem completamente
+ * ocultos em resoluções de desktop para não interferir no fluxo padrão.
+ */
+.lazy-nav-checkbox, 
+.lazy-nav-btn {
   display: none;
 }
 
-/* Ativação do comportamento Mobile-First Intrínseco quando a tela aperta */
+/* ==========================================================================
+   GATILHO DE RESPONSIVIDADE MOBILE-FIRST INTRÍNSECA
+   ========================================================================== */
 @media (max-width: 768px) {
+  /**
+   * Exibe o botão de alternância (hambúrguer) no fluxo móvel.
+   */
   .lazy-nav-btn {
     display: block;
     cursor: pointer;
@@ -51,8 +117,12 @@
     color: hsl(var(--lazy-text-main-raw));
   }
 
+  /**
+   * Transforma o menu horizontal em um painel vertical absoluto recolhido.
+   * Herda dinamicamente o fundo do card para consistência de cor.
+   */
   .lazy-nav-menu {
-    display: none; /* Esconde por padrão no Mobile */
+    display: none; /* Esconde por padrão no fluxo mobile */
     flex-direction: column;
     width: 100%;
     position: absolute;
@@ -66,7 +136,10 @@
     align-items: flex-start;
   }
 
-  /* Quando o Checkbox invisível for marcado pelo clique do label (botão), exibe o menu */
+  /**
+   * Chaveador condicional de estado. Quando o checkbox invisível entra no 
+   * estado ':checked' via clique na label, o menu adjacente muda seu display para flex.
+   */
   .lazy-nav-checkbox:checked ~ .lazy-nav-menu {
     display: flex;
   }
