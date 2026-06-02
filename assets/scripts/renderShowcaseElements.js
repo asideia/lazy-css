@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = `
                 <div style="padding: 2rem; border: 1px solid hsl(0 75% 55% / 0.2); background: hsl(0 75% 55% / 0.05); border-radius: 8px;">
                     <p style="color: hsl(0 75% 55%); font-weight: 500; margin: 0;">❌ Erro ao carregar os dados da documentação.</p>
-                    <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0; color: #666;">Certifique-se de que o arquivo dist/lazycss.spec.json existe e está bem formatado.</p>
+                    <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0; color: #666;">Certifique-se de que o arquivo dist/lazycss.spec.json exists e está bem formatado.</p>
                 </div>
             `;
         });
@@ -53,7 +53,7 @@ function renderShowcase(categories, targetContainer) {
             </div>
         `;
 
-        // 3. Renderiza a Tabela Técnica de Especificações (Blueprint Specs)
+        // 3. Renderiza a Tabela Técnica de Especificações (Blueprint Specs) com ADR 0005
         if (cat.blueprint_specs && cat.blueprint_specs.length > 0) {
             const specsTitle = document.createElement('h3');
             specsTitle.innerText = '📋 Contrato Técnico (IA Specs)';
@@ -61,14 +61,16 @@ function renderShowcase(categories, targetContainer) {
             section.appendChild(specsTitle);
 
             const table = document.createElement('table');
-            table.style.cssText = 'width: 100%; border-collapse: collapse; margin-bottom: 2.5rem; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden;';
+            // Injeção da classe padrão do Lazy CSS
+            table.className = 'lazy-table';
             
+            // Definição dos cabeçalhos semânticos
             table.innerHTML = `
                 <thead>
-                    <tr style="background: #f7fafc; text-align: left; border-bottom: 1px solid #edf2f7;">
-                        <th style="padding: 1rem; width: 25%;">Signature / Selector</th>
-                        <th style="padding: 1rem; width: 20%;">Parent Context</th>
-                        <th style="padding: 1rem; width: 55%;">Strict Architectural Rule & Expected Behavior</th>
+                    <tr>
+                        <th>Signature / Selector</th>
+                        <th>Parent Context</th>
+                        <th>Strict Architectural Rule & Expected Behavior</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,15 +80,15 @@ function renderShowcase(categories, targetContainer) {
             const tbody = table.querySelector('tbody');
             cat.blueprint_specs.forEach(spec => {
                 const tr = document.createElement('tr');
-                tr.style.borderBottom = '1px solid #edf2f7';
                 
                 // Define a cor da etiqueta baseada no contexto semântico real do arquivo (fileId)
                 const badgeStyle = getContextBadgeStyle(spec.context);
 
+                // IMPORTANTE: Injeção do data-label em cada célula para remapeamento via pseudo-elementos CSS no mobile
                 tr.innerHTML = `
-                    <td style="padding: 1rem; font-family: monospace; font-size: 0.95rem; color: #c53030; font-weight: bold; white-space: nowrap;">\`${spec.signature}\`</td>
-                    <td style="padding: 1rem;"><span style="${badgeStyle}">${spec.context}</span></td>
-                    <td style="padding: 1rem; color: #4a5568; line-height: 1.5; font-size: 0.95rem;">${spec.description}</td>
+                    <td data-label="Signature / Selector" style="font-family: monospace; font-size: 0.95rem; color: #c53030; font-weight: bold;">\`${spec.signature}\`</td>
+                    <td data-label="Parent Context"><span style="${badgeStyle}">${spec.context}</span></td>
+                    <td data-label="Strict Architectural Rule & Expected Behavior" style="color: #4a5568; line-height: 1.5; font-size: 0.95rem;">${spec.description}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -122,7 +124,6 @@ function renderShowcase(categories, targetContainer) {
 
                 // Preview em Tempo Real (Injeta o código gerado)
                 const previewArea = document.createElement('div');
-
                 previewArea.classList.add('lazy-showcase-preview');
                 previewArea.style.cssText = 'padding: 1.5rem; flex-grow: 1; background: #f8fafc; position: relative;';
                 previewArea.innerHTML = element.html;
@@ -182,16 +183,16 @@ function setupCopyBehavior() {
             
             navigator.clipboard.writeText(rawHtml).then(() => {
                 const originalText = e.currentTarget.innerText;
-                e.currentTarget.innerText = '✓ Copiado!';
-                e.currentTarget.style.background = '#edf2f7';
-                e.currentTarget.style.color = '#2b6cb0';
-                e.currentTarget.style.borderColor = '#2b6cb0';
+                button.innerText = '✓ Copiado!';
+                button.style.background = '#dcfce7';
+                button.style.color = '#15803d';
+                button.style.borderColor = '#bbf7d0';
 
                 setTimeout(() => {
-                    e.currentTarget.innerText = originalText;
-                    e.currentTarget.style.background = '#fff';
-                    e.currentTarget.style.color = '#4a5568';
-                    e.currentTarget.style.borderColor = '#cbd5e0';
+                    button.innerText = originalText;
+                    button.style.background = '#fff';
+                    button.style.color = '#4a5568';
+                    button.style.borderColor = '#cbd5e0';
                 }, 2000);
             }).catch(err => {
                 console.error('Erro ao copiar código: ', err);
@@ -204,7 +205,7 @@ function setupCopyBehavior() {
  * Retorna os estilos CSS inline de acordo com o contexto arquitetural (fileId)
  */
 function getContextBadgeStyle(context) {
-    const base = 'padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; font-family: monospace;';
+    const base = 'padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; font-family: monospace; display: inline-block;';
     switch (context) {
         case 'variables':
             return `${base} background-color: #f0fff4; color: #2f855a; border: 1px solid #c6f6d5;`;

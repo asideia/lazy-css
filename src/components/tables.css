@@ -59,6 +59,9 @@
   border-collapse: collapse;
   text-align: left;
   font-family: var(--lazy-font-sans);
+
+  margin: var(--lazy-space-md) 0;
+  font-size: 0.95rem;
 }
 
 /* Cabeçalho da Tabela - Estilização nativa interna aplicada via herança */
@@ -107,4 +110,102 @@
   white-space: normal !important;
   display: inline-block;
   max-width: 100%;
+}
+
+/* --- ABORDAGEM MOBILE-FIRST (Default para Telas Pequenas) --- */
+@media (max-width: 768px) {
+  .lazy-table {
+    display: block;
+    border: none !important;
+  }
+
+  /* Oculta o cabeçalho original de forma limpa */
+  .lazy-table thead {
+    display: none;
+  }
+
+  .lazy-table tbody, 
+  .lazy-table tr, 
+  .lazy-table td {
+    display: block;
+    width: 100%;
+  }
+
+  /* Cada linha vira um mini-card isolado */
+  .lazy-table tr {
+    background: hsl(var(--lazy-card-raw));
+    border: 1px solid hsl(var(--lazy-border-raw));
+    border-radius: var(--lazy-radius-md);
+    padding: var(--lazy-space-sm);
+    margin-bottom: var(--lazy-space-md);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  }
+
+  /* Formata as células como linhas de chave-valor */
+  .lazy-table td {
+    text-align: right;
+    padding: var(--lazy-space-xs) 0;
+    border: none;
+    border-bottom: 1px dashed hsl(var(--lazy-border-raw) / 0.5);
+    position: relative;
+    padding-left: 45%; /* Abre espaço para o rótulo esquerdo */
+  }
+
+  .lazy-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* Injeta o nome da coluna dinamicamente à esquerda */
+  .lazy-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 40%;
+    text-align: left;
+    font-weight: var(--lazy-weight-bold);
+    color: hsl(var(--lazy-text-muted-raw));
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* --- COMPORTAMENTO DESKTOP (Restaura a estrutura de tabela) --- */
+@media (min-width: 769px) {
+  .lazy-table {
+    display: table;
+  }
+  
+  .lazy-table thead {
+    display: table-header-group;
+    background-color: hsl(var(--lazy-bg-raw) / 0.7);
+  }
+  
+  .lazy-table tbody {
+    display: table-row-group;
+  }
+  
+  .lazy-table tr {
+    display: table-row;
+    border-bottom: 1px solid hsl(var(--lazy-border-raw));
+  }
+  
+  .lazy-table tr:hover {
+    background-color: hsl(var(--lazy-bg-raw) / 0.3);
+  }
+  
+  .lazy-table th, 
+  .lazy-table td {
+    display: table-cell;
+    padding: var(--lazy-space-sm) var(--lazy-space-md);
+    text-align: left;
+    border-bottom: 1px solid hsl(var(--lazy-border-raw));
+  }
+  
+  .lazy-table th {
+    font-weight: var(--lazy-weight-semibold);
+    color: hsl(var(--lazy-text-main-raw));
+  }
 }
