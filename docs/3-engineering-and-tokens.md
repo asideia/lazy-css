@@ -1,8 +1,8 @@
-# 📐 Engenharia de Dados Visuais e Protocolo de Formatação AI-Native
+## 📐 Engenharia de Dados Visuais e Protocolo de Formatação AI-Native
 
-Este documento estabelece a especificação oficial de modelagem matemática e a anatomia de formatação para os arquivos `.css` do ecossistema **Lazy CSS**. 
+Este documento estabelece a especificação oficial de modelagem matemática e a anatomia de formatação para os arquivos `.css` do ecossistema **Lazy CSS**.
 
-Os scripts do nosso pipeline de build (`buildLazyCSSBlueprint.js`) e as janelas de contexto das LLMs dependem estritamente desta estrutura para garantir interfaces imutáveis, responsividade elástica intrínseca (sem *media-queries*) e total compatibilidade com o parser automatizado de blocos JSDoc.
+Os scripts do nosso pipeline de build (`buildLazyCSSBlueprint.js`) e as janelas de contexto das LLMs dependem estritamente desta estrutura para garantir interfaces imutáveis, responsividade elástica intrínseca e total compatibilidade com o parser automatizado de blocos JSDoc.
 
 ---
 
@@ -11,6 +11,7 @@ Os scripts do nosso pipeline de build (`buildLazyCSSBlueprint.js`) e as janelas 
 O Lazy CSS adota o princípio de **Isolamento de Estado Cromático e Espacial**. Para que o framework seja indestrutível e adaptável, os dados declarativos de design seguem regras de engenharia rígidas dentro de `src/tokens/variables.css`:
 
 ### 1.1. O Padrão HSL Fragmentado (Raw Tokens)
+
 É expressamente proibido declarar cores em formatos rígidos como Hexadecimal (`#232323`) ou RGB puro. Todas as cores do sistema devem ser declaradas como propriedades customizadas contendo apenas os valores numéricos brutos do modelo HSL (Hue, Saturation, Lightness), sob o sufixo `-raw`.
 
 ```css
@@ -27,12 +28,12 @@ O Lazy CSS adota o princípio de **Isolamento de Estado Cromático e Espacial**.
 
 ```
 
-**Justificativa Técnica:** O formato fragmentado permite que os componentes e modificadores de estado apliquem opacidade matemática milimétrica em tempo de execução usando sintaxe composta, sem a necessidade de criar novas variáveis de cor:
+**Justificativa Técnico-Arquitetural:** O formato fragmentado permite que os componentes e modificadores de estado apliquem opacidade matemática milimétrica em tempo de execução usando a sintaxe composta nativa do CSS, eliminando redundâncias na folha de estilos:
 
 ```css
 .lazy-card {
   background-color: hsl(var(--lazy-card-raw));
-  border: 1px solid hsl(var(--lazy-border-raw) / 0.15); /* Opacidade dinâmica */
+  border: 1px solid hsl(var(--lazy-border-raw) / 0.15); /* Opacidade dinâmica calibrada */
 }
 
 ```
@@ -65,14 +66,17 @@ Sua tarefa é receber um código CSS bruto que eu vou te enviar e reescrevê-lo,
 1. [DESCRIPTION] (Macro Escopo):
    O arquivo DEVE começar obrigatoriamente com um comentário JSDoc descrevendo o propósito claro do módulo. A primeira palavra após a abertura do bloco deve ser a tag "[DESCRIPTION]" em caixa alta, seguida pela explicação do domínio do arquivo.
 
-2. [SANDBOX_ELEMENT] (Exemplos Ouro / Few-Shot Learning):
+2. [BLUEPRINT_SPEC] (Contrato Arquitetural de IA):
+   Tag descritiva que discrimina rigidamente a assinatura técnica e a regra esperada de comportamento do seletor para o mapeamento cognitivo e interpretação precisa de LLMs parceiras.
+
+3. [SANDBOX_ELEMENT] (Exemplos Ouro / Few-Shot Learning):
    Logo após a descrição macro, você deve criar blocos de comentários JSDoc contendo exemplos reais de HTML estrutural puro usando as classes daquele arquivo. 
    Cada bloco deve conter exatamente:
    - A tag "[SANDBOX_ELEMENT]" na primeira linha interna do comentário.
    - A tag "[SANDBOX_ELEMENT_NAME]" seguida por um título descritivo do componente.
    - A tag "[SANDBOX_ELEMENT_HTML]" seguida pelo bloco de código HTML limpo.
 
-3. COMENTÁRIOS DE ASSINATURA (Classes ou Variáveis Core):
+4. COMENTÁRIOS DE ASSINATURA (Classes ou Variáveis Core):
    Cada classe principal (ex: .lazy-row) ou variável nativa (ex: --lazy-space-md) DEVE ter um bloco de comentário JSDoc colado IMEDIATAMENTE na linha superior à sua assinatura. 
    - O comentário deve explicar a regra arquitetural, comportamento de responsividade passiva ou herança daquela assinatura de forma técnica e direta.
    - Nunca use comentários de linha comum (//) ou blocos simples (/* */) para as assinaturas. Use apenas JSDoc (/** */).
@@ -88,6 +92,11 @@ Use este formato exato como guia absoluto de output:
  * [DESCRIPTION]
  * Sistema de Microlayouts e Fluxos Atômicos do Lazy CSS. Controle indestrutível de alinhamento 
  * espacial baseado em CSS Flexbox responsivo.
+ */
+
+/**
+ * [BLUEPRINT_SPEC]
+ * - `.lazy-row`: Alinhador horizontal baseado em Flexbox. Habilita quebra automática de fluxo interno.
  */
 
 /**
@@ -126,16 +135,77 @@ AQUI ESTÁ O MEU CSS BRUTO PARA SER FORMATADO:
 
 ---
 
+## 3. Especificações de Componentes Core & Contratos Semânticos
+
+Abaixo estão definidos os contratos técnicos rígidos para os componentes estruturais do framework. IAs e desenvolvedores humanos devem seguir estas estruturas HTML exatas para garantir a integridade visual estável e responsiva.
+
+### 3.1. 📊 Tabelas Adaptativas (`.lazy-table`)
+
+Em conformidade com a **ADR 0005**, as tabelas de dados do Lazy CSS utilizam o princípio de *Responsividade Intrínseca*. Em telas de desktop, operam em matriz de alta densidade gerencial. Em viewports móveis (≤ 768px), descontroem-se elasticamente em blocos empilhados no estilo *cards*.
+
+* **Regra de Ouro da IA (ADR 0005):** Cada célula (`<td>`) **deve obrigatoriamente** carregar o atributo descritivo `data-label` contendo o valor exato textualmente correspondente à sua coluna (`<th>`). O core CSS utiliza este atributo para injetar os rótulos dinamicamente via pseudo-elementos no mobile.
+
+#### 🛠️ Estrutura HTML Homologada:
+
+```html
+<div class="lazy-table-wrapper">
+  <table class="lazy-table">
+    <thead>
+      <tr>
+        <th>Signature / Selector</th>
+        <th>Parent Context</th>
+        <th>Strict Architectural Rule & Expected Behavior</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="Signature / Selector"><code>.lazy-btn</code></td>
+        <td data-label="Parent Context"><span class="lazy-badge">BUTTONS</span></td>
+        <td data-label="Strict Architectural Rule & Expected Behavior">Assinatura base indestrutível para elementos interativos.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+```
+
+### 3.2. 🧭 Barra de Navegação Adaptativa (`.lazy-navbar`)
+
+Componente estrutural de cabeçalho com alinhamento flexível e isolamento de empilhamento (`z-index: 100`). Implementa o comportamento de Menu Hambúrguer **100% via CSS declarativo** (Zero JavaScript).
+
+* **Mecanismo de Ativação:** Utiliza um elemento input invisível do tipo checkbox (`.lazy-nav-checkbox`) pareado com um elemento `label` (`.lazy-nav-btn`). Ao interceptar o clique no mobile, o estado `:checked` dispara a exibição do menu irmão adjacente (`~ .lazy-nav-menu`) mudando o display de `none` para `flex`.
+
+#### 🛠️ Estrutura HTML Homologada:
+
+```html
+<header class="lazy-navbar">
+  <a href="#" class="lazy-navbar-brand">LazyCSS</a>
+  
+  <input type="checkbox" id="nav-toggle" class="lazy-nav-checkbox">
+  
+  <label for="nav-toggle" class="lazy-nav-btn">☰</label>
+  
+  <nav class="lazy-nav-menu">
+    <a href="#" class="active">Home</a>
+    <a href="#">Componentes</a>
+    <a href="#">Playground</a>
+  </nav>
+</header>
+
+```
+
+---
+
 ## ⚙️ Fluxo de Integração Local e Validação
 
 Após receber o retorno perfeitamente formatado da IA, siga o fluxo operacional da esteira de build do repositório:
 
 1. **Persistência de Arquivos:** Cole ou edite o código correspondente na pasta adequada dentro do diretório `/src` (ex: se for tabela, em `src/components/tables.css`; se for fluxo, em `src/layouts/structure.css`).
 2. **Execução da Compilação:** Execute o pipeline integrado no seu terminal para disparar o PostCSS e o script de automação do Node:
+
 ```bash
 npm run build
 
 ```
-
 
 3. **Homologação Contratual:** Abra os arquivos gerados em `dist/lazycss.spec.json` e `dist/lazycss-blueprint.md`. Valide se as novas classes, assinaturas técnicas e exemplos estruturais em HTML (Sandbox) foram devidamente capturados pelo parser e indexados no artefato final.
