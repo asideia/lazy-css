@@ -1,16 +1,16 @@
 /**
  * [DESCRIPTION]
- * Componentes e Utilitários de Listas do Lazy CSS.
- * Restaura e padroniza o comportamento de listas ordenadas e textuais que foram 
- * normalizadas pelo Reset global. Garante espaçamento horizontal (padding) 
- * ergonômico para que marcadores e numerações não vazem para fora dos contêineres.
+ * Componentes e Utilitários de Listas do Lazy CSS (ADR 0007).
+ * Restaura, padroniza e coesiona o comportamento de listas ordenadas e textuais nativas.
+ * Garante espaçamento horizontal (padding) ergonômico e respiro vertical automático, 
+ * assegurando que marcadores e numerações herdem a tipografia e não vazem dos contêineres.
  */
 
 /**
  * [SANDBOX_ELEMENT]
- * [SANDBOX_ELEMENT_NAME] Lista Ordenada de Passos (Ordered Guide)
+ * [SANDBOX_ELEMENT_NAME] Lista Ordenada de Passos (Nativa / Ordered Guide)
  * [SANDBOX_ELEMENT_HTML]
- * <ol class="lazy-list lazy-list-ordered">
+ * <ol>
  * <li>Baixar o manifesto técnico do blueprint.</li>
  * <li>Injetar o arquivo Markdown na sessão da LLM.</li>
  * <li>Solicitar a geração da interface base.</li>
@@ -19,46 +19,83 @@
 
 /**
  * [SANDBOX_ELEMENT]
- * [SANDBOX_ELEMENT_NAME] Lista com Marcadores Tradicionais (Bullet List)
+ * [SANDBOX_ELEMENT_NAME] Lista com Marcadores Tradicionais (Nativa / Bullet List)
  * [SANDBOX_ELEMENT_HTML]
- * <ul class="lazy-list lazy-list-bullet">
+ * <ul>
  * <li>Suporte nativo a variáveis HSL.</li>
  * <li>Contrato semântico otimizado para IA.</li>
  * <li>Renderização isolada de viewports.</li>
  * </ul>
  */
 
+/* ==========================================================================
+   1. ASSINATURA BASE E RECUO ERGONÔMICO (ADR 0007)
+   ========================================================================== */
+
 /**
- * Assinatura base para listas textuais. Garante o recuo à esquerda baseado nos tokens de espaçamento fluido do framework para abrigar os marcadores com segurança.
+ * Assinatura base para listas textuais estruturais. 
+ * Mapeia diretamente as tags nativas de bloco de listagem e a classe utilitária.
+ * Garante o recuo à esquerda baseado nos tokens de espaçamento fluido do framework.
  */
+ol,
+ul,
 .lazy-list {
   padding-left: var(--lazy-space-lg);
   margin-top: 0;
-  margin-bottom: var(--lazy-space-sm);
+  margin-bottom: var(--lazy-space-md);
   font-family: var(--lazy-font-sans);
   color: hsl(var(--lazy-text-main-raw));
 }
 
+/* Ignora o recuo se a lista estiver explicitamente aninhada dentro de uma tag de navegação estrutural */
+nav ol,
+nav ul {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   2. RESTAURAÇÃO DE MARCADORES NATIVOS
+   ========================================================================== */
+
 /**
- * Modificador para listas ordenadas. Restaura o contador decimal nativo do navegador e define o alinhamento correto dos numerais.
+ * Escopo para listas ordenadas. Restaura o contador decimal nativo do navegador
+ * e define o alinhamento correto dos numerais de forma compulsória.
  */
+ol,
 .lazy-list-ordered {
   list-style-type: decimal !important;
 }
 
 /**
- * Modificador para listas não-ordenadas (bullet points). Restaura o marcador circular clássico de forma limpa e sutil.
+ * Escopo para listas não-ordenadas (bullet points). Restaura o marcador circular 
+ * clássico de forma limpa, sutil e integrada ao tema cromático.
  */
+ul,
 .lazy-list-bullet {
   list-style-type: disc !important;
 }
 
-/* Estilização interna opcional para dar mais respiro aos itens de lista densos */
+/* Cancelamento de estilo para barras de navegação que usam herança de tag direta */
+nav ol,
+nav ul {
+  list-style-type: none !important;
+}
+
+/* ==========================================================================
+   3. ERGONOMIA DOS ITENS INTERNOS (List Item Spacing)
+   ========================================================================== */
+
+/* Estilização interna automática para dar mais respiro aos itens de lista textuais */
+ol li,
+ul li,
 .lazy-list li {
   margin-bottom: var(--lazy-space-xs);
   line-height: 1.5;
 }
 
+ol li:last-child,
+ul li:last-child,
 .lazy-list li:last-child {
   margin-bottom: 0;
 }
