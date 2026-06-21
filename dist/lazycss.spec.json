@@ -2,14 +2,9 @@
   {
     "category": "base",
     "id": "reset",
-    "description": "Reset e Normalização Base do Lazy CSS.\nZera margens e paddings nativos, força o cálculo de tamanho previsível (box-sizing),\ndesativa list-styles, normaliza elementos de mídia para comportamento responsivo\ne estabelece a herança tipográfica e cromática compulsória a partir das tags raiz (html, body).",
+    "description": "Reset, Normalização e Presets Semânticos Universais (ADR 0007) do Lazy CSS.\nZera margens e paddings nativos, força o cálculo de tamanho previsível (box-sizing),\ndesativa list-styles, normaliza elementos de mídia para comportamento responsivo\ne estabelece a herança tipográfica, cromática e estrutural compulsória a partir das tags.\nEntrega uma interface premium, ergonômica e responsiva por padrão, sem necessidade de classes iniciais.",
     "blueprint_specs": [],
-    "sandbox_elements": [
-      {
-        "name": "Demonstração de Herança Nativa de Input e Listas",
-        "html": "<div class=\"lazy-stack lazy-gap-xs\">\n<ul style=\"padding: 0;\">\n<li>Este item não possui marcadores/bolinhas nativas por padrão.</li>\n</ul>\n<input type=\"text\" placeholder=\"Herda fonte, cor e remove outline automaticamente.\">\n</div>"
-      }
-    ]
+    "sandbox_elements": []
   },
   {
     "category": "components",
@@ -288,6 +283,11 @@
     "id": "structure",
     "description": "Sistema de Microlayouts e Fluxos Atômicos do Lazy CSS. Controle indestrutível de alinhamento\nespacial baseado em CSS Flexbox responsivo. Fornece contêineres de empilhamento vertical,\nalinhamento horizontal com quebra nativa para mobile (wrap) e modificadores de densidade (gaps).",
     "blueprint_specs": [
+      {
+        "signature": ".lazy-center",
+        "context": "structure",
+        "description": "Modificador Universal de Centralização.\nUsado para centralizar blocos de conteúdo macro (como Seções Hero)\nalinhando textos, flex-items e margens de forma indestrutível."
+      },
       {
         "signature": ".lazy-stack",
         "context": "structure",

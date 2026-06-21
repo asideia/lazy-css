@@ -1,24 +1,15 @@
 /**
  * [DESCRIPTION]
- * Reset e Normalização Base do Lazy CSS. 
+ * Reset, Normalização e Presets Semânticos Universais (ADR 0007) do Lazy CSS. 
  * Zera margens e paddings nativos, força o cálculo de tamanho previsível (box-sizing),
  * desativa list-styles, normaliza elementos de mídia para comportamento responsivo
- * e estabelece a herança tipográfica e cromática compulsória a partir das tags raiz (html, body).
+ * e estabelece a herança tipográfica, cromática e estrutural compulsória a partir das tags.
+ * Entrega uma interface premium, ergonômica e responsiva por padrão, sem necessidade de classes iniciais.
  */
 
-/**
- * [SANDBOX_ELEMENT]
- * [SANDBOX_ELEMENT_NAME] Demonstração de Herança Nativa de Input e Listas
- * [SANDBOX_ELEMENT_HTML]
- * <div class="lazy-stack lazy-gap-xs">
- * <ul style="padding: 0;">
- * <li>Este item não possui marcadores/bolinhas nativas por padrão.</li>
- * </ul>
- * <input type="text" placeholder="Herda fonte, cor e remove outline automaticamente.">
- * </div>
- */
-
-/* Força o cálculo de tamanho de caixa previsível em todo o ecossistema */
+/* ==========================================================================
+   1. RESET E NORMALIZAÇÃO DE CAIXA (Box Reset)
+   ========================================================================== */
 *,
 *::before,
 *::after {
@@ -27,7 +18,6 @@
   padding: 0;
 }
 
-/* Configura a raiz do documento com rolagem suave e comportamento limpo */
 html {
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
@@ -35,12 +25,11 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Normaliza o corpo da página aplicando os tokens corporativos padrão */
 body {
   font-family: var(--lazy-font-sans);
   font-size: 1rem;
   font-weight: var(--lazy-weight-normal);
-  line-height: 1.5;
+  line-height: 1.6;
   background-color: hsl(var(--lazy-bg-raw));
   color: hsl(var(--lazy-text-main-raw));
   text-rendering: optimizeLegibility;
@@ -48,58 +37,238 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Remove estilos padrão de listas em contêineres semânticos */
-ul,
-ol {
-  list-style: none;
+/* ==========================================================================
+   2. PRESETS E SCAFFOLDING ESTRUTURAL (Zero-Class Layouts - ADR 0007)
+   ========================================================================== */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--lazy-space-md);
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: var(--lazy-space-md) var(--lazy-space-md);
 }
 
-/* Garante que imagens e elementos de mídia se comportem de forma responsiva */
-img,
-svg,
-video,
-canvas,
-audio,
-iframe {
+nav, 
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: var(--lazy-space-md);
+}
+
+main {
+  display: block;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: var(--lazy-space-lg) var(--lazy-space-md);
+}
+
+section, 
+article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lazy-space-md);
+  margin-bottom: var(--lazy-space-xl);
+  width: 100%;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lazy-space-sm);
+  padding: var(--lazy-space-md);
+  background-color: hsl(var(--lazy-card-raw));
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-lg);
+}
+
+/**
+ * COMPORTAMENTO AUTOMÁTICO DO FOOTER
+ * Alinha e centraliza de forma compulsória todos os sub-elementos internos.
+ */
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--lazy-space-sm);
+  width: 100%;
+  max-width: 1140px;
+  margin: var(--lazy-space-xl) auto 0 auto;
+  padding: var(--lazy-space-xl) var(--lazy-space-md);
+  border-top: 1px solid hsl(var(--lazy-border-raw));
+  color: hsl(var(--lazy-text-muted-raw));
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   3. TIPOGRAFIA FLUIDA E ERGONOMIA VISUAL
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  color: hsl(var(--lazy-text-main-raw));
+  font-weight: var(--lazy-weight-bold);
+  margin-top: 0;
+  margin-bottom: var(--lazy-space-xs);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.25rem, 1.75rem + 2.5vw, 3.5rem); }
+h2 { font-size: clamp(1.75rem, 1.4rem + 1.8vw, 2.5rem); }
+h3 { font-size: clamp(1.35rem, 1.2rem + 1vw, 1.75rem); }
+h4 { font-size: 1.25rem; }
+
+/**
+ * Parágrafos controlados com limitador de largura.
+ * O margin-inline: inherit garante que se o container pai for centralizado,
+ * o bloco do parágrafo também centralize corretamente.
+ */
+p {
+  margin-top: 0;
+  margin-bottom: var(--lazy-space-sm);
+  color: hsl(var(--lazy-text-muted-raw));
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+  max-width: 65ch;
+  margin-inline: inherit; 
+}
+
+/* ==========================================================================
+   4. PRESET NATIVO PARA FORMULÁRIOS (Form Architecture)
+   ========================================================================== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lazy-space-md);
+  width: 100%;
+  max-width: 480px;
+}
+
+/* Alinha inputs e labels em blocos verticais nativos de formulário */
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lazy-space-xs);
+  width: 100%;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: var(--lazy-weight-medium);
+  color: hsl(var(--lazy-text-main-raw));
+}
+
+/* Estilização automatizada para campos de texto nativos */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea,
+select {
+  font-family: inherit;
+  font-size: 1rem;
+  color: hsl(var(--lazy-text-main-raw));
+  background-color: hsl(var(--lazy-card-raw));
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-md);
+  padding: var(--lazy-space-sm);
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
+}
+
+/* Efeito de Foco unificado usando a nossa cor primária corporativa */
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: hsl(var(--lazy-primary-raw));
+  box-shadow: 0 0 0 3px hsl(var(--lazy-primary-raw) / 0.15);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: hsl(var(--lazy-primary-raw));
+  cursor: pointer;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* BUTTONS NATIVOS */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: var(--lazy-weight-medium);
+  background-color: hsl(var(--lazy-primary-raw));
+  color: #ffffff;
+  border: none;
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  border-radius: var(--lazy-radius-md);
+  cursor: pointer;
+  line-height: 1;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  width: fit-content;
+}
+
+button:hover {
+  background-color: hsl(var(--lazy-primary-raw) / 0.9);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+[role="button"] { cursor: pointer; }
+
+/* ==========================================================================
+   5. MÍDIAS, LINKS E TABELAS ADMINISTRATIVAS
+   ========================================================================== */
+ul, ol { list-style: none; }
+
+img, svg, video, canvas, audio, iframe {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
-/* Herança consistente para elementos de entrada de dados (Inputs) e botões */
-input,
-button,
-textarea,
-select {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  outline: none;
-}
-
-/* Define o cursor interativo para elementos clicáveis por padrão */
-button,
-[role="button"] {
-  cursor: pointer;
-}
-
-/* Desativa o redimensionamento descontrolado que quebra layouts em áreas de texto */
-textarea {
-  resize: vertical;
-}
-
-/* Remove decorações padrão de links e aplica transição suave */
 a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.15s ease;
 }
+a:hover { color: hsl(var(--lazy-primary-raw)); }
 
-/* Garante isolamento de tabelas administrativas para evitar vazamento de células */
 table {
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
+  margin-bottom: var(--lazy-space-md);
+  text-align: left;
+}
+
+thead tr {
+  border-bottom: 2px solid hsl(var(--lazy-border-raw));
+}
+
+th {
+  font-weight: var(--lazy-weight-bold);
+  padding: var(--lazy-space-sm);
+  color: hsl(var(--lazy-text-main-raw));
+}
+
+td {
+  padding: var(--lazy-space-sm);
+  border-bottom: 1px solid hsl(var(--lazy-border-raw));
 }

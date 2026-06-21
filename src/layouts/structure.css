@@ -31,6 +31,19 @@
  */
 
 /**
+ * Modificador Universal de Centralização.
+ * Usado para centralizar blocos de conteúdo macro (como Seções Hero)
+ * alinhando textos, flex-items e margens de forma indestrutível.
+ */
+.lazy-center, 
+[data-align="center"] {
+  text-align: center !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-inline: auto !important;
+}
+
+/**
  * Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna.
  * O gap padrão é estabelecido aqui e pode ser sobrescrito pelos modificadores de densidade.
  */

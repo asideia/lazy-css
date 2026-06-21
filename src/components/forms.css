@@ -58,3 +58,11 @@
   box-shadow: 0 0 0 3px hsl(var(--lazy-primary-raw) / 0.15);
   outline: none; /* Remove o outline nativo do browser para manter a consistência do design token */
 }
+
+/* Dentro de src/components/forms.css ou correspondente de componentes */
+.lazy-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lazy-space-xs);
+  width: 100%;
+}

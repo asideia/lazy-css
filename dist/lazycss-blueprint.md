@@ -15,29 +15,17 @@
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: BASE
-**Context Scope & Domain:** Reset e Normalização Base do Lazy CSS.
+**Context Scope & Domain:** Reset, Normalização e Presets Semânticos Universais (ADR 0007) do Lazy CSS.
 Zera margens e paddings nativos, força o cálculo de tamanho previsível (box-sizing),
 desativa list-styles, normaliza elementos de mídia para comportamento responsivo
-e estabelece a herança tipográfica e cromática compulsória a partir das tags raiz (html, body).
+e estabelece a herança tipográfica, cromática e estrutural compulsória a partir das tags.
+Entrega uma interface premium, ergonômica e responsiva por padrão, sem necessidade de classes iniciais.
 
 ### 🔐 ALLOWED CLASS CONTRACTS & SELECTORS
 The AI can ONLY use the following class signatures for this category. Do not hallucinate variants.
 
 | Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
 | :--- | :--- | :--- |
-
-### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
-Replicate these structural combinations precisely when generating user interfaces:
-
-#### Concept: Demonstração de Herança Nativa de Input e Listas
-```html
-<div class="lazy-stack lazy-gap-xs">
-<ul style="padding: 0;">
-<li>Este item não possui marcadores/bolinhas nativas por padrão.</li>
-</ul>
-<input type="text" placeholder="Herda fonte, cor e remove outline automaticamente.">
-</div>
-```
 
 ---
 
@@ -380,6 +368,7 @@ The AI can ONLY use the following class signatures for this category. Do not hal
 
 | Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
 | :--- | :--- | :--- |
+| `.lazy-center` | `structure` | Modificador Universal de Centralização. Usado para centralizar blocos de conteúdo macro (como Seções Hero) alinhando textos, flex-items e margens de forma indestrutível. |
 | `.lazy-stack` | `structure` | Empilhador vertical atômico baseado em Flexbox. Alinha todos os elementos filhos em uma única coluna. O gap padrão é estabelecido aqui e pode ser sobrescrito pelos modificadores de densidade. |
 | `.lazy-row` | `structure` | Alinhador horizontal baseado em Flexbox. Posiciona os elementos lado a lado com quebra automática (wrap) ativada para telas pequenas. Centraliza itens verticalmente por padrão ergonômico. |
 | `.lazy-row-between` | `structure` | Modificadores de Alinhamento para o eixo principal da .lazy-row |
