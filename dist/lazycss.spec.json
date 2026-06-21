@@ -2,34 +2,34 @@
   {
     "category": "base",
     "id": "reset",
-    "description": "Reset, Normalização e Presets Semânticos Universais (ADR 0007) do Lazy CSS.\nZera margens e paddings nativos, força o cálculo de tamanho previsível (box-sizing),\ndesativa list-styles, normaliza elementos de mídia para comportamento responsivo\ne estabelece a herança tipográfica, cromática e estrutural compulsória a partir das tags.\nEntrega uma interface premium, ergonômica e responsiva por padrão, sem necessidade de classes iniciais.",
+    "description": "Reset, Normalização e Estrutura Semântica Macro (ADR 0007) do Lazy CSS.\nZera margens e paddings nativos, força o cálculo de tamanho previsível (box-sizing),\ndesativa list-styles estruturais, normaliza elementos de mídia para comportamento responsivo\ne estabelece a herança tipográfica, cromática e estrutural compulsória a partir das tags.\nEntrega uma interface premium, ergonômica e responsiva por padrão, sem necessidade de classes iniciais.",
     "blueprint_specs": [],
     "sandbox_elements": []
   },
   {
     "category": "components",
     "id": "buttons",
-    "description": "Componentes de Botões e Elementos de Ação do Lazy CSS.\nFornece a fundação interativa para gatilhos, submissões de formulários e navegação.\nUtiliza modificadores de filtro nativo (brightness) para gerenciar estados de hover\ne clique de forma agnóstica a cores, reduzindo drasticamente a verbosidade do código.",
+    "description": "Componentes de Botões e Elementos de Ação do Lazy CSS (ADR 0007).\nFornece a fundação interativa para gatilhos, submissões de formulários e navegação.\nCentraliza e coesiona a estilização da tag nativa <button> e da classe utilitária .lazy-btn.\nUtiliza modificadores de filtro nativo (brightness) para gerenciar estados de hover\ne clique de forma agnóstica a cores, reduzindo drasticamente a verbosidade do código.",
     "blueprint_specs": [
-      {
-        "signature": ".lazy-btn",
-        "context": "buttons",
-        "description": "Assinatura base indestrutível para elementos interativos. Fornece alinhamento flexível interno (inline-flex), tipografia integrada, padding fluido médio, proteção contra quebra de linha (nowrap) e transições suaves de estado."
-      },
       {
         "signature": ".lazy-btn-primary",
         "context": "buttons",
-        "description": "Modificador de variante para ação primária. Aplica o token de cor institucional principal do sistema como plano de fundo e adiciona um anel sutil de elevação via sombra projetada."
+        "description": "Modificador de variante para ação primária. Aplica o token de cor institucional\nprincipal do sistema como plano de fundo e adiciona um anel sutil de elevação."
+      },
+      {
+        "signature": ".lazy-btn-secondary",
+        "context": "buttons",
+        "description": "Modificador explícito secundário (útil quando aplicado em tags <a> que precisam\nresetar cores ou destacar comportamento de contorno sutil)."
       }
     ],
     "sandbox_elements": [
       {
         "name": "Grupo de Ações Primária e Secundária (Inline Row)",
-        "html": "<div class=\"lazy-row lazy-gap-xs\">\n<button type=\"button\" class=\"lazy-btn\">Cancelar</button>\n<button type=\"submit\" class=\"lazy-btn lazy-btn-primary\">Confirmar Registro</button>\n</div>"
+        "html": "<div class=\"lazy-row lazy-gap-xs\">\n<button type=\"button\">Cancelar (Nativo)</button>\n<button type=\"submit\" class=\"lazy-btn-primary\">Confirmar Registro</button>\n</div>"
       },
       {
         "name": "Botão Composto com Estado Cromático Destrutivo",
-        "html": "<button type=\"button\" class=\"lazy-btn lazy-status-danger\" style=\"border-radius: var(--lazy-radius-md);\">\nExcluir Conta\n</button>"
+        "html": "<button type=\"button\" class=\"lazy-status-danger\">Excluir Conta</button>"
       }
     ]
   },
@@ -63,54 +63,32 @@
   {
     "category": "components",
     "id": "forms",
-    "description": "Componentes e Utilitários de Formulários do Lazy CSS.\nFornece controles de entrada de dados (inputs, textareas) com comportamento fluido,\ntipografia integrada aos tokens do sistema, placeholders atenuados e estados de foco\nacessíveis com feedback visual suave por transição de CSS.",
-    "blueprint_specs": [
-      {
-        "signature": ".lazy-field",
-        "context": "forms",
-        "description": "Campo de entrada de dados genérico. Aplica largura total, padding baseado nos tokens de espaçamento fluido, fundo de card para contraste e cantos arredondados padrão. Possui animação de transição nativa para estados de foco."
-      }
-    ],
+    "description": "Componentes e Utilitários de Formulários do Lazy CSS (ADR 0007).\nCentraliza e coesiona o design de controles de entrada de dados (inputs, textareas, selects, labels).\nFornece comportamento fluido, tipografia integrada, placeholders atenuados\ne estados de foco acessíveis com feedback visual suave por transição de CSS.",
+    "blueprint_specs": [],
     "sandbox_elements": [
       {
-        "name": "Grupo de Campo de Entrada Padrão (Vertical Stack)",
-        "html": "<div class=\"lazy-stack lazy-gap-xs\">\n<label style=\"font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));\">E-mail Corporativo</label>\n<input type=\"email\" class=\"lazy-field\" placeholder=\"exemplo@empresa.com\">\n</div>"
+        "name": "Grupo de Campo de Entrada Padrão (Vertical Stack Nativo)",
+        "html": "<div class=\"lazy-form-group\">\n<label>E-mail Corporativo</label>\n<input type=\"email\" placeholder=\"exemplo@empresa.com\">\n</div>"
       },
       {
         "name": "Formulário em Linha Composto (Row Layout)",
-        "html": "<div class=\"lazy-row lazy-gap-sm\">\n<div class=\"lazy-fill lazy-stack lazy-gap-xs\">\n<label style=\"font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));\">Primeiro Nome</label>\n<input type=\"text\" class=\"lazy-field\" placeholder=\"John\">\n</div>\n<div class=\"lazy-fill lazy-stack lazy-gap-xs\">\n<label style=\"font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));\">Sobrenome</label>\n<input type=\"text\" class=\"lazy-field\" placeholder=\"Doe\">\n</div>\n</div>"
+        "html": "<div class=\"lazy-row lazy-gap-sm\">\n<div class=\"lazy-fill lazy-form-group\">\n<label>Primeiro Nome</label>\n<input type=\"text\" placeholder=\"John\">\n</div>\n<div class=\"lazy-fill lazy-form-group\">\n<label>Sobrenome</label>\n<input type=\"text\" placeholder=\"Doe\">\n</div>\n</div>"
       }
     ]
   },
   {
     "category": "components",
     "id": "lists",
-    "description": "Componentes e Utilitários de Listas do Lazy CSS.\nRestaura e padroniza o comportamento de listas ordenadas e textuais que foram\nnormalizadas pelo Reset global. Garante espaçamento horizontal (padding)\nergonômico para que marcadores e numerações não vazem para fora dos contêineres.",
-    "blueprint_specs": [
-      {
-        "signature": ".lazy-list",
-        "context": "lists",
-        "description": "Assinatura base para listas textuais. Garante o recuo à esquerda baseado nos tokens de espaçamento fluido do framework para abrigar os marcadores com segurança."
-      },
-      {
-        "signature": ".lazy-list-ordered",
-        "context": "lists",
-        "description": "Modificador para listas ordenadas. Restaura o contador decimal nativo do navegador e define o alinhamento correto dos numerais."
-      },
-      {
-        "signature": ".lazy-list-bullet",
-        "context": "lists",
-        "description": "Modificador para listas não-ordenadas (bullet points). Restaura o marcador circular clássico de forma limpa e sutil."
-      }
-    ],
+    "description": "Componentes e Utilitários de Listas do Lazy CSS (ADR 0007).\nRestaura, padroniza e coesiona o comportamento de listas ordenadas e textuais nativas.\nGarante espaçamento horizontal (padding) ergonômico e respiro vertical automático,\nassegurando que marcadores e numerações herdem a tipografia e não vazem dos contêineres.",
+    "blueprint_specs": [],
     "sandbox_elements": [
       {
-        "name": "Lista Ordenada de Passos (Ordered Guide)",
-        "html": "<ol class=\"lazy-list lazy-list-ordered\">\n<li>Baixar o manifesto técnico do blueprint.</li>\n<li>Injetar o arquivo Markdown na sessão da LLM.</li>\n<li>Solicitar a geração da interface base.</li>\n</ol>"
+        "name": "Lista Ordenada de Passos (Nativa / Ordered Guide)",
+        "html": "<ol>\n<li>Baixar o manifesto técnico do blueprint.</li>\n<li>Injetar o arquivo Markdown na sessão da LLM.</li>\n<li>Solicitar a geração da interface base.</li>\n</ol>"
       },
       {
-        "name": "Lista com Marcadores Tradicionais (Bullet List)",
-        "html": "<ul class=\"lazy-list lazy-list-bullet\">\n<li>Suporte nativo a variáveis HSL.</li>\n<li>Contrato semântico otimizado para IA.</li>\n<li>Renderização isolada de viewports.</li>\n</ul>"
+        "name": "Lista com Marcadores Tradicionais (Nativa / Bullet List)",
+        "html": "<ul>\n<li>Suporte nativo a variáveis HSL.</li>\n<li>Contrato semântico otimizado para IA.</li>\n<li>Renderização isolada de viewports.</li>\n</ul>"
       }
     ]
   },
@@ -211,17 +189,12 @@
   {
     "category": "components",
     "id": "tables",
-    "description": "Componentes de Tabelas Estruturadas do Lazy CSS.\nFornece estilização nativa, limpa e de alta densidade para listagem de dados,\nrelatórios e painéis gerenciais. Implementa o princípio de responsividade intrínseca,\nconvertendo tabelas densas em blocos empilhados (cards) no mobile,\nutilizando atributos de dados sem quebrar a semântica original do HTML.",
+    "description": "Componentes de Tabelas Estruturadas do Lazy CSS (ADR 0007).\nFornece estilização nativa, limpa e de alta densidade para listagem de dados,\nrelatórios e painéis gerenciais. Implementa o princípio de responsividade intrínseca,\ncombinando a estilização das tags nativas (table, th, td) com a classe .lazy-table.\nConverte tabelas densas em blocos empilhados (cards) no mobile utilizando atributos de dados.",
     "blueprint_specs": [
       {
         "signature": ".lazy-table-wrapper",
         "context": "tables",
         "description": "Wrapper de contenção mecânica. Obrigatoriamente envelopa a tag <table>.\nGarante o arredondamento perfeito do contêiner e isola o escopo de scroll\nhorizontal se o layout de tabela tradicional for forçado."
-      },
-      {
-        "signature": ".lazy-table",
-        "context": "tables",
-        "description": "Componente de tabela principal. Ocupa toda a largura disponível, herda a tipografia\ne gerencia as margens externas do bloco."
       },
       {
         "signature": ".lazy-text-break",
@@ -232,7 +205,7 @@
     "sandbox_elements": [
       {
         "name": "Tabela de Dados Administrativa Padrão (Alta Densidade)",
-        "html": "<div class=\"lazy-table-wrapper\">\n<table class=\"lazy-table\">\n<thead>\n<tr>\n<th>ID</th>\n<th>Nome do Cliente</th>\n<th>Hash de Verificação</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td data-label=\"ID\">#1001</td>\n<td data-label=\"Nome do Cliente\">Ana Silva</td>\n<td data-label=\"Hash de Verificação\"><code class=\"lazy-text-break\">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>\n</tr>\n<tr>\n<td data-label=\"ID\">#1002</td>\n<td data-label=\"Nome do Cliente\">Carlos Souza</td>\n<td data-label=\"Hash de Verificação\"><code class=\"lazy-text-break\">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>\n</tr>\n</tbody>\n</table>\n</div>"
+        "html": "<div class=\"lazy-table-wrapper\">\n<table class=\"lazy-table\">\n<thead>\n<tr>\n<th>ID</th>\n<th>Nome do Cliente</th>\n<th>Hash de Verificação</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td data-label=\"ID\">#1001</td>\n<td data-label=\"Nome do Cliente\">Ana Silva</td>\n<td data-label=\"Hash de Verificação\"><code class=\"lazy-text-break\">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>\n</tr>\n</tbody>\n</table>\n</div>"
       }
     ]
   },

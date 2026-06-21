@@ -15,9 +15,9 @@
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: BASE
-**Context Scope & Domain:** Reset, Normalização e Presets Semânticos Universais (ADR 0007) do Lazy CSS.
+**Context Scope & Domain:** Reset, Normalização e Estrutura Semântica Macro (ADR 0007) do Lazy CSS.
 Zera margens e paddings nativos, força o cálculo de tamanho previsível (box-sizing),
-desativa list-styles, normaliza elementos de mídia para comportamento responsivo
+desativa list-styles estruturais, normaliza elementos de mídia para comportamento responsivo
 e estabelece a herança tipográfica, cromática e estrutural compulsória a partir das tags.
 Entrega uma interface premium, ergonômica e responsiva por padrão, sem necessidade de classes iniciais.
 
@@ -30,8 +30,9 @@ The AI can ONLY use the following class signatures for this category. Do not hal
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: COMPONENTS
-**Context Scope & Domain:** Componentes de Botões e Elementos de Ação do Lazy CSS.
+**Context Scope & Domain:** Componentes de Botões e Elementos de Ação do Lazy CSS (ADR 0007).
 Fornece a fundação interativa para gatilhos, submissões de formulários e navegação.
+Centraliza e coesiona a estilização da tag nativa <button> e da classe utilitária .lazy-btn.
 Utiliza modificadores de filtro nativo (brightness) para gerenciar estados de hover
 e clique de forma agnóstica a cores, reduzindo drasticamente a verbosidade do código.
 
@@ -40,8 +41,8 @@ The AI can ONLY use the following class signatures for this category. Do not hal
 
 | Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
 | :--- | :--- | :--- |
-| `.lazy-btn` | `buttons` | Assinatura base indestrutível para elementos interativos. Fornece alinhamento flexível interno (inline-flex), tipografia integrada, padding fluido médio, proteção contra quebra de linha (nowrap) e transições suaves de estado. |
-| `.lazy-btn-primary` | `buttons` | Modificador de variante para ação primária. Aplica o token de cor institucional principal do sistema como plano de fundo e adiciona um anel sutil de elevação via sombra projetada. |
+| `.lazy-btn-primary` | `buttons` | Modificador de variante para ação primária. Aplica o token de cor institucional principal do sistema como plano de fundo e adiciona um anel sutil de elevação. |
+| `.lazy-btn-secondary` | `buttons` | Modificador explícito secundário (útil quando aplicado em tags <a> que precisam resetar cores ou destacar comportamento de contorno sutil). |
 
 ### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
 Replicate these structural combinations precisely when generating user interfaces:
@@ -49,16 +50,14 @@ Replicate these structural combinations precisely when generating user interface
 #### Concept: Grupo de Ações Primária e Secundária (Inline Row)
 ```html
 <div class="lazy-row lazy-gap-xs">
-<button type="button" class="lazy-btn">Cancelar</button>
-<button type="submit" class="lazy-btn lazy-btn-primary">Confirmar Registro</button>
+<button type="button">Cancelar (Nativo)</button>
+<button type="submit" class="lazy-btn-primary">Confirmar Registro</button>
 </div>
 ```
 
 #### Concept: Botão Composto com Estado Cromático Destrutivo
 ```html
-<button type="button" class="lazy-btn lazy-status-danger" style="border-radius: var(--lazy-radius-md);">
-Excluir Conta
-</button>
+<button type="button" class="lazy-status-danger">Excluir Conta</button>
 ```
 
 ---
@@ -102,39 +101,38 @@ Replicate these structural combinations precisely when generating user interface
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: COMPONENTS
-**Context Scope & Domain:** Componentes e Utilitários de Formulários do Lazy CSS.
-Fornece controles de entrada de dados (inputs, textareas) com comportamento fluido,
-tipografia integrada aos tokens do sistema, placeholders atenuados e estados de foco
-acessíveis com feedback visual suave por transição de CSS.
+**Context Scope & Domain:** Componentes e Utilitários de Formulários do Lazy CSS (ADR 0007).
+Centraliza e coesiona o design de controles de entrada de dados (inputs, textareas, selects, labels).
+Fornece comportamento fluido, tipografia integrada, placeholders atenuados
+e estados de foco acessíveis com feedback visual suave por transição de CSS.
 
 ### 🔐 ALLOWED CLASS CONTRACTS & SELECTORS
 The AI can ONLY use the following class signatures for this category. Do not hallucinate variants.
 
 | Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
 | :--- | :--- | :--- |
-| `.lazy-field` | `forms` | Campo de entrada de dados genérico. Aplica largura total, padding baseado nos tokens de espaçamento fluido, fundo de card para contraste e cantos arredondados padrão. Possui animação de transição nativa para estados de foco. |
 
 ### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
 Replicate these structural combinations precisely when generating user interfaces:
 
-#### Concept: Grupo de Campo de Entrada Padrão (Vertical Stack)
+#### Concept: Grupo de Campo de Entrada Padrão (Vertical Stack Nativo)
 ```html
-<div class="lazy-stack lazy-gap-xs">
-<label style="font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));">E-mail Corporativo</label>
-<input type="email" class="lazy-field" placeholder="exemplo@empresa.com">
+<div class="lazy-form-group">
+<label>E-mail Corporativo</label>
+<input type="email" placeholder="exemplo@empresa.com">
 </div>
 ```
 
 #### Concept: Formulário em Linha Composto (Row Layout)
 ```html
 <div class="lazy-row lazy-gap-sm">
-<div class="lazy-fill lazy-stack lazy-gap-xs">
-<label style="font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));">Primeiro Nome</label>
-<input type="text" class="lazy-field" placeholder="John">
+<div class="lazy-fill lazy-form-group">
+<label>Primeiro Nome</label>
+<input type="text" placeholder="John">
 </div>
-<div class="lazy-fill lazy-stack lazy-gap-xs">
-<label style="font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));">Sobrenome</label>
-<input type="text" class="lazy-field" placeholder="Doe">
+<div class="lazy-fill lazy-form-group">
+<label>Sobrenome</label>
+<input type="text" placeholder="Doe">
 </div>
 </div>
 ```
@@ -142,35 +140,32 @@ Replicate these structural combinations precisely when generating user interface
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: COMPONENTS
-**Context Scope & Domain:** Componentes e Utilitários de Listas do Lazy CSS.
-Restaura e padroniza o comportamento de listas ordenadas e textuais que foram
-normalizadas pelo Reset global. Garante espaçamento horizontal (padding)
-ergonômico para que marcadores e numerações não vazem para fora dos contêineres.
+**Context Scope & Domain:** Componentes e Utilitários de Listas do Lazy CSS (ADR 0007).
+Restaura, padroniza e coesiona o comportamento de listas ordenadas e textuais nativas.
+Garante espaçamento horizontal (padding) ergonômico e respiro vertical automático,
+assegurando que marcadores e numerações herdem a tipografia e não vazem dos contêineres.
 
 ### 🔐 ALLOWED CLASS CONTRACTS & SELECTORS
 The AI can ONLY use the following class signatures for this category. Do not hallucinate variants.
 
 | Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
 | :--- | :--- | :--- |
-| `.lazy-list` | `lists` | Assinatura base para listas textuais. Garante o recuo à esquerda baseado nos tokens de espaçamento fluido do framework para abrigar os marcadores com segurança. |
-| `.lazy-list-ordered` | `lists` | Modificador para listas ordenadas. Restaura o contador decimal nativo do navegador e define o alinhamento correto dos numerais. |
-| `.lazy-list-bullet` | `lists` | Modificador para listas não-ordenadas (bullet points). Restaura o marcador circular clássico de forma limpa e sutil. |
 
 ### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
 Replicate these structural combinations precisely when generating user interfaces:
 
-#### Concept: Lista Ordenada de Passos (Ordered Guide)
+#### Concept: Lista Ordenada de Passos (Nativa / Ordered Guide)
 ```html
-<ol class="lazy-list lazy-list-ordered">
+<ol>
 <li>Baixar o manifesto técnico do blueprint.</li>
 <li>Injetar o arquivo Markdown na sessão da LLM.</li>
 <li>Solicitar a geração da interface base.</li>
 </ol>
 ```
 
-#### Concept: Lista com Marcadores Tradicionais (Bullet List)
+#### Concept: Lista com Marcadores Tradicionais (Nativa / Bullet List)
 ```html
-<ul class="lazy-list lazy-list-bullet">
+<ul>
 <li>Suporte nativo a variáveis HSL.</li>
 <li>Contrato semântico otimizado para IA.</li>
 <li>Renderização isolada de viewports.</li>
@@ -263,11 +258,11 @@ Replicate these structural combinations precisely when generating user interface
 ---
 
 ## 📦 SYSTEM ARCHITECTURE: COMPONENTS
-**Context Scope & Domain:** Componentes de Tabelas Estruturadas do Lazy CSS.
+**Context Scope & Domain:** Componentes de Tabelas Estruturadas do Lazy CSS (ADR 0007).
 Fornece estilização nativa, limpa e de alta densidade para listagem de dados,
 relatórios e painéis gerenciais. Implementa o princípio de responsividade intrínseca,
-convertendo tabelas densas em blocos empilhados (cards) no mobile,
-utilizando atributos de dados sem quebrar a semântica original do HTML.
+combinando a estilização das tags nativas (table, th, td) com a classe .lazy-table.
+Converte tabelas densas em blocos empilhados (cards) no mobile utilizando atributos de dados.
 
 ### 🔐 ALLOWED CLASS CONTRACTS & SELECTORS
 The AI can ONLY use the following class signatures for this category. Do not hallucinate variants.
@@ -275,7 +270,6 @@ The AI can ONLY use the following class signatures for this category. Do not hal
 | Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
 | :--- | :--- | :--- |
 | `.lazy-table-wrapper` | `tables` | Wrapper de contenção mecânica. Obrigatoriamente envelopa a tag <table>. Garante o arredondamento perfeito do contêiner e isola o escopo de scroll horizontal se o layout de tabela tradicional for forçado. |
-| `.lazy-table` | `tables` | Componente de tabela principal. Ocupa toda a largura disponível, herda a tipografia e gerencia as margens externas do bloco. |
 | `.lazy-text-break` | `tables` | Utilitário de segurança para quebra inteligente de strings massivas (Hashes, Tokens, URLs). Impede que sequências longas de caracteres sem espaço forcem o esticamento da célula. |
 
 ### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
@@ -297,11 +291,6 @@ Replicate these structural combinations precisely when generating user interface
 <td data-label="ID">#1001</td>
 <td data-label="Nome do Cliente">Ana Silva</td>
 <td data-label="Hash de Verificação"><code class="lazy-text-break">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</code></td>
-</tr>
-<tr>
-<td data-label="ID">#1002</td>
-<td data-label="Nome do Cliente">Carlos Souza</td>
-<td data-label="Hash de Verificação"><code class="lazy-text-break">816534932c2b715487349cdfe34932c2b715487349cdfe816534932c2b7154873</code></td>
 </tr>
 </tbody>
 </table>
