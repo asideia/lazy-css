@@ -1,8 +1,8 @@
 /**
  * [DESCRIPTION]
- * Reset, Normalização e Presets Semânticos Universais (ADR 0007) do Lazy CSS. 
+ * Reset, Normalização e Estrutura Semântica Macro (ADR 0007) do Lazy CSS. 
  * Zera margens e paddings nativos, força o cálculo de tamanho previsível (box-sizing),
- * desativa list-styles, normaliza elementos de mídia para comportamento responsivo
+ * desativa list-styles estruturais, normaliza elementos de mídia para comportamento responsivo
  * e estabelece a herança tipográfica, cromática e estrutural compulsória a partir das tags.
  * Entrega uma interface premium, ergonômica e responsiva por padrão, sem necessidade de classes iniciais.
  */
@@ -139,103 +139,11 @@ p {
 }
 
 /* ==========================================================================
-   4. PRESET NATIVO PARA FORMULÁRIOS (Form Architecture)
+   4. MÍDIAS, LINKS E CONTEXTO ESTRUTURAL
    ========================================================================== */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lazy-space-md);
-  width: 100%;
-  max-width: 480px;
+ul, ol { 
+  list-style: none; 
 }
-
-/* Alinha inputs e labels em blocos verticais nativos de formulário */
-form div {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lazy-space-xs);
-  width: 100%;
-}
-
-label {
-  font-size: 0.9rem;
-  font-weight: var(--lazy-weight-medium);
-  color: hsl(var(--lazy-text-main-raw));
-}
-
-/* Estilização automatizada para campos de texto nativos */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="url"],
-textarea,
-select {
-  font-family: inherit;
-  font-size: 1rem;
-  color: hsl(var(--lazy-text-main-raw));
-  background-color: hsl(var(--lazy-card-raw));
-  border: 1px solid hsl(var(--lazy-border-raw));
-  border-radius: var(--lazy-radius-md);
-  padding: var(--lazy-space-sm);
-  width: 100%;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  outline: none;
-}
-
-/* Efeito de Foco unificado usando a nossa cor primária corporativa */
-input:focus,
-textarea:focus,
-select:focus {
-  border-color: hsl(var(--lazy-primary-raw));
-  box-shadow: 0 0 0 3px hsl(var(--lazy-primary-raw) / 0.15);
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-  accent-color: hsl(var(--lazy-primary-raw));
-  cursor: pointer;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-/* BUTTONS NATIVOS */
-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: var(--lazy-weight-medium);
-  background-color: hsl(var(--lazy-primary-raw));
-  color: #ffffff;
-  border: none;
-  padding: var(--lazy-space-sm) var(--lazy-space-md);
-  border-radius: var(--lazy-radius-md);
-  cursor: pointer;
-  line-height: 1;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  width: fit-content;
-}
-
-button:hover {
-  background-color: hsl(var(--lazy-primary-raw) / 0.9);
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-[role="button"] { cursor: pointer; }
-
-/* ==========================================================================
-   5. MÍDIAS, LINKS E TABELAS ADMINISTRATIVAS
-   ========================================================================== */
-ul, ol { list-style: none; }
 
 img, svg, video, canvas, audio, iframe {
   display: block;
@@ -250,25 +158,4 @@ a {
 }
 a:hover { color: hsl(var(--lazy-primary-raw)); }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  margin-bottom: var(--lazy-space-md);
-  text-align: left;
-}
-
-thead tr {
-  border-bottom: 2px solid hsl(var(--lazy-border-raw));
-}
-
-th {
-  font-weight: var(--lazy-weight-bold);
-  padding: var(--lazy-space-sm);
-  color: hsl(var(--lazy-text-main-raw));
-}
-
-td {
-  padding: var(--lazy-space-sm);
-  border-bottom: 1px solid hsl(var(--lazy-border-raw));
-}
+[role="button"] { cursor: pointer; }
