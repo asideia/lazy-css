@@ -24,7 +24,7 @@
     "llm-friendly",
     "backend"
   ],
-  "author": "Sua Empresa",
+  "author": "AsIdeia",
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^10.4.20",
