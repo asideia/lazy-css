@@ -6,6 +6,13 @@
  */
 
 /**
+ * [BLUEPRINT_SPEC]
+ * - `[data-theme="light"]`: Escopo manual de cores com polaridade de alto contraste claro.
+ * - `[data-theme="dark"]`: Escopo manual de cores com polaridade invertida para modo noturno.
+ * - `@media (prefers-color-scheme: dark)`: Gatilho automático de inversão cromática indestrutível.
+ */
+
+/**
  * [SANDBOX_ELEMENT]
  * [SANDBOX_ELEMENT_NAME] Manipulação Dinâmica de Cores e Espaços Fluidos
  * [SANDBOX_ELEMENT_HTML]
@@ -15,9 +22,12 @@
  * </div>
  */
 
-:root {
+/* ==========================================================================
+   1. ESCOPO DE TOKENS E CONFIGURAÇÃO BASE / FALLBACK (TEMA LIGHT)
+   ========================================================================== */
+:root, [data-theme="light"] {
     /* ------------------------------------------------------------------------
-       1. CORES FUNDAMENTAIS (Raw HSL)
+       A. CORES FUNDAMENTAIS (Raw HSL) - LIGHT MODE
        ------------------------------------------------------------------------ */
 
     /**
@@ -151,4 +161,36 @@
      * Sombra elevada para destacar elementos sobrepostos (Dropdowns, modais, tooltips).
      */
     --lazy-shadow-raised: 0 4px 6px -1px hsl(var(--lazy-text-main-raw) / 0.05), 0 2px 4px -1px hsl(var(--lazy-text-main-raw) / 0.03);
+}
+
+/* ==========================================================================
+   2. INTERCEÇÃO AUTOMÁTICA DE POLARIDADE (TEMA DARK VIA MEDIA QUERY)
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --lazy-primary-raw:     220 85% 62%;   /* Saturação calibrada para contraste escuro */
+        --lazy-bg-raw:          215 25% 10%;   /* Dark profundo ergonômico */
+        --lazy-card-raw:        215 25% 14%;   /* Card sutilmente elevado */
+        --lazy-text-main-raw:   210 40% 98%;   /* Texto principal de alto contraste claro */
+        --lazy-text-muted-raw:  215 15% 65%;   /* Texto de apoio suavizado */
+        --lazy-border-raw:      215 15% 22%;   /* Divisórias escuras de baixa agressividade */
+        
+        --lazy-shadow-flat:     0 1px 3px rgba(0, 0, 0, 0.3);
+        --lazy-shadow-raised:   0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* ==========================================================================
+   3. INVERSÃO MANUAL DE POLARIDADE (TEMA DARK VIA ATRIBUTO)
+   ========================================================================== */
+[data-theme="dark"] {
+    --lazy-primary-raw:     220 85% 62%;
+    --lazy-bg-raw:          215 25% 10%;
+    --lazy-card-raw:        215 25% 14%;
+    --lazy-text-main-raw:   210 40% 98%;
+    --lazy-text-muted-raw:  215 15% 65%;
+    --lazy-border-raw:      215 15% 22%;
+    
+    --lazy-shadow-flat:     0 1px 3px rgba(0, 0, 0, 0.3);
+    --lazy-shadow-raised:   0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
 }
