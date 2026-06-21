@@ -1,18 +1,18 @@
 /**
  * [DESCRIPTION]
- * Componentes e Utilitários de Formulários do Lazy CSS.
- * Fornece controles de entrada de dados (inputs, textareas) com comportamento fluido,
- * tipografia integrada aos tokens do sistema, placeholders atenuados e estados de foco 
- * acessíveis com feedback visual suave por transição de CSS.
+ * Componentes e Utilitários de Formulários do Lazy CSS (ADR 0007).
+ * Centraliza e coesiona o design de controles de entrada de dados (inputs, textareas, selects, labels).
+ * Fornece comportamento fluido, tipografia integrada, placeholders atenuados 
+ * e estados de foco acessíveis com feedback visual suave por transição de CSS.
  */
 
 /**
  * [SANDBOX_ELEMENT]
- * [SANDBOX_ELEMENT_NAME] Grupo de Campo de Entrada Padrão (Vertical Stack)
+ * [SANDBOX_ELEMENT_NAME] Grupo de Campo de Entrada Padrão (Vertical Stack Nativo)
  * [SANDBOX_ELEMENT_HTML]
- * <div class="lazy-stack lazy-gap-xs">
- * <label style="font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));">E-mail Corporativo</label>
- * <input type="email" class="lazy-field" placeholder="exemplo@empresa.com">
+ * <div class="lazy-form-group">
+ * <label>E-mail Corporativo</label>
+ * <input type="email" placeholder="exemplo@empresa.com">
  * </div>
  */
 
@@ -21,48 +21,140 @@
  * [SANDBOX_ELEMENT_NAME] Formulário em Linha Composto (Row Layout)
  * [SANDBOX_ELEMENT_HTML]
  * <div class="lazy-row lazy-gap-sm">
- * <div class="lazy-fill lazy-stack lazy-gap-xs">
- * <label style="font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));">Primeiro Nome</label>
- * <input type="text" class="lazy-field" placeholder="John">
+ * <div class="lazy-fill lazy-form-group">
+ * <label>Primeiro Nome</label>
+ * <input type="text" placeholder="John">
  * </div>
- * <div class="lazy-fill lazy-stack lazy-gap-xs">
- * <label style="font-family: var(--lazy-font-sans); font-size: 0.9rem; font-weight: var(--lazy-weight-medium); color: hsl(var(--lazy-text-main-raw));">Sobrenome</label>
- * <input type="text" class="lazy-field" placeholder="Doe">
+ * <div class="lazy-fill lazy-form-group">
+ * <label>Sobrenome</label>
+ * <input type="text" placeholder="Doe">
  * </div>
  * </div>
  */
 
+/* ==========================================================================
+   1. CONTEXTO E ESTRUTURA DOS FORMULÁRIOS
+   ========================================================================== */
+
 /**
- * Campo de entrada de dados genérico. Aplica largura total, padding baseado nos tokens de espaçamento fluido, fundo de card para contraste e cantos arredondados padrão. Possui animação de transição nativa para estados de foco.
+ * Escopo macro de formulário. Alinha inputs e blocos verticais de forma nativa,
+ * controlando a largura máxima para manter uma ergonomia de leitura confortável.
  */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lazy-space-md);
+  width: 100%;
+  max-width: 480px;
+}
+
+/**
+ * Wrapper de associação semântica (Label + Field). 
+ * Chaveia os elementos internos para blocos empilhados verticalmente com gap controlado.
+ */
+form div,
+.lazy-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lazy-space-xs);
+  width: 100%;
+}
+
+/**
+ * Rótulos textuais de alta legibilidade.
+ * Herda a tipografia global e estabelece peso médio para contraste com o input.
+ */
+label {
+  font-family: var(--lazy-font-sans);
+  font-size: 0.9rem;
+  font-weight: var(--lazy-weight-medium);
+  color: hsl(var(--lazy-text-main-raw));
+}
+
+/* ==========================================================================
+   2. ASSINATURA BASE DOS CAMPOS DE ENTRADA (Fields)
+   ========================================================================== */
+
+/**
+ * Campo de entrada de dados genérico. Aplica largura total, padding baseado nos tokens 
+ * de espaçamento fluido, fundo de card para contraste e cantos arredondados padrão.
+ */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+textarea,
+select,
 .lazy-field {
   width: 100%;
+  font-family: inherit;
+  font-size: 1rem;
   padding: var(--lazy-space-sm) var(--lazy-space-md);
   background-color: hsl(var(--lazy-card-raw));
   color: hsl(var(--lazy-text-main-raw));
   border: 1px solid hsl(var(--lazy-border-raw));
   border-radius: var(--lazy-radius-md);
   box-shadow: var(--lazy-shadow-flat);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none; /* Remove o outline nativo do browser para proteger os design tokens */
+  -webkit-appearance: none; /* Normaliza renderizações invasivas do iOS */
+  appearance: none;
+}
+
+/* Redefinição sutil para elementos de seleção que necessitam da seta nativa ou customizada */
+select {
+  appearance: auto;
+  cursor: pointer;
 }
 
 /* Placeholder discreto - Estilização atenuada para indicação de dados */
+input::placeholder,
+textarea::placeholder,
 .lazy-field::placeholder {
   color: hsl(var(--lazy-text-muted-raw));
-  opacity: 0.7;
+  opacity: 0.65;
 }
 
-/* Estado de Foco (Focus) Seguro e Elegante - Feedback de acessibilidade usando anel de destaque suave */
+/* ==========================================================================
+   3. GERENCIAMENTO DE ESTADOS (Focus, Disabled, Readonly)
+   ========================================================================== */
+
+/* Estado de Foco Seguro e Elegante - Feedback de acessibilidade usando anel de destaque suave */
+input:focus,
+textarea:focus,
+select:focus,
 .lazy-field:focus {
   border-color: hsl(var(--lazy-primary-raw));
   box-shadow: 0 0 0 3px hsl(var(--lazy-primary-raw) / 0.15);
-  outline: none; /* Remove o outline nativo do browser para manter a consistência do design token */
 }
 
-/* Dentro de src/components/forms.css ou correspondente de componentes */
-.lazy-form-group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--lazy-space-xs);
-  width: 100%;
+/* Elementos de seleção binária (Checkbox e Radio) integrados à cor primária */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: hsl(var(--lazy-primary-raw));
+  width: auto;
+  cursor: pointer;
+}
+
+/* Áreas de texto com redimensionamento estrito vertical e área útil inicial ergonômica */
+textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+
+/* Bloqueios visuais e mecânicos para estados inativos */
+input:disabled,
+textarea:disabled,
+select:disabled,
+input[readonly],
+textarea[readonly] {
+  background-color: hsl(var(--lazy-bg-raw));
+  color: hsl(var(--lazy-text-muted-raw));
+  border-color: hsl(var(--lazy-border-raw));
+  cursor: not-allowed;
+  opacity: 0.7;
 }
