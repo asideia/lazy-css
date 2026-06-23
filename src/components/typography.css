@@ -1,0 +1,101 @@
+/**
+ * [DESCRIPTION]
+ * Componentes, Presets Inline e Utilitários de Tipografia do Lazy CSS (ADR 0007).
+ * Centraliza a estilização de elementos tipográficos avançados (blocos de código, 
+ * citações e marcações) e fornece classes utilitárias de precisão para gerenciamento
+ * de alinhamento, peso, transformações e estados cromáticos textuais de forma agnóstica.
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Bloco de Citação Semântica (Blockquote)
+ * [SANDBOX_ELEMENT_HTML]
+ * <blockquote>
+ * "O programador agnóstico foca nos fundamentos da computação, tornando a linguagem um mero detalhe de implementação."
+ * </blockquote>
+ */
+
+/**
+ * [SANDBOX_ELEMENT]
+ * [SANDBOX_ELEMENT_NAME] Renderização de Código e Utilitários Cromáticos
+ * [SANDBOX_ELEMENT_HTML]
+ * <p class="lazy-text-muted">
+ * Use o modificador <code class="lazy-text-uppercase">.lazy-text-center</code> para centralizar fluxos textuais.
+ * </p>
+ */
+
+/* ==========================================================================
+   1. PRESETS TIPOGRÁFICOS NATIVOS (Inline & Block Semantics)
+   ========================================================================== */
+
+/**
+ * Elementos de código inline e blocos de texto pré-formatados. 
+ * Força a herança da família monoespaçada dos design tokens, reduz sutilmente a escala
+ * para casar com a linha e injeta um fundo de alto contraste atenuado.
+ */
+code, 
+pre {
+  font-family: var(--lazy-font-mono, monospace);
+  font-size: 0.9em;
+  background-color: hsl(var(--lazy-text-main-raw) / 0.05);
+  padding: 0.2em 0.4em;
+  border-radius: var(--lazy-radius-sm);
+  color: hsl(var(--lazy-text-main-raw));
+}
+
+/**
+ * Bloco de código pré-formatado estrutural. Converte o elemento para bloco, 
+ * injeta padding elástico interno e isola o escopo de overflow horizontal caso 
+ * strings ou linhas de código massivas estourem a largura do container pai.
+ */
+pre {
+  display: block;
+  padding: var(--lazy-space-md);
+  overflow-x: auto;
+  margin-bottom: var(--lazy-space-md);
+}
+
+/**
+ * Citação em bloco semântica. Cria uma barra vertical de destaque à esquerda utilizando
+ * a cor primária institucional e força o estilo itálico com cor atenuada para 
+ * isolar visualmente o texto citado do fluxo editorial padrão.
+ */
+blockquote {
+  border-left: 4px solid hsl(var(--lazy-primary-raw));
+  padding-left: var(--lazy-space-md);
+  margin: var(--lazy-space-md) 0;
+  color: hsl(var(--lazy-text-muted-raw));
+  font-style: italic;
+}
+
+/* ==========================================================================
+   2. UTILITÁRIOS DE ALINHAMENTO E DIRECIONAMENTO
+   ========================================================================== */
+
+/**
+ * Modificadores de ancoragem e alinhamento de texto. 
+ * Utilizam a flag !important para vencer a especificidade de componentes complexos 
+ * ou regras macro herdadas de seletores de tag do reset.
+ */
+.lazy-text-center { text-align: center !important; }
+.lazy-text-left   { text-align: left !important; }
+.lazy-text-right  { text-align: right !important; }
+
+/* ==========================================================================
+   3. TRANSFORMAÇÕES VISUAIS E ESTADOS CROMÁTICOS
+   ========================================================================== */
+
+/**
+ * Utilitário de capitalização compulsória. Transforma todos os caracteres internos em caixa alta.
+ */
+.lazy-text-uppercase { 
+  text-transform: uppercase; 
+}
+
+/**
+ * Modificador de atenuação cromática. Aplica o token de texto mutado do sistema
+ * para reduzir o contraste de elementos secundários, metadados ou legendas de apoio.
+ */
+.lazy-text-muted { 
+  color: hsl(var(--lazy-text-muted-raw)) !important; 
+}

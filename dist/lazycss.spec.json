@@ -210,6 +210,38 @@
     ]
   },
   {
+    "category": "components",
+    "id": "typography",
+    "description": "Componentes, Presets Inline e Utilitários de Tipografia do Lazy CSS (ADR 0007).\nCentraliza a estilização de elementos tipográficos avançados (blocos de código,\ncitações e marcações) e fornece classes utilitárias de precisão para gerenciamento\nde alinhamento, peso, transformações e estados cromáticos textuais de forma agnóstica.",
+    "blueprint_specs": [
+      {
+        "signature": ".lazy-text-center",
+        "context": "typography",
+        "description": "Modificadores de ancoragem e alinhamento de texto.\nUtilizam a flag !important para vencer a especificidade de componentes complexos\nou regras macro herdadas de seletores de tag do reset."
+      },
+      {
+        "signature": ".lazy-text-uppercase",
+        "context": "typography",
+        "description": "Utilitário de capitalização compulsória. Transforma todos os caracteres internos em caixa alta."
+      },
+      {
+        "signature": ".lazy-text-muted",
+        "context": "typography",
+        "description": "Modificador de atenuação cromática. Aplica o token de texto mutado do sistema\npara reduzir o contraste de elementos secundários, metadados ou legendas de apoio."
+      }
+    ],
+    "sandbox_elements": [
+      {
+        "name": "Bloco de Citação Semântica (Blockquote)",
+        "html": "<blockquote>\n\"O programador agnóstico foca nos fundamentos da computação, tornando a linguagem um mero detalhe de implementação.\"\n</blockquote>"
+      },
+      {
+        "name": "Renderização de Código e Utilitários Cromáticos",
+        "html": "<p class=\"lazy-text-muted\">\nUse o modificador <code class=\"lazy-text-uppercase\">.lazy-text-center</code> para centralizar fluxos textuais.\n</p>"
+      }
+    ]
+  },
+  {
     "category": "layouts",
     "id": "page-grid",
     "description": "Macroestruturas de Páginas e Grids Resilientes do Lazy CSS.\nFornece a fundação de posicionamento estrutural e visualização para dashboards\ncorporativos com rolagem isolada, grids de dados auto-responsivos via CSS Grid\ne contêineres centrais com limitação de largura ergonômica.",

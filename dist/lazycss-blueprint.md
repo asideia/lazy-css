@@ -299,6 +299,40 @@ Replicate these structural combinations precisely when generating user interface
 
 ---
 
+## 📦 SYSTEM ARCHITECTURE: COMPONENTS
+**Context Scope & Domain:** Componentes, Presets Inline e Utilitários de Tipografia do Lazy CSS (ADR 0007).
+Centraliza a estilização de elementos tipográficos avançados (blocos de código,
+citações e marcações) e fornece classes utilitárias de precisão para gerenciamento
+de alinhamento, peso, transformações e estados cromáticos textuais de forma agnóstica.
+
+### 🔐 ALLOWED CLASS CONTRACTS & SELECTORS
+The AI can ONLY use the following class signatures for this category. Do not hallucinate variants.
+
+| Signature/Selector | Parent Context | Strict Architectural Rule & Expected Behavior |
+| :--- | :--- | :--- |
+| `.lazy-text-center` | `typography` | Modificadores de ancoragem e alinhamento de texto. Utilizam a flag !important para vencer a especificidade de componentes complexos ou regras macro herdadas de seletores de tag do reset. |
+| `.lazy-text-uppercase` | `typography` | Utilitário de capitalização compulsória. Transforma todos os caracteres internos em caixa alta. |
+| `.lazy-text-muted` | `typography` | Modificador de atenuação cromática. Aplica o token de texto mutado do sistema para reduzir o contraste de elementos secundários, metadados ou legendas de apoio. |
+
+### 🎯 GOLD STANDARD EXAMPLES (FEW-SHOT LEARNING)
+Replicate these structural combinations precisely when generating user interfaces:
+
+#### Concept: Bloco de Citação Semântica (Blockquote)
+```html
+<blockquote>
+"O programador agnóstico foca nos fundamentos da computação, tornando a linguagem um mero detalhe de implementação."
+</blockquote>
+```
+
+#### Concept: Renderização de Código e Utilitários Cromáticos
+```html
+<p class="lazy-text-muted">
+Use o modificador <code class="lazy-text-uppercase">.lazy-text-center</code> para centralizar fluxos textuais.
+</p>
+```
+
+---
+
 ## 📦 SYSTEM ARCHITECTURE: LAYOUTS
 **Context Scope & Domain:** Macroestruturas de Páginas e Grids Resilientes do Lazy CSS.
 Fornece a fundação de posicionamento estrutural e visualização para dashboards
