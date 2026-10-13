@@ -11,27 +11,36 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write   # Required to create GitHub Releases and upload assets
-    
+
     steps:
       # 1. Checkout the repository code into the runner
       - name: 📂 Checkout codebase
         uses: actions/checkout@v4
 
-      # 2. Setup the Node.js runtime environment
+      # 2. Setup the Node.js runtime environment with caching enabled
       - name: 🟢 Setup Node.js env
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      # 3. Install development dependencies using clean install (npm ci)
+      # 3. Install all dependencies including devDependencies explicitly
       - name: 📦 Install ecosystem dependencies
-        run: npm ci
+        run: npm ci --include=dev
 
       # 4. Compile core CSS modules and build AI Specs/Blueprints
       - name: ⚡ Compile Lazy CSS artifacts
         run: npm run build
 
-      # 5. Create an automated GitHub Release and attach all updated production assets
+      # 5. Verify build outputs exist before proceeding to release
+      - name: 🔍 Verify build artifacts
+        run: |
+          ls -la dist/
+          test -f dist/lazycss.min.css || { echo "Missing dist/lazycss.min.css"; exit 1; }
+          test -f dist/lazycss.spec.json || { echo "Missing dist/lazycss.spec.json"; exit 1; }
+          test -f dist/lazycss-blueprint.md || { echo "Missing dist/lazycss-blueprint.md"; exit 1; }
+
+      # 6. Create an automated GitHub Release and attach production assets
       - name: 🏆 Generate automated GitHub Release
         uses: softprops/action-gh-release@v2
         with:
