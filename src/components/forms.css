@@ -37,22 +37,30 @@
    ========================================================================== */
 
 /**
- * Escopo macro de formulário. Alinha inputs e blocos verticais de forma nativa,
- * controlando a largura máxima para manter uma ergonomia de leitura confortável.
+ * Escopo macro de formulário. Ocupa 100% da largura do contêiner pai
+ * e alinha blocos verticais de forma fluida.
  */
 form {
   display: flex;
   flex-direction: column;
   gap: var(--lazy-space-md);
   width: 100%;
-  max-width: 480px;
+}
+
+/**
+ * Formulário compacto opcional (ex: tela de login centralizada).
+ */
+.lazy-form-compact {
+  max-width: 440px;
+  margin-inline: auto;
 }
 
 /**
  * Wrapper de associação semântica (Label + Field). 
  * Chaveia os elementos internos para blocos empilhados verticalmente com gap controlado.
+ * Preserva divs com classes de layout (como .lazy-row ou .lazy-grid).
  */
-form div,
+:where(form > div:not([class])),
 .lazy-form-group {
   display: flex;
   flex-direction: column;
@@ -76,8 +84,8 @@ label {
    ========================================================================== */
 
 /**
- * Campo de entrada de dados genérico. Aplica largura total, padding baseado nos tokens 
- * de espaçamento fluido, fundo de card para contraste e cantos arredondados padrão.
+ * Campo de entrada de dados genérico. Aplica largura total, altura ergonômica (min 42px)
+ * para mobile/touch, fundo de card para contraste e cantos arredondados padrão.
  */
 input[type="text"],
 input[type="email"],
@@ -86,10 +94,16 @@ input[type="search"],
 input[type="tel"],
 input[type="url"],
 input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
 textarea,
 select,
 .lazy-field {
   width: 100%;
+  min-height: 42px;
   font-family: inherit;
   font-size: 1rem;
   padding: var(--lazy-space-sm) var(--lazy-space-md);
@@ -99,14 +113,67 @@ select,
   border-radius: var(--lazy-radius-md);
   box-shadow: var(--lazy-shadow-flat);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
-  outline: none; /* Remove o outline nativo do browser para proteger os design tokens */
-  -webkit-appearance: none; /* Normaliza renderizações invasivas do iOS */
+  outline: none;
+  -webkit-appearance: none;
   appearance: none;
 }
 
-/* Redefinição sutil para elementos de seleção que necessitam da seta nativa ou customizada */
+/* Select com chevron integrado elegante */
 select {
-  appearance: auto;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--lazy-space-md) center;
+  background-size: 16px;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+/* Estilização moderna para input de upload de arquivos */
+input[type="file"] {
+  min-height: 42px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: hsl(var(--lazy-text-main-raw));
+  background-color: hsl(var(--lazy-card-raw));
+  border: 1px dashed hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-md);
+  padding: var(--lazy-space-xs) var(--lazy-space-sm);
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-sm);
+  background-color: hsl(var(--lazy-bg-raw));
+  color: hsl(var(--lazy-text-main-raw));
+  padding: 6px 12px;
+  margin-right: var(--lazy-space-sm);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: var(--lazy-weight-medium);
+  cursor: pointer;
+  transition: background-color 0.15s ease, filter 0.15s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+  filter: brightness(0.95);
+}
+
+/* Input do tipo cor */
+input[type="color"] {
+  height: 42px;
+  padding: 4px;
+  cursor: pointer;
+  border-radius: var(--lazy-radius-md);
+  border: 1px solid hsl(var(--lazy-border-raw));
+}
+
+/* Input do tipo range / slider */
+input[type="range"] {
+  accent-color: hsl(var(--lazy-primary-raw));
+  width: 100%;
   cursor: pointer;
 }
 
@@ -122,21 +189,27 @@ textarea::placeholder,
    3. GERENCIAMENTO DE ESTADOS (Focus, Disabled, Readonly)
    ========================================================================== */
 
-/* Estado de Foco Seguro e Elegante - Feedback de acessibilidade usando anel de destaque suave */
+/* Estado de Foco Seguro e Elegante com suporte a :focus e :focus-visible */
 input:focus,
+input:focus-visible,
 textarea:focus,
+textarea:focus-visible,
 select:focus,
-.lazy-field:focus {
+select:focus-visible,
+.lazy-field:focus,
+.lazy-field:focus-visible {
   border-color: hsl(var(--lazy-primary-raw));
-  box-shadow: 0 0 0 3px hsl(var(--lazy-primary-raw) / 0.15);
+  box-shadow: 0 0 0 3px hsl(var(--lazy-primary-raw) / 0.18);
 }
 
 /* Elementos de seleção binária (Checkbox e Radio) integrados à cor primária */
 input[type="checkbox"],
 input[type="radio"] {
   accent-color: hsl(var(--lazy-primary-raw));
-  width: auto;
+  width: 1.15rem;
+  height: 1.15rem;
   cursor: pointer;
+  vertical-align: middle;
 }
 
 /* Áreas de texto com redimensionamento estrito vertical e área útil inicial ergonômica */

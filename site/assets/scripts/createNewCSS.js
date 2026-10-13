@@ -9,8 +9,11 @@ const path = require('path');
 const args = process.argv.slice(2);
 const inputPath = args[0];
 
-// Definição da raiz do projeto e pasta padrão src
-const BASE_SRC = path.join(__dirname, '../../src');
+// Definição da raiz do projeto e pasta padrão src (suporta site/assets/ ou assets/)
+const ROOT_DIR = fs.existsSync(path.resolve(__dirname, '../../src'))
+    ? path.resolve(__dirname, '../..')
+    : path.resolve(__dirname, '../../..');
+const BASE_SRC = path.join(ROOT_DIR, 'src');
 
 /**
  * Retorna o template de anatomia estrita esperado pelo buildLazyCSSSpec.js

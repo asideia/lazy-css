@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy CSS - Quickstart & Contexto de IA</title>
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <link rel="stylesheet" href="../../dist/lazycss.min.css">
+    <script src="../assets/scripts/changeTheme.js"></script>
+</head>
+<body>
+
+    <!-- Header 100% Full-Width com Alternador de Tema -->
+    <header class="lazy-navbar">
+        <a href="../../index.html" class="lazy-navbar-brand">🦥 Lazy<span>CSS</span></a>
+        
+        <div style="display: flex; align-items: center; gap: var(--lazy-space-sm);">
+            <button id="lazy-theme-toggle" class="lazy-btn lazy-btn-secondary" aria-label="Alternar tema" title="Alternar tema" style="padding: 4px 10px; min-height: 34px; font-size: 0.85rem;">
+                🌓 <span class="theme-text">Tema</span>
+            </button>
+            <input type="checkbox" id="lazy-menu-toggle" class="lazy-nav-checkbox">
+            <label for="lazy-menu-toggle" class="lazy-nav-btn">☰</label>
+            <nav class="lazy-nav-menu">
+                <a href="../../index.html">Home</a>
+                <a href="quickstart.html" class="active">Quickstart & IA</a>
+                <a href="showcase.html">Componentes</a>
+                <a href="playground.html">Playground</a>
+                <a href="https://github.com/asideia/lazy-css" target="_blank" rel="noopener noreferrer">📦 GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal Semântico -->
+    <main class="lazy-stack" style="max-width: 900px;">
+        
+        <section class="lazy-card lazy-stack lazy-gap-sm">
+            <h1 style="margin: 0;">🌐 Uso via CDN (Sem NPM)</h1>
+            <p style="margin: 0;">
+                Ideal para desenvolvimento ágil, arquiteturas monolíticas e integração simplificada com LLMs. Insira o link abaixo diretamente no <code>&lt;head&gt;</code> do seu projeto:
+            </p>
+            
+            <pre style="margin: 0;"><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/asideia/lazy-css@main/dist/lazycss.min.css"&gt;</code></pre>
+        </section>
+
+        <section class="lazy-card lazy-stack lazy-gap-md">
+            <div class="lazy-stack lazy-gap-xs">
+                <h2 style="margin: 0;">🤖 Alimente sua Inteligência Artificial</h2>
+                <p style="margin: 0;">
+                    O Lazy CSS não exige que você decore classes utilitárias complexas. O grande segredo é baixar ou copiar o nosso manifesto de especificação técnica unificado e enviá-lo diretamente à sua LLM.
+                </p>
+            </div>
+
+            <div style="text-align: center; padding: var(--lazy-space-lg); border: 1px dashed hsl(var(--lazy-border-raw)); border-radius: var(--lazy-radius-lg); background-color: hsl(var(--lazy-card-raw));">
+                <h3 style="margin-top: 0;">Compilador de Blueprint Nativo</h3>
+                <div class="lazy-row" style="justify-content: center; gap: var(--lazy-space-sm); margin-top: var(--lazy-space-sm);">
+                    <button id="lazy-download-blueprint-btn" class="lazy-btn lazy-btn-primary">
+                        🤖 Baixar Contexto para IA (.md)
+                    </button>
+                    <button id="lazy-copy-blueprint-btn" class="lazy-btn lazy-btn-secondary">
+                        📋 Copiar Manifesto para Clipboard
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="lazy-card lazy-stack lazy-gap-md">
+            <div class="lazy-stack lazy-gap-xs">
+                <h2 style="margin: 0;">🛠️ Guia de Prompts para Modelos de Linguagem (LLMs)</h2>
+                <p style="margin: 0;">
+                    Siga os exemplos abaixo para delegar a construção de layouts e componentes corporativos para o seu copiloto de código com precisão milimétrica:
+                </p>
+            </div>
+
+            <div class="lazy-table-wrapper">
+                <table class="lazy-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 250px;">Objetivo do Comando</th>
+                            <th>Exemplo Prático de Prompt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Objetivo do Comando"><strong>Gerar nova interface</strong></td>
+                            <td data-label="Exemplo Prático de Prompt">"Utilizando os componentes e o grid elástico definidos no Blueprint anexado, crie o HTML de uma tela de login de alta densidade."</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Objetivo do Comando"><strong>Ajustar responsividade</strong></td>
+                            <td data-label="Exemplo Prático de Prompt">"Refatore este bloco utilizando as regras de desalinhamento móvel e desconstrução semântica de tabelas da ADR 0005."</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Objetivo do Comando"><strong>Validar conformidade</strong></td>
+                            <td data-label="Exemplo Prático de Prompt">"Verifique se o HTML que escrevi viola alguma assinatura core ou padrão de HSL fragmentado documentado no manifesto."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Semântico Padronizado -->
+    <footer>
+        <p>&copy; 2026 Lazy CSS Framework. Distribuído sob a licença MIT.</p>
+    </footer>
+
+    <script src="../assets/scripts/downloadLazyCSSBlueprint.js"></script>
+</body>
+</html>

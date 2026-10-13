@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandbox CDN - Teste de CDN do Lazy CSS</title>
+    <link rel="icon" type="image/x-icon" href="../site/assets/images/favicon.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/asideia/lazy-css@main/dist/lazycss.min.css">
+    <script src="../site/assets/scripts/changeTheme.js"></script>
+</head>
+<body>
+
+    <!-- Header Unificado e Responsivo com Alternador de Tema -->
+    <header class="lazy-navbar">
+        <a href="../index.html" class="lazy-navbar-brand">🦥 Lazy<span>CSS</span></a>
+        
+        <div style="display: flex; align-items: center; gap: var(--lazy-space-sm);">
+            <button id="lazy-theme-toggle" class="lazy-btn lazy-btn-secondary" aria-label="Alternar tema" title="Alternar tema" style="padding: 4px 10px; min-height: 34px; font-size: 0.85rem;">
+                🌓 <span class="theme-text">Tema</span>
+            </button>
+            <input type="checkbox" id="lazy-menu-toggle" class="lazy-nav-checkbox">
+            <label for="lazy-menu-toggle" class="lazy-nav-btn">☰</label>
+            <nav class="lazy-nav-menu">
+                <a href="../index.html">Home</a>
+                <a href="../site/pages/quickstart.html">Quickstart & IA</a>
+                <a href="../site/pages/showcase.html">Componentes</a>
+                <a href="../site/pages/playground.html">Playground</a>
+                <a href="sandbox.html">Sandbox</a>
+                <a href="https://github.com/asideia/lazy-css" target="_blank" rel="noopener noreferrer">📦 GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="lazy-stack" style="gap: var(--lazy-space-lg);">
+        
+        <div class="lazy-row lazy-row-between">
+            <div>
+                <h1 style="margin: 0;">⚡ Lazy CSS CDN Sandbox</h1>
+                <p class="lazy-text-muted" style="margin: 0;">Testando renderização e carregamento assíncrono via jsDelivr</p>
+            </div>
+            <button type="button" class="lazy-btn lazy-btn-primary">Conexão Estável</button>
+        </div>
+
+        <hr>
+
+        <div class="lazy-row" style="gap: var(--lazy-space-md);">
+            
+            <div class="lazy-card lazy-status-success lazy-fill" style="min-width: 240px;">
+                <h3 style="margin-top: 0;">Sucesso</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 0;">Classes de status e variáveis HSL processadas corretamente.</p>
+            </div>
+
+            <div class="lazy-card lazy-status-warning lazy-fill" style="min-width: 240px;">
+                <h3 style="margin-top: 0;">Pendente</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 0;">Alinhamento e cores fluidas testados via espelhamento do GitHub.</p>
+            </div>
+
+            <div class="lazy-card lazy-status-danger lazy-fill" style="min-width: 240px;">
+                <h3 style="margin-top: 0;">Erro Crítico</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 0;">Se você está vendo as cores corretas, a CDN está operacional.</p>
+            </div>
+
+        </div>
+
+        <section class="lazy-card">
+            <h2 style="margin-top: 0; margin-bottom: var(--lazy-space-sm);">Tabela de Homologação</h2>
+            <div class="lazy-table-wrapper">
+                <table class="lazy-table">
+                    <thead>
+                        <tr>
+                            <th>Ambiente</th>
+                            <th>Provedor</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Ambiente">Produção Externa</td>
+                            <td data-label="Provedor">cdn.jsdelivr.net</td>
+                            <td data-label="Status"><span class="lazy-status-success" style="padding: 2px 8px; border-radius: var(--lazy-radius-sm); font-size: 0.8rem; font-weight: var(--lazy-weight-bold);">Online</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Semântico Padronizado -->
+    <footer>
+        <p>&copy; 2026 Lazy CSS Framework. Distribuído sob a licença MIT.</p>
+    </footer>
+
+</body>
+</html>

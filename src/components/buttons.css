@@ -39,6 +39,7 @@ button,
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 42px;
   font-family: inherit;
   font-size: 1rem;
   font-weight: var(--lazy-weight-medium);
@@ -54,6 +55,7 @@ button,
   cursor: pointer;
   text-decoration: none; /* Garante que links estilizados como botões não fiquem sublinhados */
   width: fit-content;    /* Impede que botões nativos estiquem em layouts flex por padrão */
+  outline: none;
 }
 
 /* ==========================================================================
@@ -82,7 +84,7 @@ button,
 }
 
 /* ==========================================================================
-   3. GERENCIAMENTO DE ESTADOS NATIVOS (Hover, Active, Disabled)
+   3. GERENCIAMENTO DE ESTADOS NATIVOS (Hover, Active, Focus, Disabled)
    ========================================================================== */
 
 /* Estados dinâmicos via filtros agnósticos aplicados globalmente */
@@ -96,6 +98,13 @@ button:active,
 .lazy-btn:active {
   filter: brightness(0.85);
   transform: scale(0.98);
+}
+
+/* Foco acessível com teclado */
+button:focus-visible,
+.lazy-btn:focus-visible {
+  outline: 2px solid hsl(var(--lazy-primary-raw));
+  outline-offset: 2px;
 }
 
 /* Estado Desabilitado - Blindagem visual e bloqueio de comportamento */

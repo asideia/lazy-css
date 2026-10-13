@@ -1,0 +1,8 @@
+{
+  "name": "Lazy CSS - AI-Native Structural Framework",
+  "description": "A predictable, semantic, and LLM-friendly CSS library built for backend developers.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

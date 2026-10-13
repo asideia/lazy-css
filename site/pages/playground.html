@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy CSS - Playground</title>
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <link rel="stylesheet" href="../../dist/lazycss.min.css">
+    <script src="../assets/scripts/changeTheme.js"></script>
+    <style>
+        /* Trava de altura total e layout para experiência IDE */
+        html, body { height: 100vh; overflow: hidden; margin: 0; }
+        .editor-pane, .preview-pane { height: 100%; display: flex; flex-direction: column; box-sizing: border-box; }
+        @media (min-width: 769px) {
+            .editor-pane { width: 40%; }
+            .preview-pane { width: 60%; }
+        }
+    </style>
+</head>
+<body class="lazy-stack" style="height: 100vh;">
+
+    <!-- Header 100% Full-Width com Alternador de Tema -->
+    <header class="lazy-navbar">
+        <a href="../../index.html" class="lazy-navbar-brand">🦥 Lazy<span>CSS</span></a>
+        
+        <div style="display: flex; align-items: center; gap: var(--lazy-space-sm);">
+            <button id="lazy-theme-toggle" class="lazy-btn lazy-btn-secondary" aria-label="Alternar tema" title="Alternar tema" style="padding: 4px 10px; min-height: 34px; font-size: 0.85rem;">
+                🌓 <span class="theme-text">Tema</span>
+            </button>
+            <input type="checkbox" id="lazy-menu-toggle" class="lazy-nav-checkbox">
+            <label for="lazy-menu-toggle" class="lazy-nav-btn">☰</label>
+            <nav class="lazy-nav-menu">
+                <a href="../../index.html">Home</a>
+                <a href="quickstart.html">Quickstart & IA</a>
+                <a href="showcase.html">Componentes</a>
+                <a href="playground.html" class="active">Playground</a>
+                <a href="https://github.com/asideia/lazy-css" target="_blank" rel="noopener noreferrer">📦 GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Layout Dividido Adaptativo (Mobile-First) -->
+    <main class="lazy-layout-split" style="flex-grow: 1; overflow: hidden; max-width: 100%; padding: 0; margin: 0;">
+
+        <!-- Painel do Editor -->
+        <section class="editor-pane" style="background-color: hsl(var(--lazy-card-raw)); border-right: 1px solid hsl(var(--lazy-border-raw)); padding: var(--lazy-space-md); margin-bottom: 0;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--lazy-space-xs);">
+                <h3 style="margin: 0; font-size: 1.1rem;">✒️ Editor HTML</h3>
+                <div style="display: flex; gap: var(--lazy-space-xs);">
+                    <button type="button" id="btn-copy-code" style="font-size: 0.8rem; padding: 4px 10px; min-height: auto;">📋 Copiar</button>
+                    <button type="button" id="btn-reset-code" style="font-size: 0.8rem; padding: 4px 10px; min-height: auto;">🔄 Resetar</button>
+                </div>
+            </div>
+            <textarea
+                id="lazy-code-input"
+                class="lazy-ide-input"
+                placeholder="Digite ou cole seu HTML estrutural aqui..."
+                spellcheck="false"
+                autocorrect="off"
+                autocapitalize="off"
+            ></textarea>
+        </section>
+
+        <!-- Painel do Preview -->
+        <section class="preview-pane" style="margin-bottom: 0;">
+            <div style="background-color: hsl(var(--lazy-bg-raw)); padding: var(--lazy-space-sm) var(--lazy-space-md); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid hsl(var(--lazy-border-raw));">
+                <span style="font-weight: var(--lazy-weight-medium);">🖥️ Real-time Preview</span>
+                <span id="css-status" style="padding: 4px 8px; border-radius: var(--lazy-radius-sm); font-size: 0.8rem; font-weight: var(--lazy-weight-bold); background: hsl(var(--lazy-success-raw) / 0.1); color: hsl(var(--lazy-success-raw));">🔍 Monitorando...</span>
+            </div>
+            <iframe id="lazy-preview-frame" style="width: 100%; flex-grow: 1; border: none; background: transparent;" srcdoc="
+                <!DOCTYPE html>
+                <html>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <link rel='stylesheet' href='/dist/lazycss.min.css'>
+                        <style>body { padding: var(--lazy-space-md); margin: 0; }</style>
+                    </head>
+                    <body id='preview-root'></body>
+                </html>
+            "></iframe>
+        </section>
+    </main>
+
+    <script src="../assets/scripts/renderPlaygroundElements.js"></script>
+</body>
+</html>

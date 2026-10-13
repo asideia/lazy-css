@@ -26,6 +26,8 @@
    1. ESCOPO DE TOKENS E CONFIGURAÇÃO BASE / FALLBACK (TEMA LIGHT)
    ========================================================================== */
 :root, [data-theme="light"] {
+    color-scheme: light;
+
     /* ------------------------------------------------------------------------
        A. CORES FUNDAMENTAIS (Raw HSL) - LIGHT MODE
        ------------------------------------------------------------------------ */
@@ -167,7 +169,8 @@
    2. INTERCEÇÃO AUTOMÁTICA DE POLARIDADE (TEMA DARK VIA MEDIA QUERY)
    ========================================================================== */
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
+        color-scheme: dark;
         --lazy-primary-raw:     220 85% 62%;   /* Saturação calibrada para contraste escuro */
         --lazy-bg-raw:          215 25% 10%;   /* Dark profundo ergonômico */
         --lazy-card-raw:        215 25% 14%;   /* Card sutilmente elevado */
@@ -181,9 +184,35 @@
 }
 
 /* ==========================================================================
-   3. INVERSÃO MANUAL DE POLARIDADE (TEMA DARK VIA ATRIBUTO)
+   3. INVERSÃO MANUAL DE POLARIDADE (TEMA LIGHT FORÇADO VIA ATRIBUTO)
    ========================================================================== */
-[data-theme="dark"] {
+:root[data-theme="light"],
+[data-theme="light"],
+html[data-theme="light"],
+body[data-theme="light"] {
+    color-scheme: light;
+    --lazy-primary-raw:     220 85% 57%;
+    --lazy-success-raw:     142 70% 35%;
+    --lazy-danger-raw:      350 80% 55%;
+    --lazy-warning-raw:     38 92% 50%;
+    --lazy-info-raw:        214 85% 45%;
+    --lazy-bg-raw:          210 20% 98%;
+    --lazy-card-raw:        0 0% 100%;
+    --lazy-text-main-raw:   215 25% 15%;
+    --lazy-text-muted-raw:  215 15% 50%;
+    --lazy-border-raw:      214 30% 92%;
+    --lazy-shadow-flat:     0 1px 3px hsl(var(--lazy-text-main-raw) / 0.05);
+    --lazy-shadow-raised:   0 4px 6px -1px hsl(var(--lazy-text-main-raw) / 0.05), 0 2px 4px -1px hsl(var(--lazy-text-main-raw) / 0.03);
+}
+
+/* ==========================================================================
+   4. INVERSÃO MANUAL DE POLARIDADE (TEMA DARK FORÇADO VIA ATRIBUTO)
+   ========================================================================== */
+:root[data-theme="dark"],
+[data-theme="dark"],
+html[data-theme="dark"],
+body[data-theme="dark"] {
+    color-scheme: dark;
     --lazy-primary-raw:     220 85% 62%;
     --lazy-bg-raw:          215 25% 10%;
     --lazy-card-raw:        215 25% 14%;

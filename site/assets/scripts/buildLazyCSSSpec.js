@@ -5,9 +5,12 @@
 const fs = require('fs');
 const path = require('path');
 
-// Configuração de diretórios baseados na raiz do projeto
-const SRC_DIR = path.join(__dirname, '../../src');
-const OUTPUT_FILE = path.join(__dirname, '../../dist/lazycss.spec.json');
+// Configuração de diretórios baseados na raiz do projeto (suporta assets/ ou site/assets/)
+const ROOT_DIR = fs.existsSync(path.resolve(__dirname, '../../src'))
+    ? path.resolve(__dirname, '../..')
+    : path.resolve(__dirname, '../../..');
+const SRC_DIR = path.join(ROOT_DIR, 'src');
+const OUTPUT_FILE = path.join(ROOT_DIR, 'dist/lazycss.spec.json');
 
 /**
  * Normaliza e limpa quebras de linhas e asteriscos de blocos de comentários CSS
@@ -132,6 +135,12 @@ function buildSpecJson() {
                 fullSpecification.push(fileSpec);
             }
         }
+    }
+
+    // Garante que o diretório de destino existe antes de gravar
+    const distDir = path.dirname(OUTPUT_FILE);
+    if (!fs.existsSync(distDir)) {
+        fs.mkdirSync(distDir, { recursive: true });
     }
 
     // Grava o arquivo de especificação unificado na raiz do projeto

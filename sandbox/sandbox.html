@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy CSS — Sandbox Semântica</title>
+    <link rel="icon" type="image/x-icon" href="../site/assets/images/favicon.ico">
+    <link rel="stylesheet" href="../dist/lazycss.min.css">
+    <script src="../site/assets/scripts/changeTheme.js"></script>
+</head>
+<body>
+
+    <!-- Header Unificado e Responsivo com Alternador de Tema -->
+    <header class="lazy-navbar">
+        <a href="../index.html" class="lazy-navbar-brand">🦥 Lazy<span>CSS</span></a>
+        
+        <div style="display: flex; align-items: center; gap: var(--lazy-space-sm);">
+            <button id="lazy-theme-toggle" class="lazy-btn lazy-btn-secondary" aria-label="Alternar tema" title="Alternar tema" style="padding: 4px 10px; min-height: 34px; font-size: 0.85rem;">
+                🌓 <span class="theme-text">Tema</span>
+            </button>
+            <input type="checkbox" id="lazy-menu-toggle" class="lazy-nav-checkbox">
+            <label for="lazy-menu-toggle" class="lazy-nav-btn">☰</label>
+            <nav class="lazy-nav-menu">
+                <a href="../index.html">Home</a>
+                <a href="../site/pages/quickstart.html">Quickstart & IA</a>
+                <a href="../site/pages/showcase.html">Componentes</a>
+                <a href="../site/pages/playground.html">Playground</a>
+                <a href="sandbox.html" class="active">Sandbox</a>
+                <a href="https://github.com/asideia/lazy-css" target="_blank" rel="noopener noreferrer">📦 GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <section>
+            <h1>Construa interfaces incríveis apenas escrevendo HTML</h1>
+            <p>Deixe que o motor invisível do framework cuide dos seus espaçamentos, tipografia elástica e modo escuro nativo. O primeiro ecossistema focado em fricção zero para humanos e modelos de Inteligência Artificial.</p>
+            <div>
+                <a href="quickstart.html" class="lazy-btn lazy-btn-primary">Experimentar o manifesto</a>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="funcionalidades">
+            <h2>A beleza do código limpo</h2>
+            <p>Nossa engenharia elimina a necessidade de inflar as tags com centenas de classes utilitárias volumosas ou estilos inline repetitivos. O resultado é pura legibilidade.</p>
+            
+            <article>
+                <h3>Design System Invisível</h3>
+                <p>Ao ler a estrutura semântica clássica, o Lazy CSS formata títulos, caixas, tabelas e mídias com proporções harmônicas e ergonomia visual de alta fidelidade.</p>
+            </article>
+
+            <article>
+                <h3>Pronto para IA (AI-Native)</h3>
+                <p>Os modelos de linguagem geram layouts perfeitos gastando uma fração dos tokens normais, pois focam estritamente no significado dos dados, não na pintura de componentes.</p>
+            </article>
+        </section>
+
+        <hr>
+
+        <section id="metricas">
+            <h2>Métricas de Performance da Build</h2>
+            <p>Tabelas administrativas herdam alinhamentos horizontais, divisórias sutis e cabeçalhos em negrito sem nenhuma classe manual.</p>
+            
+            <div class="lazy-table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Métrica de Entrega</th>
+                            <th>Lazy CSS</th>
+                            <th>Concorrência</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Métrica de Entrega"><strong>Tamanho de Distribuição (Gzip)</strong></td>
+                            <td data-label="Lazy CSS" style="color: hsl(var(--lazy-success-raw)); font-weight: var(--lazy-weight-medium);">~2.4 KB</td>
+                            <td data-label="Concorrência">+25 KB</td>
+                        </tr>
+                        <tr>
+                            <td data-label="Métrica de Entrega"><strong>Lógica JavaScript Adicional</strong></td>
+                            <td data-label="Lazy CSS" style="color: hsl(var(--lazy-success-raw)); font-weight: var(--lazy-weight-medium);">0% (Nativo)</td>
+                            <td data-label="Concorrência">Obrigatória</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="cadastro">
+            <h2>Cadastre seu projeto piloto</h2>
+            <p>O formulário abaixo assume empilhamento vertical clássico e caixas de entrada estilizadas com transições suaves e efeito de foco unificado.</p>
+            
+            <form action="#" class="lazy-form-compact">
+                <div>
+                    <label for="nome">Nome do Desenvolvedor</label>
+                    <input type="text" id="nome" placeholder="Ex: Linus Torvalds" required>
+                </div>
+
+                <div>
+                    <label for="email">E-mail Corporativo</label>
+                    <input type="email" id="email" placeholder="seu@email.com" required>
+                </div>
+
+                <div>
+                    <label for="mensagem">Descrição do MVP</label>
+                    <textarea id="mensagem" placeholder="Fale brevemente sobre o produto que está construindo..."></textarea>
+                </div>
+
+                <button type="submit" class="lazy-btn-primary">Ativar Acesso Premium</button>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- Footer Semântico Padronizado -->
+    <footer>
+        <p>&copy; 2026 Lazy CSS Framework. Distribuído sob as regras rígidas da simplicidade.</p>
+    </footer>
+
+</body>
+</html>

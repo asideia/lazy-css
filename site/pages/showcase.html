@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazy CSS - Vitrine de Componentes</title>
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    <link rel="stylesheet" href="../../dist/lazycss.min.css">
+    <script src="../assets/scripts/changeTheme.js"></script>
+</head>
+<body>
+
+    <!-- Header 100% Full-Width com Alternador de Tema -->
+    <header class="lazy-navbar">
+        <a href="../../index.html" class="lazy-navbar-brand">🦥 Lazy<span>CSS</span></a>
+        
+        <div style="display: flex; align-items: center; gap: var(--lazy-space-sm);">
+            <button id="lazy-theme-toggle" class="lazy-btn lazy-btn-secondary" aria-label="Alternar tema" title="Alternar tema" style="padding: 4px 10px; min-height: 34px; font-size: 0.85rem;">
+                🌓 <span class="theme-text">Tema</span>
+            </button>
+            <input type="checkbox" id="lazy-menu-toggle" class="lazy-nav-checkbox">
+            <label for="lazy-menu-toggle" class="lazy-nav-btn">☰</label>
+            <nav class="lazy-nav-menu">
+                <a href="../../index.html">Home</a>
+                <a href="quickstart.html">Quickstart & IA</a>
+                <a href="showcase.html" class="active">Componentes</a>
+                <a href="playground.html">Playground</a>
+                <a href="https://github.com/asideia/lazy-css" target="_blank" rel="noopener noreferrer">📦 GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal Semântico -->
+    <main class="lazy-stack">
+        <section class="lazy-stack lazy-gap-xs" style="margin-bottom: var(--lazy-space-md);">
+            <h1 style="font-size: 2.5rem; margin: 0;">Vitrine de Componentes</h1>
+            <p class="lazy-text-muted" style="margin: 0;">
+                Consulte as especificações técnicas das classes consumidas pela IA e teste os blocos de interface gerados pelo framework.
+            </p>
+            <div style="margin-top: var(--lazy-space-sm); max-width: 520px;">
+                <div style="position: relative; display: flex; align-items: center;">
+                    <input type="search" id="showcase-search-input" placeholder="🔍 Filtrar componentes (ex: button, table, form, navbar)..." style="width: 100%; padding-right: 2.5rem;" autocomplete="off" spellcheck="false">
+                    <button type="button" id="showcase-search-clear" aria-label="Limpar busca" title="Limpar busca" style="position: absolute; right: 10px; background: transparent; border: none; font-size: 1.1rem; line-height: 1; cursor: pointer; color: hsl(var(--lazy-text-muted-raw)); padding: 4px; display: none;">✕</button>
+                </div>
+                <div id="showcase-search-status" style="margin-top: 6px; font-size: 0.85rem; color: hsl(var(--lazy-text-muted-raw)); display: none;"></div>
+            </div>
+        </section>
+
+        <section id="showcase-container" class="lazy-stack" style="gap: var(--lazy-space-md); overflow-x: hidden;">
+            <div style="padding: var(--lazy-space-xl); text-align: center; background: hsl(var(--lazy-card-raw)); border: 1px solid hsl(var(--lazy-border-raw)); border-radius: var(--lazy-radius-md);">
+                <p style="margin: 0; font-weight: var(--lazy-weight-medium);">⏳ Carregando catálogo de componentes...</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Semântico Padronizado -->
+    <footer>
+        <p>&copy; 2026 Lazy CSS Framework. Distribuído sob a licença MIT.</p>
+    </footer>
+
+    <script src="../assets/scripts/renderShowcaseElements.js"></script>
+</body>
+</html>

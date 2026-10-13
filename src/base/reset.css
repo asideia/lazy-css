@@ -23,6 +23,8 @@ html {
   -moz-tab-size: 4;
   tab-size: 4;
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--lazy-border-raw)) transparent;
 }
 
 body {
@@ -41,16 +43,32 @@ body {
    2. PRESETS E SCAFFOLDING ESTRUTURAL (Zero-Class Layouts - ADR 0007)
    ========================================================================== */
 
-header {
+/* Header macro da página - 100% full-width de ponta a ponta */
+body > header,
+header:not(article header, section header, .lazy-card header, aside header) {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: var(--lazy-space-md);
   width: 100%;
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: var(--lazy-space-md) var(--lazy-space-md);
+  max-width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  background-color: hsl(var(--lazy-card-raw));
+  border-bottom: 1px solid hsl(var(--lazy-border-raw));
+}
+
+/* Headers locais dentro de cartões ou seções */
+article > header,
+section > header,
+.lazy-card > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: var(--lazy-space-sm);
 }
 
 nav, 
@@ -99,10 +117,12 @@ footer {
   text-align: center;
   gap: var(--lazy-space-sm);
   width: 100%;
-  max-width: 1140px;
-  margin: var(--lazy-space-xl) auto 0 auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: var(--lazy-space-xl) 0 0 0;
   padding: var(--lazy-space-xl) var(--lazy-space-md);
   border-top: 1px solid hsl(var(--lazy-border-raw));
+  background-color: hsl(var(--lazy-card-raw));
   color: hsl(var(--lazy-text-muted-raw));
   font-size: 0.9rem;
 }
@@ -159,3 +179,100 @@ a {
 a:hover { color: hsl(var(--lazy-primary-raw)); }
 
 [role="button"] { cursor: pointer; }
+
+/* Linhas divisórias semânticas sutis */
+hr {
+  border: 0;
+  border-top: 1px solid hsl(var(--lazy-border-raw));
+  margin: var(--lazy-space-lg) 0;
+  width: 100%;
+}
+
+/* Modais nativos via tag <dialog> */
+dialog {
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-lg);
+  background-color: hsl(var(--lazy-card-raw));
+  color: hsl(var(--lazy-text-main-raw));
+  padding: var(--lazy-space-lg);
+  box-shadow: var(--lazy-shadow-raised);
+  max-width: min(90vw, 560px);
+  margin: auto;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Accordions e seções colapsáveis nativas */
+details {
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-md);
+  background-color: hsl(var(--lazy-card-raw));
+  padding: var(--lazy-space-sm) var(--lazy-space-md);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+details[open] {
+  padding-bottom: var(--lazy-space-md);
+}
+
+summary {
+  cursor: pointer;
+  font-weight: var(--lazy-weight-medium);
+  color: hsl(var(--lazy-text-main-raw));
+  user-select: none;
+  outline: none;
+  padding: var(--lazy-space-xs) 0;
+}
+
+summary:hover {
+  color: hsl(var(--lazy-primary-raw));
+}
+
+summary:focus-visible {
+  outline: 2px solid hsl(var(--lazy-primary-raw));
+  outline-offset: 2px;
+  border-radius: var(--lazy-radius-sm);
+}
+
+/* Agrupamento semântico de formulários */
+fieldset {
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-radius: var(--lazy-radius-md);
+  padding: var(--lazy-space-md);
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lazy-space-sm);
+}
+
+legend {
+  font-weight: var(--lazy-weight-bold);
+  font-size: 0.95rem;
+  padding: 0 var(--lazy-space-xs);
+  color: hsl(var(--lazy-text-main-raw));
+}
+
+/* Marcação de texto e atalhos de teclado */
+mark {
+  background-color: hsl(var(--lazy-warning-raw) / 0.25);
+  color: hsl(var(--lazy-text-main-raw));
+  padding: 0.1em 0.35em;
+  border-radius: var(--lazy-radius-sm);
+}
+
+kbd {
+  font-family: var(--lazy-font-mono, monospace);
+  font-size: 0.85em;
+  background-color: hsl(var(--lazy-bg-raw));
+  border: 1px solid hsl(var(--lazy-border-raw));
+  border-bottom-width: 2px;
+  border-radius: var(--lazy-radius-sm);
+  padding: 0.15em 0.4em;
+  color: hsl(var(--lazy-text-main-raw));
+  box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}

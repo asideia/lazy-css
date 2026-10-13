@@ -5,9 +5,12 @@
 const fs = require('fs');
 const path = require('path');
 
-// Definição dos caminhos baseados na estrutura assets/scripts/
-const SPEC_FILE = path.join(__dirname, '../../dist/lazycss.spec.json');
-const OUTPUT_MD_FILE = path.join(__dirname, '../../dist/lazycss-blueprint.md');
+// Definição dos caminhos baseados na estrutura (suporta assets/ ou site/assets/)
+const ROOT_DIR = fs.existsSync(path.resolve(__dirname, '../../src'))
+    ? path.resolve(__dirname, '../..')
+    : path.resolve(__dirname, '../../..');
+const SPEC_FILE = path.join(ROOT_DIR, 'dist/lazycss.spec.json');
+const OUTPUT_MD_FILE = path.join(ROOT_DIR, 'dist/lazycss-blueprint.md');
 
 /**
  * Compila o arquivo JSON de especificação em um Manifesto Markdown de alta performance para IAs
