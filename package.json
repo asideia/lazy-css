@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "build": "mkdir dist && npm run build-spec && npm run build-min && npm run build-blueprint",
+    "build-windows": "rmdir /S dist && mkdir dist && npm run build-spec && npm run build-min && npm run build-blueprint",
+    "build-linux": "rm -rf dist && mkdir -p dist && npm run build-spec && npm run build-min && npm run build-blueprint",
     "watch": "postcss src/lazy.css -o dist/lazycss.min.css --watch",
     "build-spec": "node site/assets/scripts/buildLazyCSSSpec.js",
     "build-min": "postcss src/lazy.css -o dist/lazycss.min.css",
