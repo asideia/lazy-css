@@ -5,7 +5,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     const downloadBtn = document.getElementById('lazy-download-blueprint-btn');
     const copyBtn = document.getElementById('lazy-copy-blueprint-btn');
-    const FILE_PATH = '/dist/lazycss-blueprint.md';
+    
+    // Determina o caminho base dinamicamente (suporta GitHub Pages e Localhost)
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    const basePath = (window.location.hostname.includes('github.io') && pathSegments.length > 0) 
+        ? `/${pathSegments[0]}` 
+        : '';
+    
+    const FILE_PATH = `${basePath}/dist/lazycss-blueprint.md`;
     
     if (downloadBtn) {
         downloadBtn.addEventListener('click', () => {
