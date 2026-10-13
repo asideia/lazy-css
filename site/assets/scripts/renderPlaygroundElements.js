@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusBadge = document.getElementById('css-status');
 
     // Template padrão limpo (apenas elementos sem estrutura de página)
-    const defaultTemplate = 
-`<div class="lazy-stack">
+    const defaultTemplate =
+        `<div class="lazy-stack">
     <div class="lazy-row lazy-row-between">
         <div class="lazy-stack lazy-gap-xs">
             <h3 style="margin:0; font-size: 1.4rem; font-weight: 600;">Controle de Usuários</h3>
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Persiste no localStorage
         try {
             localStorage.setItem(STORAGE_KEY, userHtml);
-        } catch (_) {}
+        } catch (_) { }
 
         try {
             const doc = iframe.contentDocument || iframe.contentWindow.document;
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     doc.documentElement.removeAttribute('data-theme');
                 }
             }
-        } catch (_) {}
+        } catch (_) { }
     });
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
@@ -149,7 +149,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Checa se o arquivo CSS compilado existe localmente
     function checkCssAvailability() {
-        fetch('/dist/lazycss.min.css', { method: 'HEAD' })
+        // Detecta se está rodando no GitHub Pages sob um subdiretório (ex: /lazy-css/)
+        const pathSegments = window.location.pathname.split('/').filter(Boolean);
+        const repoPrefix = (window.location.hostname.includes('github.io') && pathSegments.length > 0)
+            ? `/${pathSegments[0]}`
+            : '';
+
+        const cssPath = `${repoPrefix}/dist/lazycss.min.css`;
+
+        fetch(cssPath, { method: 'HEAD' })
             .then(response => {
                 if (response.ok) {
                     statusBadge.innerText = "✓ lazycss.min.css pronto";
