@@ -1,7 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     const textarea = document.getElementById('lazy-code-input');
-    const iframe = document.getElementById('lazy-preview-frame');
     const statusBadge = document.getElementById('css-status');
+
+    // 1. Calcula o prefixo correto dependendo se está no GitHub Pages (/lazy-css/) ou local ('')
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    const repoPrefix = (window.location.hostname.includes('github.io') && pathSegments.length > 0)
+        ? `/${pathSegments[0]}`
+        : '';
+
+    // 2. Define o iframe com o srcdoc estruturado exatamente como você precisa
+    const iframe = document.getElementById('lazy-preview-frame');
+    if (iframe) {
+        iframe.srcdoc = `<!DOCTYPE html>
+        <html>
+            <head>
+                <meta charset='UTF-8'>
+                <link rel='stylesheet' href='${repoPrefix}/dist/lazycss.min.css'>
+                <style>body { padding: var(--lazy-space-md); margin: 0; }</style>
+            </head>
+            <body id='preview-root'></body>
+        </html>`;
+    }
 
     // Template padrão limpo (apenas elementos sem estrutura de página)
     const defaultTemplate =
