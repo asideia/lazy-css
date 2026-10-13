@@ -29,8 +29,14 @@ jobs:
         run: npm ci --include=dev
 
       # 4. Compile core CSS modules and build AI Specs/Blueprints
-      - name: ⚡ Compile Lazy CSS artifacts
-        run: npm run build
+      - name: ⚡ Compile Lazy CSS artifacts (Step by Step)
+        run: |
+          node --version
+          npm run build-spec || echo "build-spec failed"
+          npm run build-min || echo "build-min failed"
+          npm run build-blueprint || echo "build-blueprint failed"
+          ls -la
+          ls -la dist/ || echo "Directory dist does not exist"
 
       # 5. Verify build outputs exist before proceeding to release
       - name: 🔍 Verify build artifacts
